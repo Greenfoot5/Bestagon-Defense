@@ -102,7 +102,7 @@ namespace Gameplay
         public void PopulateSaveData(SaveLevel saveData)
         {
             saveData.lives = GameStats.Lives;
-            saveData.money = GameStats.Money;
+            saveData.energy = GameStats.Energy;
             saveData.waveIndex = GameStats.Rounds - 1;
             saveData.random = Random.state;
             saveData.shopCost = shop.GetComponent<Shop>().nextCost;
@@ -158,7 +158,7 @@ namespace Gameplay
             var shopComponent = shop.GetComponent<Shop>();
             shopComponent.nextCost = saveData.shopCost;
             GameStats.Powercells = 0;
-            GameStats.Money = saveData.money;
+            GameStats.Energy = saveData.energy;
 
             foreach (SaveLevel.NodeData nodeData in saveData.nodes)
             {

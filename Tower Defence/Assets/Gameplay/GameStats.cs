@@ -11,15 +11,15 @@ namespace Gameplay
     {
         private static bool _active;
 
-        private static int _money;
-        [Tooltip("How much money the player starts the level with")]
-        public int startMoney = 200;
-        public static int Money
+        private static int _energy;
+        [Tooltip("How much energy the player starts the level with")]
+        public int startEnergy = 200;
+        public static int Energy
         {
-            get => _money;
+            get => _energy;
             set
             {
-                _money = value;
+                _energy = value;
                 OnGainMoney?.Invoke();
             }
         }
@@ -88,7 +88,7 @@ namespace Gameplay
         {
             if (!_active)
             {
-                Money = startMoney;
+                Energy = startEnergy;
                 _lives = startLives;
                 _rounds = 0;
             }

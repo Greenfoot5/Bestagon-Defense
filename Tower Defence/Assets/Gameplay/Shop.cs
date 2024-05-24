@@ -89,9 +89,9 @@ namespace Gameplay
 
             // Update button text
             powercellsText.text = "<sprite=\"UI-Powercell\" name=\"full\"> " + nextCost;
-            GameStats.OnGainMoney += CalculateEnergy;
+            GameStats.OnGainMoney += CalculateCells;
             GameStats.OnGainPowercell += UpdateEnergyButton;
-            CalculateEnergy();
+            CalculateCells();
         }
         
         /// <summary>
@@ -159,12 +159,12 @@ namespace Gameplay
             return (int) (_levelData.sellPercentage * nextCost);
         }
 
-        private void CalculateEnergy()
+        private void CalculateCells()
         {
-            while (GameStats.Money > nextCost)
+            while (GameStats.Energy > nextCost)
             {
                 nextCost += _levelData.selectionCostIncrement;
-                GameStats.Money -= nextCost;
+                GameStats.Energy -= nextCost;
                 GameStats.Powercells++;
             }
             UpdateEnergyButton();
@@ -184,7 +184,7 @@ namespace Gameplay
                 powercellsText.text = shopText.GetLocalizedString() + " - <sprite=\"UI-Powercell\" name=\"full\"> " + GameStats.Powercells;
             }
 
-            energyProgress.percentage = GameStats.Money / (float)nextCost;
+            energyProgress.percentage = GameStats.Energy / (float)nextCost;
         }
     }
 }

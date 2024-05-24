@@ -22,8 +22,8 @@ namespace Abstract.Saving
         }
         public List<NodeData> nodes;
         
-        
-        public int money;
+        public int energy;
+        public int cells;
         public int lives;
         public int waveIndex;
         public Random.State random;
