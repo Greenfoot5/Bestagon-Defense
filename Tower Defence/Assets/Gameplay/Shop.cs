@@ -74,22 +74,19 @@ namespace Gameplay
         {
             _buildManager = BuildManager.instance;
             _levelData = _buildManager.GetComponent<GameManager>().levelData;
+            
             // It should only be greater than 0 if we've loaded a save
             if (nextCost == 0)
-            {
                 nextCost = _levelData.initialSelectionCost;
-            }
             else
-            {
                 _hasPlayerMadePurchase = true;
-            }
 
             _defaultButtonTop = energyProgress.outColorA;
             _defaultButtonBottom = energyProgress.outColorB;
-
+            
             // Update button text
             powercellsText.text = "<sprite=\"UI-Powercell\" name=\"full\"> " + nextCost;
-            GameStats.OnGainMoney += CalculateCells;
+            GameStats.OnGainEnergy += CalculateCells;
             GameStats.OnGainPowercell += UpdateEnergyButton;
             CalculateCells();
         }
@@ -161,12 +158,15 @@ namespace Gameplay
 
         private void CalculateCells()
         {
-            while (GameStats.Energy > nextCost)
+            var energyToSubtract = 0;
+            while (GameStats.Energy - energyToSubtract > nextCost)
             {
                 nextCost += _levelData.selectionCostIncrement;
-                GameStats.Energy -= nextCost;
+                energyToSubtract += nextCost;
                 GameStats.Powercells++;
             }
+            if (energyToSubtract > 0)
+                GameStats.Energy -= energyToSubtract;
             UpdateEnergyButton();
         }
 

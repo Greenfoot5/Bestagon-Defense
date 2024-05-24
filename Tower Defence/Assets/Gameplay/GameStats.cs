@@ -20,7 +20,7 @@ namespace Gameplay
             set
             {
                 _energy = value;
-                OnGainMoney?.Invoke();
+                OnGainEnergy?.Invoke();
             }
         }
         
@@ -78,7 +78,7 @@ namespace Gameplay
         public static event RoundProgressEvent OnRoundProgress;
         public static event GameOverEvent OnGameOver;
         public static event LoseLife OnLoseLife;
-        public static event GainMoney OnGainMoney;
+        public static event GainMoney OnGainEnergy;
         public static event GainCell OnGainPowercell;
         
         /// <summary>
@@ -88,7 +88,8 @@ namespace Gameplay
         {
             if (!_active)
             {
-                Energy = startEnergy;
+                _energy = startEnergy;
+                _powercells = 0;
                 _lives = startLives;
                 _rounds = 0;
             }
