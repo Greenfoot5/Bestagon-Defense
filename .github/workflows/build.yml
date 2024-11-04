@@ -58,10 +58,10 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
 
           # Use for paid version:
-          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+          # UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
 
           # Use for free version:
-          #UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           projectPath: 'Tower Defence'
           targetPlatform: ${{ matrix.targetPlatform }}
@@ -73,10 +73,10 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
 
           # Use for paid version:
-          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+#          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
 
           # Use for free version:
-          #UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           projectPath: 'Tower Defence'
           targetPlatform: ${{ matrix.targetPlatform }}

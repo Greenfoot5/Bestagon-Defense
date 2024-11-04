@@ -64,8 +64,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5170262958080
-    m_Localized: Bestagon Defence is a tower defence game! This means you've got
-      to place turrets to stop enemies reaching the end goal for as long as possible.
+    m_Localized: Bestagon Defence is a roguelike tower defence game!
     m_Metadata:
       m_Items: []
   - m_Id: 6205761118208
@@ -75,71 +74,52 @@ MonoBehaviour:
   - m_Id: 5232535789568
     m_Localized: '<size=+25>The Goal<size=100%>
 
-      You begin with each level
-      with a certain amount of <sprite="UI-Life" name="life">, and each time an enemy
-      reaches they end, you lose at least one. You can gain more through the shop.
-      If you lose them all, it''s game over. The aim is therefore to make it as far
-      as possible before you lose, aiming to top the leaderboards!'
+      If the enemies reach the end
+      you lose some <sprite="UI-Life" name="life">. Kill them to gain <sprite="UI-EnergyBit"
+      name="bit"> so you can buy more and stronger defenses! The longer you last,
+      the higher you get on the leaderboard.'
     m_Metadata:
       m_Items: []
   - m_Id: 5390363254784
-    m_Localized: "<size=+25>The Shop<size=100%>\nThe shop is here to help! You can
-      use the hard earned <sprite=\"UI-Gold\" name=\"gold>  you gain from killing
-      enemies by opening the shop. The price increases each time however.\nEach time
-      you open the shop you'll get some choices. The main three are either turrets
-      or modules (turret upgrades). You can only pick one thing before the shop closes.
-      These three are randomised each time the shop opens. The bottom three don't
-      change. The options are:\n<sprite=\"UI-Life\" name=\"life\"> <color=#D41E3C>Revitalise</color>
-      - Gives you some lives back\n<sprite=\"UI-Gold\" name=\"gold\"> <color=#fce544>Refund</color> 
-      - Gives you back some of the gold you spent opening the shop, but the price
-      still increases.\n - <color=#f8663a>Reroll</color> - Spend <sprite=\"UI-Life\"
-      name=\"life\">  to reroll your turret & module selection. It can cost multiple
-      <sprite=\"UI-Life\" name=\"life\">  for one reroll, or one <sprite=\"UI-Life\"
-      name=\"life\">  for many rerolls. They carry over between shop opens."
+    m_Localized: '<size=+25>The Shop<size=100%>
+
+      Open the shop with the button
+      at the bottom of the screen. You''ll then get a choice of turrets and/or modules
+      to pick from. If there''s nothing you like you can refund the cost. Each opening
+      costs 1 <sprite="UI-Powercell" name="full">.'
     m_Metadata:
       m_Items: []
   - m_Id: 5906971484160
     m_Localized: '<size=+25>Turrets & Modules<size=100%>
 
-      Turrets can be placed
-      on the map. To place one, select one from your inventory, and select a tile,
-      the turret is then built! If you click on the turret again some buttons appear
-      to help fine-tune the turret into working more effectively. Once placed they
-      automatically start attacking enemies. Most have a targeting system, but some
-      might not have one, or require you to control where it attacks.
-
-      Each
-      turret has a glyph that appears on a module''s card in the shop showing which
-      turrets it can be used on:
-
-      <sprite="UI-Glyphs" name="any"> - Any
+      Turrets attack enemies
+      for you. You can place them on a white hexagon. Turrets can then be enhance
+      by applying modules onto the turret. Modules have some restrictions on which
+      turrets they can be applied to, denoted by their glyphs:
 
       <sprite="UI-Glyphs"
-      name="gunner"> - Gunner
+      name="any"> - Any
 
-      <sprite="UI-Glyphs" name="lancer"> - Lancer
-
-      <sprite="UI-Glyphs"
-      name="laser"> - Laser
-
-      <sprite="UI-Glyphs" name="shooter"> - Shooter
+      <sprite="UI-Glyphs" name="gunner"> - Gunner
 
       <sprite="UI-Glyphs"
-      name="smasher"> - Smasher
+      name="lancer"> - Lancer
+
+      <sprite="UI-Glyphs" name="laser"> - Laser
+
+      <sprite="UI-Glyphs"
+      name="shooter"> - Shooter
+
+      <sprite="UI-Glyphs" name="smasher"> - Smasher
 
 
-      Modules can be obtained from the shop. To
-      apply one, select the turret you wish to apply it to, select the module from
-      your inventory and hit the "Apply Module" button above the turret. Most modules
-      can be applied to multiple turrets, and some to any. Check the turret glyphs
-      on the module''s shop card to see what it can be applied to. Module can also
-      be upgraded (up to a max level) by placing a module the the same type and level
-      to a turret. Most modules can also be applied to a turret even if there''s
-      one of the same type at a different level, but not all.
+      Unique
+      modules cannot be applied twice to a turret, but can still be upgraded. A module
+      can be upgraded by applying the same module of the same level.
 
 
-      If you''re
-      not sure what a turret/module is/does, check the wiki!'
+      For
+      more info, check the wiki!'
     m_Metadata:
       m_Items: []
   - m_Id: 6032959987712
@@ -399,4 +379,9 @@ MonoBehaviour:
     - rid: 1943649921315110921
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 00e02fabf505000000e0af01c133000000e0efe34c4f000000e02f34981e4700
+        m_Entries: 
+        m_SharedEntries:
+        - id: 6552697167872
+        - id: 56904050008064
+        - id: 87191660257280
+        - id: 20018362405871616
