@@ -12,7 +12,7 @@ using UnityEngine.UI;
 namespace Enemies
 {
     /// <summary>
-    /// The base skeleton for the enemy, holding it's stats and abilities
+    /// The base skeleton for the enemy, holding its stats and abilities
     /// </summary>
     public class Enemy : MonoBehaviour
     {
