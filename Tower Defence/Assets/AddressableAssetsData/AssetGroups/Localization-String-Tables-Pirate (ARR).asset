@@ -13,16 +13,13 @@ MonoBehaviour:
   m_Name: Localization-String-Tables-Pirate (ARR)
   m_EditorClassIdentifier: 
   m_GroupName: Localization-String-Tables-Pirate (ARR)
-  m_Data:
-    m_SerializedData: []
   m_GUID: 21c82bb164c6849e88c5a168bea561d1
   m_SerializeEntries:
-  - m_GUID: f347eaea1b11f43e5ad781df5c477c93
-    m_Address: Modules_ARR
+  - m_GUID: 33134590c4e0143c9b9caa4981fc3447
+    m_Address: GUI_ARR
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ARR
-    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8f4ee820c8ca84cc58629f8e55a729d7
     m_Address: Transition_ARR
@@ -37,11 +34,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-ARR
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 33134590c4e0143c9b9caa4981fc3447
-    m_Address: GUI_ARR
+  - m_GUID: f347eaea1b11f43e5ad781df5c477c93
+    m_Address: Modules_ARR
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ARR
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 6e9e55f6df8a74e608f92b8e3a1f0b77, type: 2}

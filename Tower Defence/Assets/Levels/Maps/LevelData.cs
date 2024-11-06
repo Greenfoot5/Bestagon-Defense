@@ -51,8 +51,12 @@ namespace Levels.Maps
         public int initialSelectionCount = 3;
         [Tooltip("How many options to display in selections after the first")]
         public int selectionCount = 3;
-        
+
         [Header("Costs")]
+        [Tooltip("Shows how costs scale per wave")]
+        public CurvedReference selectionCost;
+
+        public WrapMode mode;
         [Tooltip("The initial cost to open the selection")]
         public int initialSelectionCost;
         [Tooltip("The amount to increase the selection cost by every time it's is opened")]

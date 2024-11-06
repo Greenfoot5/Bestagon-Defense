@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 903b7f394ff2a4b548e468290ffc9509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  variables: {fileID: 11400000, guid: d7369fe863cc54f8d892750b8251c8c0, type: 2}
+  variables: {fileID: 11400000, guid: a97bc1dfdb8f24a54b824b176de63718, type: 2}
 --- !u!114 &7033422843349886309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +93,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7033422843349886311}
     m_Modifications:
+    - target: {fileID: 985842982966307418, guid: f3587694556224242bba9c3791c43922, type: 3}
+      propertyPath: m_ClearFlags
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1159651515993598024, guid: f3587694556224242bba9c3791c43922, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 6316183153120340424, guid: f3587694556224242bba9c3791c43922, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -136,6 +144,10 @@ PrefabInstance:
     - target: {fileID: 6316183153120340427, guid: f3587694556224242bba9c3791c43922, type: 3}
       propertyPath: m_Name
       value: Transition
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872387338073466488, guid: f3587694556224242bba9c3791c43922, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
