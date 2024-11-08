@@ -318,6 +318,53 @@ MonoBehaviour:
       variable: {fileID: 11400000, guid: b54cb3d9e6f25430dbcb163e806032f4, type: 2}
     - useConstant: 1
       item:
+        chain: {fileID: 11400000, guid: 2bdc773f9c2ea4f8292ef859b337f751, type: 2}
+        tier: 1
+      constantValue:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 5
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 136
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 6
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 136
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 11
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 136
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 12
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 136
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 0
+      variable: {fileID: 11400000, guid: b54cb3d9e6f25430dbcb163e806032f4, type: 2}
+    - useConstant: 1
+      item:
         chain: {fileID: 11400000, guid: c342d1012d5f14de98af3e55c958dd5a, type: 2}
         tier: 1
       constantValue:
@@ -445,13 +492,13 @@ MonoBehaviour:
       variable: {fileID: 11400000, guid: b54cb3d9e6f25430dbcb163e806032f4, type: 2}
     - useConstant: 1
       item:
-        chain: {fileID: 11400000, guid: c7dc926b36da34c37bce5dbc826c7c6f, type: 2}
-        tier: 1
+        chain: {fileID: 11400000, guid: 2bdc773f9c2ea4f8292ef859b337f751, type: 2}
+        tier: 2
       constantValue:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 24
+          time: 11
           value: 0
           inSlope: 0
           outSlope: 0
@@ -460,7 +507,7 @@ MonoBehaviour:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 25
+          time: 12
           value: 1
           inSlope: 0
           outSlope: 0
