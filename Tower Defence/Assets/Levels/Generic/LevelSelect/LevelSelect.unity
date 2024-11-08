@@ -2480,7 +2480,7 @@ PrefabInstance:
     - target: {fileID: 2439588432732005687, guid: 7e9986840c99345b98c4ce44fba44d82, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 3c273be36c458444790870e7c7ffd75a, type: 3}
+      objectReference: {fileID: -1692154449123013253, guid: 61e0ff2adcb904790b6791782dfcccf1, type: 3}
     - target: {fileID: 2439588434130122686, guid: 7e9986840c99345b98c4ce44fba44d82, type: 3}
       propertyPath: m_text
       value: Upgrade
