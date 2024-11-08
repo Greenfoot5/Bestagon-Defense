@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Abstract.EnvironmentVariables
@@ -5,7 +6,7 @@ namespace Abstract.EnvironmentVariables
     /// <summary>
     /// Allows us to store data and get it depending on if the game is in the editor, stable or development build.
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public struct EnvironmentVariable
     {
         [SerializeField]
@@ -45,7 +46,7 @@ namespace Abstract.EnvironmentVariables
         /// </summary>
         public void SetData()
         {
-            System.Environment.SetEnvironmentVariable(name, GetData());
+            Environment.SetEnvironmentVariable(name, GetData());
         }
     }
 }
