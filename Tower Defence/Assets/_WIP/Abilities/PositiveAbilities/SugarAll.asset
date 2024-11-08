@@ -17,7 +17,7 @@ MonoBehaviour:
   abilityIcon: {fileID: 1595557568634733894, guid: 2cede4385411542b29f7b2c61a9e1053, type: 3}
   abilityEffect: {fileID: 2228279973635050725, guid: 5f8c3e2695cf14a3cad64dff7a67dee7, type: 3}
   range: 3
-  timer: 6
+  timer: 5
   startCount: -1
   speedMultiplier: 1.5
   duration: 2

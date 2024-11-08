@@ -12,22 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"b2cfde9c-92b1-4329-a03d-f8749385af53\"\n   
+  _rsKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"6d3730e3-b4f3-4215-ad8f-762ed30485a4\"\n   
     },\n    \"rs\": {\n      \"key\": \"ForcedVersion\",\n      \"type\": \"json\",\n     
     \"schemaId\": null,\n      \"value\": {\n        \"major\": 1,\n        \"minor\":
-    1,\n        \"patch\": 9\n      }\n    }\n  },\n  {\n    \"metadata\": {\n     
-    \"entityId\": \"094b5d9e-0a6d-4de9-80ee-3d42741f282d\"\n    },\n    \"rs\": {\n     
-    \"key\": \"test\",\n      \"type\": \"int\",\n      \"value\": 5\n    }\n  }\n]"
-  _rsLastCachedKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"b2cfde9c-92b1-4329-a03d-f8749385af53\"\n   
+    1,\n        \"patch\": 0\n      }\n    }\n  }\n]"
+  _rsLastCachedKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"6d3730e3-b4f3-4215-ad8f-762ed30485a4\"\n   
     },\n    \"rs\": {\n      \"key\": \"ForcedVersion\",\n      \"type\": \"json\",\n     
     \"schemaId\": null,\n      \"value\": {\n        \"major\": 1,\n        \"minor\":
-    1,\n        \"patch\": 9\n      }\n    }\n  },\n  {\n    \"metadata\": {\n     
-    \"entityId\": \"094b5d9e-0a6d-4de9-80ee-3d42741f282d\"\n    },\n    \"rs\": {\n     
-    \"key\": \"test\",\n      \"type\": \"int\",\n      \"value\": 5\n    }\n  }\n]"
+    1,\n        \"patch\": 0\n      }\n    }\n  }\n]"
   _environments: "[\n  {\n    \"projectId\": \"77e9ee4b-9a44-4688-be6c-34db1fb00724\",\n   
-    \"name\": \"alpha\",\n    \"id\": \"9991561f-c455-4f3c-8da1-830509d49ad0\",\n   
-    \"isDefault\": false,\n    \"createdAt\": \"2022-08-25T19:29:33Z\",\n    \"updatedAt\":
-    \"2022-08-25T19:29:33Z\"\n  },\n  {\n    \"projectId\": \"77e9ee4b-9a44-4688-be6c-34db1fb00724\",\n   
     \"name\": \"production\",\n    \"id\": \"8e1cb9b6-0872-4cae-8e26-72e9a0caf772\",\n   
     \"isDefault\": true,\n    \"createdAt\": \"2022-08-25T19:10:17Z\",\n    \"updatedAt\":
-    \"2022-08-25T19:10:17Z\"\n  }\n]"
+    \"2022-08-25T19:10:17Z\"\n  },\n  {\n    \"projectId\": \"77e9ee4b-9a44-4688-be6c-34db1fb00724\",\n   
+    \"name\": \"alpha\",\n    \"id\": \"9991561f-c455-4f3c-8da1-830509d49ad0\",\n   
+    \"isDefault\": false,\n    \"createdAt\": \"2022-08-25T19:29:33Z\",\n    \"updatedAt\":
+    \"2022-08-25T19:29:33Z\"\n  }\n]"

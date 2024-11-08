@@ -100,7 +100,7 @@ MonoBehaviour:
     list:
     - useConstant: 0
       item:
-        chain: {fileID: 11400000, guid: d312f79296a2146e3976d8622d6b1b8c, type: 2}
+        chain: {fileID: 11400000, guid: d40d23008188f4636ba917575d70acdc, type: 2}
         tier: 1
       constantValue:
         serializedVersion: 2
@@ -111,8 +111,8 @@ MonoBehaviour:
       variable: {fileID: 11400000, guid: b54cb3d9e6f25430dbcb163e806032f4, type: 2}
     - useConstant: 0
       item:
-        chain: {fileID: 11400000, guid: 4fefd36538e92402a8d072de671e05ff, type: 2}
-        tier: 1
+        chain: {fileID: 11400000, guid: d40d23008188f4636ba917575d70acdc, type: 2}
+        tier: 2
       constantValue:
         serializedVersion: 2
         m_Curve: []
@@ -122,8 +122,8 @@ MonoBehaviour:
       variable: {fileID: 11400000, guid: b54cb3d9e6f25430dbcb163e806032f4, type: 2}
     - useConstant: 0
       item:
-        chain: {fileID: 11400000, guid: 854f51527d5254adda062c0c23aec5cb, type: 2}
-        tier: 1
+        chain: {fileID: 11400000, guid: d40d23008188f4636ba917575d70acdc, type: 2}
+        tier: 3
       constantValue:
         serializedVersion: 2
         m_Curve: []
@@ -194,3 +194,4 @@ MonoBehaviour:
   revitaliseLives: 1
   refundPercentage: 1
   rerollCost: 1
+  sellPercentage: 0

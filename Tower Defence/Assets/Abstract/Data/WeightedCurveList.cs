@@ -85,7 +85,8 @@ namespace Abstract.Data
         /// <returns>The WeightedList for a specific time</returns>
         public WeightedList<T> ToWeightedList(float time)
         {
-            var weightedList = new WeightedList<T>(null);
+            var weightedList = new WeightedList<T>(new List<WeightedItem<T>> {new(list[0].item, list[0].Value.Evaluate(time))});
+            weightedList.list.RemoveAt(0);
             foreach (WeightedCurvedReference<T> item in list.Where(item => item.Value.Evaluate(time) > 0))
             {
                 weightedList.list.Add(new WeightedItem<T>(item.item, item.Value.Evaluate(time)));

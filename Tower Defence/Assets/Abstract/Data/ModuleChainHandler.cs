@@ -1,4 +1,5 @@
 using Modules;
+using Turrets;
 using UnityEngine;
 
 namespace Abstract.Data
@@ -61,6 +62,7 @@ namespace Abstract.Data
         {
             if (chain == null || tier == 0)
             {
+                Debug.LogWarning("Attempt to obtain an invalid module");
                 return null;
             }
             return chain.GetModule(tier);
@@ -101,6 +103,11 @@ namespace Abstract.Data
         public string GetDisplayName()
         {
             return chain.displayName.GetLocalizedString() + " " + GetTierDisplay();
+        }
+        
+        public bool ValidModule(Damager damager)
+        {
+            return chain.GetModule(tier).ValidModule(damager);
         }
     }
 }

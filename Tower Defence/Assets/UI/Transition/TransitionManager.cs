@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.Tables;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 namespace UI.Transition
@@ -113,6 +114,7 @@ namespace UI.Transition
         {
             if (_loadingScene != scene.name) return;
             
+            GameObject.FindGameObjectsWithTag("MainCamera")[0].GetComponent<Camera>().GetUniversalAdditionalCameraData().cameraStack.Add(_camera);
             Open();
             _loadingScene = null;
         }

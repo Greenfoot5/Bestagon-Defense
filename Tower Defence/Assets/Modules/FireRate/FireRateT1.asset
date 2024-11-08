@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moduleTier: 1
   isUpgradableTo: 1
-  percentageChange: 0.1
+  percentageChange: 0.43

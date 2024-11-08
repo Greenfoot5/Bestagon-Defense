@@ -83,10 +83,13 @@ namespace Gameplay
                 TurretInfo.instance.Close();
                 return;
             }
-            
-            // Clear any previous selection
-            Deselect();
-        
+
+            if (_selectedNode != null)
+            {
+                // Clear any previous selection
+                Deselect();
+            }
+
             _selectedNode = node;
             TurretInfo.instance.SetTarget(node);
         }

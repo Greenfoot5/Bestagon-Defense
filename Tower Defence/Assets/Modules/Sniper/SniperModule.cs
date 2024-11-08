@@ -1,8 +1,9 @@
 using System;
 using Turrets;
+using Turrets.Gunner;
+using Turrets.Lancer;
 using Turrets.Laser;
 using Turrets.Shooter;
-using Turrets.Smasher;
 using UnityEngine;
 
 namespace Modules.Sniper
@@ -13,7 +14,7 @@ namespace Modules.Sniper
     [CreateAssetMenu(fileName = "SniperT0", menuName = "Modules/Sniper")]
     public class SniperModule : Module
     {
-        protected override Type[] ValidTypes => new[] { typeof(Shooter), typeof(Laser), typeof(Smasher) };
+        protected override Type[] ValidTypes => new[] { typeof(Shooter), typeof(Laser), typeof(Gunner), typeof(Lancer) };
 
         [Header("Shooter Turret")]
         [Tooltip("The percentage to modify the range of the Shooter by")]
@@ -28,9 +29,26 @@ namespace Modules.Sniper
         [Tooltip("The percentage to modify the rotation speed of the shooter by")]
         [SerializeField]
         private float shooterRotationSpeedPercentageChange;
-        [Tooltip("The percentage to modify the speed of the bullets by")]
+        
+        [Header("Gunner Turret")]
+        [Tooltip("The percentage to modify the range of the Gunner by")]
         [SerializeField]
-        private float shooterBulletSpeedPercentageChange;
+        private float gunnerRangePercentageChange;
+        [Tooltip("The percentage to modify the damage of the Gunner by")]
+        [SerializeField]
+        private float gunnerDamagePercentageChange;
+        [Tooltip("The percentage to modify the fire rate of the Gunner by")]
+        [SerializeField]
+        private float gunnerFireRatePercentageChange;
+        [Tooltip("The percentage to modify the rotation speed of the Gunner by")]
+        [SerializeField]
+        private float gunnerSpinUpPercentageChange;
+        [Tooltip("The percentage to modify the fire rate of the Gunner by")]
+        [SerializeField]
+        private float gunnerSpinDownPercentageChange;
+        [Tooltip("The percentage to modify the rotation speed of the Gunner by")]
+        [SerializeField]
+        private float gunnerMaxFireRatePercentageChange;
 
         [Header("Laser Turret")]
         [Tooltip("The percentage to modify the range of the Laser by")]
@@ -42,81 +60,114 @@ namespace Modules.Sniper
         [Tooltip("The percentage to modify the rotation speed of the Laser by")]
         [SerializeField]
         private float laserRotationSpeedPercentageChange;
+        [Tooltip("The percentage to modify the Laser cooldown by")]
+        [SerializeField]
+        private float laserLaserCooldown;
+        [Tooltip("The percentage to modify the Laser duration by")]
+        [SerializeField]
+        private float laserLaserDuration;
 
-        [Header("Smasher Turret")]
-        [Tooltip("The percentage to modify the range of the Smasher by")]
+        [Header("Lancer Turret")]
+        [Tooltip("The percentage to modify the range of the Lancer by")]
         [SerializeField]
-        private float smasherRangePercentageChange;
-        [Tooltip("The percentage to modify the damage of the Smasher by")]
+        private float lancerRangePercentageChange;
+        [Tooltip("The percentage to modify the damage of the Lancer by")]
         [SerializeField]
-        private float smasherDamagePercentageChange;
-        [Tooltip("The percentage to modify the fire rate of the Smasher by")]
+        private float lancerDamagePercentageChange;
+        [Tooltip("The percentage to modify the fire rate of the Lancer by")]
         [SerializeField]
-        private float smasherFireRatePercentageChange;
+        private float lancerFireRatePercentageChange;
+        [Tooltip("The percentage to modify the Lancer shot distance by")]
+        [SerializeField]
+        private float lancerShotDistanceChange;
+        [Tooltip("The percentage to modify the Lancer shot knockback by")]
+        [SerializeField]
+        private float lancerShotKnockbackChange;
         
         /// <summary>
         /// Modifies a turret's stats
         /// </summary>
-        /// <param name="turret">The turret's stats to modify</param>
-        /// <exception cref="ArgumentOutOfRangeException">An invalid turret is being modified</exception>
-        public override void AddModule(Turret turret)
+        /// <param name="damager">The turret's stats to modify</param>
+        public override void AddModule(Damager damager)
         {
-            switch (turret)
+            switch (damager)
             {
                 // Modify the Shooter stats
                 case Shooter shooter:
-                    turret.damage.AddModifier(shooterDamagePercentageChange);
-                    turret.range.AddModifier(shooterRangePercentageChange);
-                    turret.fireRate.AddModifier(shooterFireRatePercentageChange);
+                    damager.damage.AddModifier(shooterDamagePercentageChange);
+                    shooter.range.AddModifier(shooterRangePercentageChange);
+                    shooter.fireRate.AddModifier(shooterFireRatePercentageChange);
                     shooter.rotationSpeed.AddModifier(shooterRotationSpeedPercentageChange);
+                    break;
+                // Modify the Smasher's stats
+                case Gunner gunner:
+                    damager.damage.AddModifier(gunnerDamagePercentageChange);
+                    gunner.range.AddModifier(gunnerRangePercentageChange);
+                    gunner.fireRate.AddModifier(gunnerFireRatePercentageChange);
+                    gunner.spinMultiplier.AddModifier(gunnerSpinUpPercentageChange);
+                    gunner.spinCooldown.AddModifier(gunnerSpinDownPercentageChange);
+                    gunner.maxFireRate.AddModifier(gunnerMaxFireRatePercentageChange);
                     break;
                 // Modify the Laser's stats
                 case Laser laser:
-                    turret.range.AddModifier(laserRangePercentageChange);
+                    damager.damage.AddModifier(laserDamagePercentageChange);
+                    laser.range.AddModifier(laserRangePercentageChange);
                     laser.rotationSpeed.AddModifier(laserRotationSpeedPercentageChange);
-                    turret.damage.AddModifier(laserDamagePercentageChange);
+                    laser.laserCooldown.AddModifier(laserLaserCooldown);
+                    laser.laserDuration.AddModifier((laserLaserDuration));
                     break;
-                // Modify the Smasher's stats
-                case Smasher _:
-                    turret.range.AddModifier(smasherRangePercentageChange);
-                    turret.damage.AddModifier(smasherDamagePercentageChange);
-                    turret.fireRate.AddModifier(smasherFireRatePercentageChange);
+                // Modify the Lancer's stats
+                case Lancer lancer:
+                    damager.damage.AddModifier(lancerDamagePercentageChange);
+                    lancer.range.AddModifier(lancerRangePercentageChange);
+                    lancer.fireRate.AddModifier(lancerFireRatePercentageChange);
+                    lancer.bulletRange.AddModifier(lancerShotDistanceChange);
+                    damager.OnShoot += OnShoot;
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
         
         /// <summary>
         /// Removes any stats modifications from the module
         /// </summary>
-        /// <param name="turret">The turret to remove the modifications from</param>
+        /// <param name="damager">The turret to remove the modifications from</param>
         /// <exception cref="ArgumentOutOfRangeException">An invalid turret</exception>
-        public override void RemoveModule(Turret turret)
+        public override void RemoveModule(Damager damager)
         {
-            switch (turret)
+            switch (damager)
             {
-                // Modify the Shooter's stats
+                // Modify the Shooter stats
                 case Shooter shooter:
-                    turret.damage.TakeModifier(shooterDamagePercentageChange);
-                    turret.range.TakeModifier(shooterRangePercentageChange);
-                    turret.fireRate.TakeModifier(shooterFireRatePercentageChange);
-                    shooter.rotationSpeed.TakeModifier(shooterRotationSpeedPercentageChange);
+                    damager.damage.AddModifier(shooterDamagePercentageChange);
+                    shooter.range.AddModifier(shooterRangePercentageChange);
+                    shooter.fireRate.AddModifier(shooterFireRatePercentageChange);
+                    shooter.rotationSpeed.AddModifier(shooterRotationSpeedPercentageChange);
+                    break;
+                // Modify the Smasher's stats
+                case Gunner gunner:
+                    damager.damage.AddModifier(gunnerDamagePercentageChange);
+                    gunner.range.AddModifier(gunnerRangePercentageChange);
+                    gunner.fireRate.AddModifier(gunnerFireRatePercentageChange);
+                    gunner.spinMultiplier.AddModifier(gunnerSpinUpPercentageChange);
+                    gunner.spinCooldown.AddModifier(gunnerSpinDownPercentageChange);
+                    gunner.maxFireRate.AddModifier(gunnerMaxFireRatePercentageChange);
                     break;
                 // Modify the Laser's stats
                 case Laser laser:
-                    turret.range.TakeModifier(laserRangePercentageChange);
-                    laser.rotationSpeed.TakeModifier(laserRotationSpeedPercentageChange);
-                    turret.damage.TakeModifier(laserDamagePercentageChange);
+                    damager.damage.AddModifier(laserDamagePercentageChange);
+                    laser.range.AddModifier(laserRangePercentageChange);
+                    laser.rotationSpeed.AddModifier(laserRotationSpeedPercentageChange);
+                    laser.laserCooldown.AddModifier(laserLaserCooldown);
+                    laser.laserDuration.AddModifier((laserLaserDuration));
                     break;
-                // Modify the Smasher's stats
-                case Smasher _:
-                    turret.range.TakeModifier(smasherRangePercentageChange);
-                    turret.damage.TakeModifier(smasherDamagePercentageChange);
-                    turret.fireRate.TakeModifier(smasherFireRatePercentageChange);
+                // Modify the Lancer's stats
+                case Lancer lancer:
+                    damager.damage.AddModifier(lancerDamagePercentageChange);
+                    lancer.range.AddModifier(lancerRangePercentageChange);
+                    lancer.fireRate.AddModifier(lancerFireRatePercentageChange);
+                    lancer.bulletRange.AddModifier(lancerShotDistanceChange);
+                    damager.OnShoot -= OnShoot;
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -124,10 +175,9 @@ namespace Modules.Sniper
         /// Applies stat modifications when the bullet when fired
         /// </summary>
         /// <param name="bullet">The bullet to modify</param>
-        public override void OnShoot(Bullet bullet)
+        private void OnShoot(Bullet bullet)
         {
-            bullet.damage.AddModifier(shooterDamagePercentageChange);
-            bullet.speed.AddModifier(shooterBulletSpeedPercentageChange);
+            bullet.knockbackAmount.AddModifier(lancerShotKnockbackChange);
         }
     }
 }

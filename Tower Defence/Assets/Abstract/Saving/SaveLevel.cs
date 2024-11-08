@@ -20,20 +20,19 @@ namespace Abstract.Saving
             public List<ModuleChainHandler> moduleChainHandlers;
             public Quaternion turretRotation;
         }
-        public List<NodeData> nodes;
+        public List<NodeData> Nodes;
         
-        
-        public int money;
-        public int powercells;
-        public int lives;
-        public int waveIndex;
-        public Random.State random;
-        public int shopCost;
+        public int Energy;
+        public int Powercells;
+        public int Lives;
+        public int WaveIndex;
+        public Random.State RandomState;
+        public int ShopCost;
 
-        public List<TurretBlueprint> turretInventory;
-        public List<ModuleChainHandler> moduleInventory;
+        public List<TurretBlueprint> TurretInventory;
+        public List<ModuleChainHandler> ModuleInventory;
 
-        public readonly string version = Application.version;
+        public readonly string Version = Application.version;
         
         /// <summary>
         /// Translates the class into json format

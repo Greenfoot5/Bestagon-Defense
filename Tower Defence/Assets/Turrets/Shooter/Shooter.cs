@@ -1,5 +1,5 @@
-﻿using Abstract.Data;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.VFX;
 
 namespace Turrets.Shooter
 {
@@ -12,6 +12,10 @@ namespace Turrets.Shooter
         [Tooltip("The bullet prefab to spawn each attack")]
         [SerializeField]
         private GameObject bulletPrefab;
+
+        [Tooltip("The effect to fire when the bullet is shot")]
+        [SerializeField]
+        private VisualEffect attackEffect;
 
         /// <summary>
         /// Rotates towards the target if the turret have one.
@@ -56,19 +60,15 @@ namespace Turrets.Shooter
         /// </summary>
         protected override void Attack()
         {
+            attackEffect.SetFloat("zRotation", -firePoint.rotation.eulerAngles.z);
+            attackEffect.Play();
             // Creates the bullet
             GameObject bulletGo = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             bulletGo.name = "_" + bulletGo.name;
             var bullet = bulletGo.GetComponent<Bullet>();
-            bullet.damage = damage;
             bullet.Seek(target, this);
 
-            // Adds the modules to the bullet
-            foreach (ModuleChainHandler handler in moduleHandlers)
-            {
-                handler.GetModule().OnAttack(this);
-                bullet.AddModule(handler.GetModule());
-            }
+            base.Attack(this);
         }
     }
 }

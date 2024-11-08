@@ -14,10 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moduleTier: 4
   isUpgradableTo: 1
-  slowPercentage: 0.2
+  slowPercentage: 0.33
   duration: 4
-  gunnerSpinUpChange: -0.5
-  gunnerSpinDownChange: 0.4
-  smasherSlowPercentage: 0.15
-  smasherDuration: 0.65
-  smasherRangeChange: -0.4

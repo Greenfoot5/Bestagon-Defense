@@ -2,6 +2,7 @@
 using Abstract.Data;
 using UI.Inventory;
 using UnityEngine;
+using UnityEngine.VFX;
 
 namespace Turrets.Gunner
 {
@@ -14,6 +15,9 @@ namespace Turrets.Gunner
         [Tooltip("The bullet prefab to spawn each attack")]
         [SerializeField]
         private GameObject bulletPrefab;
+        [Tooltip("The effect to fire when the bullet is shot")]
+        [SerializeField]
+        private VisualEffect attackEffect;
         
         // Spin up stats
         private float _fireRateIncrease = 1f;
@@ -126,19 +130,14 @@ namespace Turrets.Gunner
         /// </summary>
         protected override void Attack()
         {
+            attackEffect.Play();
             // Creates the bullet
             GameObject bulletGo = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             bulletGo.name = "_" + bulletGo.name;
             var bullet = bulletGo.GetComponent<Bullet>();
-            bullet.damage = damage;
             bullet.Seek(target, this);
-
-            // Adds the modules to the bullet
-            foreach (ModuleChainHandler handler in moduleHandlers)
-            {
-                handler.GetModule().OnAttack(this);
-                bullet.AddModule(handler.GetModule());
-            }
+            
+            base.Attack(this);
         }
     }
 }

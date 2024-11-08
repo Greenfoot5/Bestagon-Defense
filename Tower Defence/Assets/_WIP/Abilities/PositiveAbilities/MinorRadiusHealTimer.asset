@@ -17,8 +17,8 @@ MonoBehaviour:
   abilityIcon: {fileID: 21300000, guid: af43a92a94bc9403c965970b4040752e, type: 3}
   abilityEffect: {fileID: 2228279973635050725, guid: 113efd59cc3914d1da68e83f518085f1, type: 3}
   range: 3
-  timer: 4
+  timer: 6
   startCount: -1
   isPercentage: 1
   healAmount: 100
-  healPercentage: 0.1
+  healPercentage: 0.2

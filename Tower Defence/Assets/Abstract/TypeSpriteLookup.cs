@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Turrets;
 using Turrets.Gunner;
 using Turrets.Lancer;
 using Turrets.Laser;
@@ -18,7 +19,8 @@ namespace Abstract
     {
         private static readonly List<Type> Types = new()
         {
-            null, // Represents no specific turret type
+            null, // Represents no specific damager type
+            typeof(Turret), // Represents no specific turret type
             typeof(Shooter),
             typeof(Laser),
             typeof(Smasher),

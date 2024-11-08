@@ -101,15 +101,16 @@ namespace Gameplay
 
         public void PopulateSaveData(SaveLevel saveData)
         {
-            saveData.lives = GameStats.Lives;
-            saveData.money = GameStats.Money;
-            saveData.powercells = GameStats.Powercells;
-            saveData.waveIndex = GameStats.Rounds - 1;
-            saveData.random = Random.state;
-            saveData.shopCost = shop.GetComponent<Shop>().nextCost;
-            saveData.nodes = new List<SaveLevel.NodeData>();
-            saveData.turretInventory = new List<TurretBlueprint>();
-            saveData.moduleInventory = new List<ModuleChainHandler>();
+            saveData.Lives = GameStats.Lives;
+            saveData.Energy = GameStats.Energy;
+            saveData.Powercells = GameStats.Powercells;
+            saveData.WaveIndex = GameStats.Rounds - 1;
+            saveData.RandomState = Random.state;
+            Debug.Log("Getting nextCost from Save Data");
+            saveData.ShopCost = shop.GetComponent<Shop>().nextCost;
+            saveData.Nodes = new List<SaveLevel.NodeData>();
+            saveData.TurretInventory = new List<TurretBlueprint>();
+            saveData.ModuleInventory = new List<ModuleChainHandler>();
 
             // Node Data
             foreach (Node node in nodeParent.GetComponentsInChildren<Node>())
@@ -126,19 +127,19 @@ namespace Gameplay
                     turretRotation = node.turret.transform.rotation,
                     moduleChainHandlers = node.turret.GetComponent<Turret>().moduleHandlers
                 };
-                saveData.nodes.Add(nodeData);
+                saveData.Nodes.Add(nodeData);
             }
             
             // Inventory
             // Turrets
             foreach (TurretBlueprint turret in TurretInventory)
             {
-                saveData.turretInventory.Add(turret);
+                saveData.TurretInventory.Add(turret);
             }
             // Modules
             foreach (ModuleChainHandler module in ModuleInventory)
             {
-                saveData.moduleInventory.Add(module);
+                saveData.ModuleInventory.Add(module);
             }
         }
         
@@ -153,15 +154,16 @@ namespace Gameplay
         public void LoadFromSaveData(SaveLevel saveData)
         {
             _startLives = GameStats.Lives;
-            GameStats.Lives = saveData.lives;
-            GameStats.PopulateRounds(saveData.waveIndex + 1);
-            Random.state = saveData.random;
+            GameStats.Lives = saveData.Lives;
+            GameStats.PopulateRounds(saveData.WaveIndex + 1);
+            Random.state = saveData.RandomState;
+            Debug.Log("Setting nextCost from Save Data");
             var shopComponent = shop.GetComponent<Shop>();
-            shopComponent.nextCost = saveData.shopCost;
-            GameStats.Powercells = saveData.powercells;
-            GameStats.Money = saveData.money;
+            shopComponent.nextCost = saveData.ShopCost;
+            GameStats.Powercells = saveData.Powercells;
+            GameStats.Energy = saveData.Energy;
 
-            foreach (SaveLevel.NodeData nodeData in saveData.nodes)
+            foreach (SaveLevel.NodeData nodeData in saveData.Nodes)
             {
                 foreach (Node node in nodeParent.GetComponentsInChildren<Node>())
                 {
@@ -176,11 +178,11 @@ namespace Gameplay
                 }
             }
 
-            foreach (TurretBlueprint turret in saveData.turretInventory)
+            foreach (TurretBlueprint turret in saveData.TurretInventory)
             {
                 shopComponent.SpawnNewTurret(turret);
             }
-            foreach (ModuleChainHandler module in saveData.moduleInventory)
+            foreach (ModuleChainHandler module in saveData.ModuleInventory)
             {
                 shopComponent.SpawnNewModule(module);
             }

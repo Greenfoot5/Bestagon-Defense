@@ -17,9 +17,9 @@ MonoBehaviour:
   abilityIcon: {fileID: 21300000, guid: f64aab135e0c1461aa1233e8c64c65c9, type: 3}
   abilityEffect: {fileID: 2228279973635050725, guid: 5f8c3e2695cf14a3cad64dff7a67dee7, type: 3}
   range: 3
-  timer: 6
-  startCount: -1
+  timer: 5
+  startCount: 4
   spawn: {fileID: 9190933599829545110, guid: b088ddab919544302bda7e10f9cd16a9, type: 3}
   count: 3
-  spawnTimer: 1
+  spawnTimer: 1.25
   doSpawnFromStart: 0

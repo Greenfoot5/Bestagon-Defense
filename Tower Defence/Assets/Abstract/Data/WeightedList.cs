@@ -21,7 +21,14 @@ namespace Abstract.Data
         /// <param name="list">The list to create</param>
         public WeightedList(List<WeightedItem<T>> list)
         {
-            this.list = list ?? new List<WeightedItem<T>>();
+            this.list = new List<WeightedItem<T>>(list);
+            RemoveUnweighted();
+        }
+
+        public WeightedList(WeightedList<T> list)
+        {
+            this.list = new List<WeightedItem<T>>(list.list);
+            RemoveUnweighted();
         }
 
         /// <summary>
@@ -66,6 +73,35 @@ namespace Abstract.Data
 
             return total;
         }
+
+        public void RemoveItem(T item)
+        {
+            RemoveUnweighted();
+            var i = 0;
+            while (i < list.Count)
+            {
+                if (list[i].item.Equals(item))
+                    list.RemoveAt(i);
+                else
+                    i++;
+            }
+        }
+
+        public void RemoveUnweighted()
+        {
+            // We don't want to remove anything if the total weight is 0
+            if (GetTotalWeight() == 0)
+                return;
+            
+            var i = 0;
+            while (i < list.Count)
+            {
+                if (list[i].weight <= 0)
+                    list.RemoveAt(i);
+                else
+                    i++;
+            }
+        }
     
         /// <summary>
         /// Empties/Cleans the list of all elements
@@ -73,6 +109,11 @@ namespace Abstract.Data
         public void Clear()
         {
             list = new List<WeightedItem<T>>();
+        }
+
+        public bool IsEmpty()
+        {
+            return list.Count == 0;
         }
     }
 }

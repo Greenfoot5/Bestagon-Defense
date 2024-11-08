@@ -74,7 +74,7 @@ namespace UI.Shop
         public void Refund()
         {
             int refundAmount = shop.nextCost - _levelData.selectionCostIncrement;
-            GameStats.Money += (int) (refundAmount * _levelData.refundPercentage);
+            GameStats.Energy += (int) (refundAmount * _levelData.refundPercentage);
             transform.parent.gameObject.SetActive(false);
             Time.timeScale = 1f;
         }

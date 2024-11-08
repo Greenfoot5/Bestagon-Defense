@@ -34,6 +34,12 @@ namespace Gameplay
             {
                 return;
             }
+            # if UNITY_EDITOR
+            catch (DllNotFoundException)
+            {
+                return;
+            }
+            #endif
 
             _activity = new Activity() 
             {

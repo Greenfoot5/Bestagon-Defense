@@ -29,6 +29,9 @@ namespace Gameplay.Waves
         [Tooltip("The time at the beginning before the start of the game")]
         private float preparationTime = 8f;
         private float _countdown = 5f;
+        [SerializeField]
+        [Tooltip("The index of the wave to start from after the boss wave")]
+        private int waveRepeatIndex;
         
         [SerializeField]
         [Tooltip("The text to update with the countdown/spawning/enemies")]
@@ -123,7 +126,10 @@ namespace Gameplay.Waves
         {
             _isSpawning = true;
             waveCountdownText.text = spawningText.GetLocalizedString();
-            Wave wave = waves[_waveIndex % waves.Length];
+            Wave wave = waves[_waveIndex % waveRepeatIndex];
+            if (GameStats.Rounds > waveRepeatIndex)
+                wave = waves[(_waveIndex - waveRepeatIndex) % (waves.Length - waveRepeatIndex) + waveRepeatIndex];
+            
             GameStats.Rounds = _waveIndex + 1;
             waveText.text = waveCountText.GetLocalizedString() + GameStats.Rounds;
             _totalEnemies = 0;
@@ -155,9 +161,6 @@ namespace Gameplay.Waves
 
             _waveIndex++;
             _isSpawning = false;
-
-            //if (_waveIndex % waves.Length != 0) yield break;
-            //Debug.Log("Level complete!");
         }
     
         /// <summary>

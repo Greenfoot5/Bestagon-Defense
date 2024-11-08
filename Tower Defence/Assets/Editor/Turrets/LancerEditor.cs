@@ -8,12 +8,12 @@ namespace Editor.Turrets
     {
         // PROPERTIES
         private SerializedProperty _partToRotate;
-
         private SerializedProperty _firePoint;
         
         private SerializedProperty _bulletPrefab;
-        
         private SerializedProperty _bulletRange;
+
+        private SerializedProperty _attackEffect;
         
         protected new void OnEnable()
         {
@@ -23,6 +23,7 @@ namespace Editor.Turrets
             _firePoint = serializedObject.FindProperty("firePoint");
             _bulletPrefab = serializedObject.FindProperty("bulletPrefab");
             _bulletRange = serializedObject.FindProperty("bulletRange");
+            _attackEffect = serializedObject.FindProperty("attackEffect");
         }
 
         public override void OnInspectorGUI()
@@ -49,6 +50,7 @@ namespace Editor.Turrets
             EditorGUILayout.Space();
 
             EditorGUILayout.PropertyField(_bulletRange);
+            EditorGUILayout.PropertyField(_attackEffect);
 
             serializedObject.ApplyModifiedProperties();
         }

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Abstract.Data;
 using Enemies;
-using Modules;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Turrets
 {
@@ -11,7 +11,7 @@ namespace Turrets
     /// </summary>
     public class Bullet : MonoBehaviour
     {
-        private Turret _source;
+        [FormerlySerializedAs("_source")] public Turret source;
         [HideInInspector]
         public Transform target;
         [HideInInspector]
@@ -30,14 +30,10 @@ namespace Turrets
         public UpgradableStat explosionRadius;
         [Tooltip("The knockback the bullet deals to a target (set by turret)")]
         public UpgradableStat knockbackAmount;
-        [Tooltip("The amount of damage the bullet deals (set by turret)")]
-        [HideInInspector]
-        public UpgradableStat damage = new(50f);
     
         [Tooltip("The effect spawned when the bullet hit's a target")]
         public GameObject impactEffect;
-
-        private readonly List<Module> _modules = new();
+        
         private readonly List<int> _hitEnemies = new();
         
         /// <summary>
@@ -48,7 +44,7 @@ namespace Turrets
         public void Seek(Transform newTarget, Turret turret)
         {
             target = newTarget;
-            _source = turret;
+            source = turret;
             useLocation = false;
         }
         
@@ -60,7 +56,7 @@ namespace Turrets
         public void Seek(Vector3 location, Turret turret)
         {
             targetLocation = location;
-            _source = turret;
+            source = turret;
             useLocation = true;
         }
 
@@ -71,17 +67,11 @@ namespace Turrets
         {
             // Check the bullet still have a target to move towards
             if (target == null && !useLocation)
-            {
                 Destroy(gameObject);
-            }
             else if (useLocation)
-            {
                 SeekTarget(targetLocation, false);
-            }
             else
-            {
                 SeekTarget(target.position, true);
-            }
         }
         
         /// <summary>
@@ -129,13 +119,14 @@ namespace Turrets
             {
                 // If the bullet has AoE damage or not
                 if (explosionRadius.GetStat() > 0f)
-                {
                     Explode();
-                }
                 else
-                {
                     Damage(target);
-                }
+            }
+            else
+            {
+                if (explosionRadius.GetStat() > 0f)
+                    Explode();
             }
 
             // Destroy so the bullet only hits the target once
@@ -149,21 +140,16 @@ namespace Turrets
         private void Damage(Component enemy)
         {
             var em = enemy.GetComponent<Enemy>();
-            
-            // Add module effects
-            foreach (Module module in _modules)
-            {
-                module.OnHit(new []{em}, _source, this);
-            }
-
             if (em == null) return;
+            
+            source.Hit(em, source, this);
 
             if (knockbackAmount.GetTrueStat() != 0)
             {
-                em.GetComponent<EnemyMovement>().TakeKnockback(knockbackAmount.GetTrueStat(), _source.transform.position);
+                em.GetComponent<EnemyMovement>().TakeKnockback(knockbackAmount.GetTrueStat(), source.transform.position);
             }
 
-            em.TakeDamage(damage.GetStat(), gameObject);
+            em.TakeDamage(source.damage.GetStat(), gameObject);
         }
     
         /// <summary>
@@ -177,22 +163,8 @@ namespace Turrets
             {
                 if (!collider2d.CompareTag("Enemy")) continue;
                 
-                foreach (Module module in _modules)
-                {
-                    module.OnHit(new []{collider2d.GetComponent<Enemy>()}, _source, this);
-                }
                 Damage(collider2d.transform);
             }
-        }
-        
-        /// <summary>
-        /// Adds a module to the bullet
-        /// </summary>
-        /// <param name="module">The module to add</param>
-        public void AddModule(Module module)
-        {
-            module.OnShoot(this);
-            _modules.Add(module);
         }
     
         /// <summary>

@@ -24,29 +24,41 @@ namespace Modules.FireRate
         /// <summary>
         /// Increases the fire rate of a turret
         /// </summary>
-        /// <param name="turret">The turret to increase the fire rate for</param>
-        public override void AddModule(Turret turret)
+        /// <param name="damager">The turret to increase the fire rate for</param>
+        public override void AddModule(Damager damager)
         {
-            if (turret.GetType() != typeof(Gunner))
+            switch (damager)
             {
-                turret.fireRate.AddModifier(percentageChange);
-            }
-            else
-            {
-                var gunner = (Gunner)turret;
-                gunner.maxFireRate.AddModifier(percentageChange);
-                gunner.spinCooldown.AddModifier(percentageChange);
-                gunner.spinMultiplier.AddModifier(percentageChange);
+                case Gunner gunner:
+                    gunner.maxFireRate.AddModifier(percentageChange);
+                    gunner.spinCooldown.AddModifier(percentageChange);
+                    gunner.spinMultiplier.AddModifier(percentageChange);
+                    gunner.fireRate.AddModifier(percentageChange);
+                    break;
+                case Turret turret:
+                    turret.fireRate.AddModifier(percentageChange);
+                    break;
             }
         }
         
         /// <summary>
         /// Removes the fire rate increase
         /// </summary>
-        /// <param name="turret">The turret to remove the fire rate for</param>
-        public override void RemoveModule(Turret turret)
+        /// <param name="damager">The turret to remove the fire rate for</param>
+        public override void RemoveModule(Damager damager)
         {
-            turret.fireRate.TakeModifier(percentageChange);
+            switch (damager)
+            {
+                case Gunner gunner:
+                    gunner.maxFireRate.TakeModifier(percentageChange);
+                    gunner.spinCooldown.TakeModifier(percentageChange);
+                    gunner.spinMultiplier.TakeModifier(percentageChange);
+                    gunner.fireRate.TakeModifier(percentageChange);
+                    break;
+                case Turret turret:
+                    turret.fireRate.TakeModifier(percentageChange);
+                    break;
+            }
         }
     }
 }

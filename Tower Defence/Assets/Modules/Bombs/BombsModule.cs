@@ -49,37 +49,42 @@ namespace Modules.Bombs
         /// <summary>
         /// Changes the turret's stats when added
         /// </summary>
-        /// <param name="turret">The turret to change stats for</param>
-        public override void AddModule(Turret turret)
+        /// <param name="damager">The turret to change stats for</param>
+        public override void AddModule(Damager damager)
         {
-            if (turret.GetType() == typeof(Smasher))
+            damager.OnShoot += OnShoot;
+            switch (damager)
             {
-                turret.damage.AddModifier(smasherDamageChange);
-                turret.range.AddModifier(smasherRangeChange);
+                case Smasher smasher:
+                    smasher.damage.AddModifier(smasherDamageChange);
+                    smasher.range.AddModifier(smasherRangeChange);
+                    break;
+                case Turret turret:
+                    turret.damage.AddModifier(damagePercentageChange);
+                    turret.fireRate.AddModifier(fireRatePercentageChange);
+                    turret.range.AddModifier(rangePercentageChange);
+                    break;
             }
-            else
-            {
-                turret.fireRate.AddModifier(fireRatePercentageChange);
-                turret.range.AddModifier(rangePercentageChange);
-            }
-            
         }
         
         /// <summary>
         /// Removes stat modifications for a turret
         /// </summary>
-        /// <param name="turret">The turret to revert stat changes for</param>
-        public override void RemoveModule(Turret turret)
+        /// <param name="damager">The turret to revert stat changes for</param>
+        public override void RemoveModule(Damager damager)
         {
-            if (turret.GetType() == typeof(Smasher))
+            damager.OnShoot -= OnShoot;
+            switch (damager)
             {
-                turret.damage.TakeModifier(smasherDamageChange);
-                turret.range.TakeModifier(smasherRangeChange);
-            }
-            else
-            {
-                turret.fireRate.TakeModifier(fireRatePercentageChange);
-                turret.range.TakeModifier(rangePercentageChange);
+                case Smasher smasher:
+                    smasher.damage.TakeModifier(smasherDamageChange);
+                    smasher.range.TakeModifier(smasherRangeChange);
+                    break;
+                case Turret turret:
+                    turret.damage.TakeModifier(damagePercentageChange);
+                    turret.fireRate.TakeModifier(fireRatePercentageChange);
+                    turret.range.TakeModifier(rangePercentageChange);
+                    break;
             }
         }
         
@@ -87,10 +92,9 @@ namespace Modules.Bombs
         /// Modifies the stats of a bullet when fired
         /// </summary>
         /// <param name="bullet">The bullet to add stats for</param>
-        public override void OnShoot(Bullet bullet)
+        private void OnShoot(Bullet bullet)
         {
             bullet.explosionRadius.AddModifier(explosionRadiusChange);
-            bullet.damage.AddModifier(damagePercentageChange);
             bullet.speed.AddModifier(speedPercentageChange);
             bullet.knockbackAmount.AddModifier(knockbackPercentageChange);
             if (bullet.useLocation) return;

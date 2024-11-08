@@ -8,6 +8,7 @@ namespace Editor.Turrets
     {
         // PROPERTIES
         private SerializedProperty _bulletPrefab;
+        private SerializedProperty _attackEffect;
         
         private SerializedProperty _spinMultiplier;
         private SerializedProperty _maxFireRate;
@@ -18,6 +19,7 @@ namespace Editor.Turrets
             base.OnEnable();
 
             _bulletPrefab = serializedObject.FindProperty("bulletPrefab");
+            _attackEffect = serializedObject.FindProperty("attackEffect");
             _spinMultiplier = serializedObject.FindProperty("spinMultiplier");
             _maxFireRate = serializedObject.FindProperty("maxFireRate");
             _spinCooldown = serializedObject.FindProperty("spinCooldown");
@@ -33,6 +35,7 @@ namespace Editor.Turrets
             EditorGUILayout.LabelField("Gunner", EditorStyles.boldLabel);
 
             EditorGUILayout.PropertyField(_bulletPrefab);
+            EditorGUILayout.PropertyField(_attackEffect);
             
             EditorGUILayout.Space();
 

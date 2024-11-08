@@ -14,6 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moduleTier: 2
   isUpgradableTo: 1
-  rotationSpeedPercentageChange: 0.85
-  damagePercentageChange: 0.25
-  gunnerFireRateCapChange: 0.2
+  rotationSpeedPercentageChange: 0.1
+  damagePercentageChange: 0.6

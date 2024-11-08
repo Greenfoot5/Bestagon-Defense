@@ -11,7 +11,7 @@ namespace Modules.Range
     [CreateAssetMenu(fileName = "RangeModule", menuName = "Modules/Range")]
     public class RangeModule : Module
     {
-        protected override Type[] ValidTypes => null;  // any
+        protected override Type[] ValidTypes => new [] {typeof(Turret)};  // any
         
         [Tooltip("The percentage to modify the range of the turret by")]
         [SerializeField]
@@ -20,23 +20,37 @@ namespace Modules.Range
         /// <summary>
         /// Increases the range of a turret
         /// </summary>
-        /// <param name="turret">The turret to increase range for</param>
-        public override void AddModule(Turret turret)
+        /// <param name="damager">The turret to increase range for</param>
+        public override void AddModule(Damager damager)
         {
-            turret.range.AddModifier(percentageChange);
-            if (turret.GetType() == typeof(Lancer))
+            switch (damager)
             {
-                ((Lancer) turret).bulletRange.AddModifier(percentageChange);
+                case Lancer lancer:
+                    lancer.bulletRange.AddModifier(percentageChange);
+                    lancer.range.AddModifier(percentageChange);
+                    break;
+                case Turret turret:
+                    turret.range.AddModifier(percentageChange);
+                    break;
             }
         }
         
         /// <summary>
         /// Removes the range increase from a turret
         /// </summary>
-        /// <param name="turret">The turret to decrease the range for</param>
-        public override void RemoveModule(Turret turret)
+        /// <param name="damager">The turret to decrease the range for</param>
+        public override void RemoveModule(Damager damager)
         {
-            turret.fireRate.TakeModifier(percentageChange);
+            switch (damager)
+            {
+                case Lancer lancer:
+                    lancer.bulletRange.TakeModifier(percentageChange);
+                    lancer.range.TakeModifier(percentageChange);
+                    break;
+                case Turret turret:
+                    turret.range.TakeModifier(percentageChange);
+                    break;
+            }
         }
     }
 }

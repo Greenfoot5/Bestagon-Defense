@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Abstract.Data;
+﻿using System.Linq;
 using Enemies;
 using UnityEngine;
+using UnityEngine.VFX;
 
 namespace Turrets.Smasher
 {
@@ -13,7 +12,7 @@ namespace Turrets.Smasher
     {
         [Tooltip("The effect to play when the smasher attacks")]
         [SerializeField]
-        private ParticleSystem smashEffect;
+        private VisualEffect smashEffect;
 
         /// <summary>
         /// Check for new enemies in radius and attacks if there are.
@@ -27,8 +26,7 @@ namespace Turrets.Smasher
             }
             
             // Don't do anything if no enemy is in range
-            var results = new Collider2D[128];
-            Physics2D.OverlapCircleNonAlloc(transform.position, range.GetStat(), results);
+            Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, range.GetStat());
             if (!results.Any(x => 
                     x != null && x.CompareTag(enemyTag)))
             {
@@ -45,6 +43,18 @@ namespace Turrets.Smasher
             
             fireCountdown -= Time.deltaTime;
         }
+
+        public override void UpdateRange()
+        {
+            // Update the effect radius
+            smashEffect.SetFloat("size", range.GetStat() * (7f/3f));
+            // Update the range shader's size
+            Vector3 localScale = transform.localScale;
+            rangeDisplay.transform.localScale = new Vector3(
+                range.GetStat() / localScale.x * 2,
+                range.GetStat() / localScale.y * 2,
+                1);
+        }
         
         /// <summary>
         /// Deals damage to all enemies in range
@@ -53,36 +63,29 @@ namespace Turrets.Smasher
         {
             smashEffect.Play();
             
+            base.Attack(this);
+            
             // Gets all the enemies in the AoE and calls Damage on them
             // ReSharper disable once Unity.PreferNonAllocApi
             Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, range.GetStat());
             
-            var enemies = new List<Enemy>();
             foreach (Collider2D collider2d in results)
             {
                 if (!collider2d.CompareTag(enemyTag)) continue;
                 
                 var enemy = collider2d.GetComponent<Enemy>();
-                enemies.Add(enemy);
                 
                 // Take damage depending on how close the enemy is to the turret's centre
-                float damagePercentage = 1 - (transform.position - collider2d.transform.position).sqrMagnitude /
-                                         (range.GetTrueStat() * range.GetTrueStat());
+                Vector2 position = transform.position;
+                float distance = 1 - (position - collider2d.ClosestPoint(position)).sqrMagnitude /
+                    (range.GetTrueStat() * range.GetTrueStat()) + 0.25f;
+                float damagePercentage = Mathf.Clamp(distance, 0.2f, 1f);
+                
                 // Only deal damage if it will actually damage the enemy
-                if (damagePercentage > 0)
-                {
-                    enemy.TakeDamage(damage.GetTrueStat() * damagePercentage, gameObject);
-                }
-            }
-
-            foreach (ModuleChainHandler handler in moduleHandlers)
-            {
-                handler.GetModule().OnAttack(this);
-            }
-            // Activates the turret's OnHit modules
-            foreach (ModuleChainHandler handler in moduleHandlers)
-            {
-                handler.GetModule().OnHit(enemies.ToArray(), this);
+                if (!(damagePercentage > 0)) continue;
+                
+                Hit(enemy, this);
+                enemy.TakeDamage(damage.GetTrueStat() * damagePercentage, gameObject);
             }
         }
     }

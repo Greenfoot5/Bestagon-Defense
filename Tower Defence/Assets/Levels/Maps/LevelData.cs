@@ -27,19 +27,23 @@ namespace Levels.Maps
         public DuplicateTypes initialDuplicateCheck = DuplicateTypes.None;
 
         [Header("Selection")]
+        [Tooltip("The weighted chance of picking a turret card to appear in the selection")]
+        public CurvedReference turretOptionWeight;
+        [Tooltip("The weighted chance of picking a module card to appear in the selection")]
+        public CurvedReference moduleOptionWeight;
+        [Tooltip("The weighted chance of pickup an additional life")]
+        public CurvedReference lifeOptionWeight;
+        [Tooltip("How many lives the life card will grant")]
+        public int lifeCount;
         [Tooltip("What turrets can appear and their weighted chance of appearing on a turret selection card")]
         public WeightedCurveList<TurretBlueprint> turrets;
         [Tooltip("What type of duplicate check to perform, if any, against the rest of the selection")]
         public DuplicateTypes turretDuplicateCheck = DuplicateTypes.ByName;
-        [Tooltip("The weighted chance of picking a turret card to appear in the selection")]
-        public CurvedReference turretOptionWeight;
         [Tooltip("What module can appear and their weighted chance of appearing on a module selection card")]
         public WeightedCurveList<ModuleChainHandler> moduleHandlers;
         [Tooltip("What type of duplicate check to perform, if any, against the rest of the selection")]
         public DuplicateTypes moduleDuplicateCheck = DuplicateTypes.ByType;
-        [Tooltip("The weighted chance of picking a module card to appear in the selection")]
-        public CurvedReference moduleOptionWeight;
-
+        
         [Header("Selection Counts")]
         [Tooltip("Is there an initial selection?")]
         public bool hasInitialSelection = true;
@@ -47,8 +51,12 @@ namespace Levels.Maps
         public int initialSelectionCount = 3;
         [Tooltip("How many options to display in selections after the first")]
         public int selectionCount = 3;
-        
+
         [Header("Costs")]
+        [Tooltip("Shows how costs scale per wave")]
+        public CurvedReference selectionCost;
+
+        public WrapMode mode;
         [Tooltip("The initial cost to open the selection")]
         public int initialSelectionCost;
         [Tooltip("The amount to increase the selection cost by every time it's is opened")]

@@ -36,123 +36,27 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5170262958080
-    m_Localized: Bestagon Defence is a tower defence game! This means ye got teh
-      place turrets to stop those dirty landlubbers making it to the six seas!
+    m_Localized: 
     m_Metadata:
       m_Items: []
   - m_Id: 5232535789568
-    m_Localized: '<size=+25>The Goal<size=100%>
-
-      Ye begin with each level with
-      a certain amount of <sprite="UI-Life" name="life">, and each time a landlubber
-      reaches they sea, ye lose at least one. Ye can gain more from the shopkeeper.
-      If ye lose ''em all, ye walk the plank. The aim is to take as many down with
-      you as possible and reach the top of the wanted boards!'
+    m_Localized: 
     m_Metadata:
       m_Items: []
   - m_Id: 5390363254784
-    m_Localized: "<size=+25>The Shop<size=100%>\nThe shop is here to help! Ye can
-      use the hard earned <sprite=\"UI-Gold\" name=\"gold>  you gain from killing
-      landlubbers by opening the shop. The shopkeeper's greedy so they increase the
-      shop each time.\nEver time the shop is opened, ye get some choices. You can
-      only pick one thing before the shop closes so make yer choise wisely. The main
-      three are either turrets or modules (turret upgrades). These three are randomised
-      each time the shop opens. The bottom are always present:\n<sprite=\"UI-Life\"
-      name=\"life\"> <color=#D41E3C>Revitalise</color> - Gives ye some lives back\n<sprite=\"UI-Gold\"
-      name=\"gold\"> <color=#fce544>Refund</color> - Gives ye back some of the gold
-      ye spent opening the shop, but the price still increases.\n - <color=#f8663a>Reroll</color>
-      - Spend <sprite=\"UI-Life\" name=\"life\">  to reroll yer turret & module selection.
-      It can cost multiple <sprite=\"UI-Life\" name=\"life\">  for one reroll, or
-      one <sprite=\"UI-Life\" name=\"life\">  for many rerolls. They carry over between
-      shop opens."
+    m_Localized: 
     m_Metadata:
       m_Items: []
   - m_Id: 5906971484160
-    m_Localized: '<size=+25>Turrets & Modules<size=100%>
-
-      Turrets can be placed
-      on the map. To place one, select one from yer inventory, and select a tile,
-      the turret is then built! If ye click on the turret again some buttons appear
-      to help fine-tune the turret into working more effectively. Once placed they
-      automatically start attacking enemies. Most have a targeting system, but some
-      might not have one, or require you to control where it attacks.
-
-      Each
-      turret also has a glyph that appears on a module''s card in the shop showing
-      which turrets it can be used on:
-
-      <sprite="UI-Glyphs" name="any"> - Any
-
-      <sprite="UI-Glyphs"
-      name="gunner"> - Gunner
-
-      <sprite="UI-Glyphs" name="lancer"> - Lancer
-
-      <sprite="UI-Glyphs"
-      name="laser"> - Laser
-
-      <sprite="UI-Glyphs" name="shooter"> - Shooter
-
-      <sprite="UI-Glyphs"
-      name="smasher"> - Smasher
-
-
-      Modules can be obtained from the shop. To
-      apply one, select the turret ye wish to apply it to, select the module from
-      yer inventory and hit the "Apply Module" button above the turret. Most modules
-      can be applied to multiple turrets, and some to any. Check the turret glyphs
-      on the module''s shop card to see what it can be applied to. Module can also
-      be upgraded (up to a max level) by placing a module the the same type and level
-      to a turret. Most modules can also be applied to a turret even if there''s
-      one of the same type at a different level, but not all.
-
-
-      If yer mind
-      gets stranded and yer not sure what a turret/module is/does, check the wiki!'
+    m_Localized: 
     m_Metadata:
       m_Items: []
   - m_Id: 6032959987712
-    m_Localized: '<size=+25>Keyboard & Mouse<size=100%>
-
-      <u>Pan the Camera</u>
-      - WASD/Arrow Keys
-
-      <u>Zoom</u> - Scroll (Hold Shift for a stronger scroll)
-
-      <u>Pause</u>
-      - Esc (or click the "P" button top left)
-
-      <u>Deselect (tile)</u> - Click
-      on any empty tile or the turret again
-
-      <u>Place Turret</u> - Open the
-      turret inventory, select a turret in yer inventory and click the desired tile
-
-      <u>Apply
-      Module</u> - Select a turret, select a module from yer inventory, click the
-      green "Apply Module" button above the turret'
+    m_Localized: 
     m_Metadata:
       m_Items: []
   - m_Id: 6136999698432
-    m_Localized: '<size=+25>Mobile/Touchscreen<size=100%>
-
-      <u>Pan the Camera</u>
-      - Tap & Drag (not on a tile or inventory item)
-
-      <u>Zoom</u> - Pinch
-
-      <u>Pause</u>
-      - The "P" button top left, or the back button (if ye have one)
-
-      <u>Deselect
-      (tile)</u> - Tap on any empty tile or the turret again
-
-      <u>Place Turret</u>
-      - Open the turret inventory, select a turret in yer inventory and tap the desired
-      tile
-
-      <u>Apply Module</u> - Select a turret, select a module from yer
-      inventory, tap the green "Apply Module" button above the turret'
+    m_Localized: 
     m_Metadata:
       m_Items: []
   - m_Id: 6251567112192
@@ -323,10 +227,28 @@ MonoBehaviour:
     m_Localized: 
     m_Metadata:
       m_Items: []
+  - m_Id: 20018537140576256
+    m_Localized: Sail Longer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20018362405871616
+    m_Localized: 
+    m_Metadata:
+      m_Items:
+      - rid: 1943649921315110920
+  - m_Id: 20227354377838592
+    m_Localized: Booty
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
     - rid: 1943649921315110920
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 00e02fabf505000000e0af01c133000000e0efe34c4f0000
+        m_Entries: 
+        m_SharedEntries:
+        - id: 6552697167872
+        - id: 56904050008064
+        - id: 87191660257280
+        - id: 20018362405871616

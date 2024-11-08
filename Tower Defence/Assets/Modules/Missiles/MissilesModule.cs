@@ -38,14 +38,16 @@ namespace Modules.Missiles
         /// <summary>
         /// Applies the stat changes to the turret
         /// </summary>
-        /// <param name="turret">The turret to modifies the stats for</param>
-        public override void AddModule(Turret turret)
+        /// <param name="damager">The turret to modifies the stats for</param>
+        public override void AddModule(Damager damager)
         {
+            damager.OnShoot += OnShoot;
+            damager.damage.AddModifier(damagePercentageChange);
+            
+            if (damager is not Turret turret) return;
             turret.fireRate.AddModifier(fireRatePercentageChange);
 
-            if (turret.GetType() != typeof(Gunner)) return;
-            
-            var gunner = (Gunner)turret;
+            if (turret is not Gunner gunner) return;
             gunner.spinMultiplier.AddModifier(gunnerSpinUpChange);
             gunner.maxFireRate.AddModifier(gunnerFireRateCapChange);
         }
@@ -53,14 +55,16 @@ namespace Modules.Missiles
         /// <summary>
         /// Removes the stats changes from a turret
         /// </summary>
-        /// <param name="turret">The turret to remove the stats changes for</param>
-        public override void RemoveModule(Turret turret)
+        /// <param name="damager">The turret to remove the stats changes for</param>
+        public override void RemoveModule(Damager damager)
         {
+            damager.OnShoot -= OnShoot;
+            damager.damage.TakeModifier(damagePercentageChange);
+            
+            if (damager is not Turret turret) return;
             turret.fireRate.TakeModifier(fireRatePercentageChange);
-            
-            if (turret.GetType() != typeof(Gunner)) return;
-            
-            var gunner = (Gunner)turret;
+
+            if (turret is not Gunner gunner) return;
             gunner.spinMultiplier.TakeModifier(gunnerSpinUpChange);
             gunner.maxFireRate.TakeModifier(gunnerFireRateCapChange);
         }
@@ -69,10 +73,9 @@ namespace Modules.Missiles
         /// Applies stat changes to a bullet
         /// </summary>
         /// <param name="bullet">The bullet to modify</param>
-        public override void OnShoot(Bullet bullet)
+        private void OnShoot(Bullet bullet)
         {
             bullet.explosionRadius.AddModifier(explosionRadiusChange);
-            bullet.damage.AddModifier(damagePercentageChange);
             bullet.speed.AddModifier(speedPercentageChange);
         }
     }

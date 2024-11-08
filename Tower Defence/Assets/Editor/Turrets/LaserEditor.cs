@@ -9,6 +9,8 @@ namespace Editor.Turrets
         // PROPERTIES
         private SerializedProperty _lineRenderer;
         private SerializedProperty _impactEffect;
+        private SerializedProperty _laserDuration;
+        private SerializedProperty _laserCooldown;
 
         protected new void OnEnable()
         {
@@ -16,6 +18,8 @@ namespace Editor.Turrets
 
             _lineRenderer = serializedObject.FindProperty("lineRenderer");
             _impactEffect = serializedObject.FindProperty("impactEffect");
+            _laserDuration = serializedObject.FindProperty("laserDuration");
+            _laserCooldown = serializedObject.FindProperty("laserCooldown");
         }
 
         public override void OnInspectorGUI()
@@ -29,6 +33,8 @@ namespace Editor.Turrets
 
             EditorGUILayout.PropertyField(_lineRenderer);
             EditorGUILayout.PropertyField(_impactEffect);
+            EditorGUILayout.PropertyField(_laserDuration);
+            EditorGUILayout.PropertyField(_laserCooldown);
 
             serializedObject.ApplyModifiedProperties();
         }

@@ -16,8 +16,9 @@ jobs:
       max-parallel: 1
       matrix:
         include:
-          - targetPlatform: StandaloneOSX # Build a macOS standalone (Intel 64-bit).
-            jobOS: macos-latest
+          # Temporarily disabled as it wasn't working
+          #- targetPlatform: StandaloneOSX # Build a macOS standalone (Intel 64-bit).
+          #  jobOS: macos-latest
           - targetPlatform: StandaloneWindows # Build a Windows standalone.
             jobOS: ubuntu-latest
           - targetPlatform: StandaloneWindows64 # Build a Windows 64-bit standalone.
@@ -51,31 +52,31 @@ jobs:
           path: Library
           key: Library-${{ matrix.targetPlatform }}
 
-      - uses: game-ci/unity-builder@v3
+      - uses: game-ci/unity-builder@v4
         env:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
 
           # Use for paid version:
-          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+          # UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
 
           # Use for free version:
-          #UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           projectPath: 'Tower Defence'
           targetPlatform: ${{ matrix.targetPlatform }}
         if: ${{ matrix.targetPlatform != 'Android' }}
           
-      - uses: game-ci/unity-builder@v3
+      - uses: game-ci/unity-builder@v4
         env:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
 
           # Use for paid version:
-          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+#          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
 
           # Use for free version:
-          #UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           projectPath: 'Tower Defence'
           targetPlatform: ${{ matrix.targetPlatform }}

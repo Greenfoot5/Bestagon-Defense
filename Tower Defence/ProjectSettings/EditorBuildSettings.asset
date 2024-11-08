@@ -12,23 +12,11 @@ EditorBuildSettings:
     path: Assets/Levels/Generic/LevelSelect/LevelSelect.unity
     guid: 6c08fdee9933e4d3a9292b88a94b983a
   - enabled: 1
-    path: Assets/Levels/Generic/Tutorial/Tutorial.unity
-    guid: 051facf12831546e19b013bb18ae86be
-  - enabled: 1
     path: Assets/Levels/Generic/Settings/Settings.unity
     guid: 3c6d46d663f374a59903ae2806d9cd66
   - enabled: 1
-    path: Assets/Levels/Maps/Prototype/PrototypeLevel.unity
-    guid: bcae845140dd848c9b9a5aa381e851c4
-  - enabled: 0
-    path: Assets/Levels/Maps/OutOfRotation/Hexagon/HexagonLevel.unity
-    guid: 98f493f3b2159447eb37c3a6dadc667d
-  - enabled: 0
-    path: Assets/Levels/Maps/OutOfRotation/Polygon/PolygonLevel.unity
-    guid: 9eb7a85ac13264cdba210105834fbd89
-  - enabled: 0
-    path: Assets/Levels/Maps/Loop/LoopLevel.unity
-    guid: 158c840c834e34d658cad8cfe7cfbf91
+    path: Assets/Levels/Generic/Tutorial/Tutorial.unity
+    guid: 051facf12831546e19b013bb18ae86be
   - enabled: 1
     path: Assets/Levels/Maps/Upgrade/UpgradeLevel.unity
     guid: f2a965634018741b1a55f40b2f38afd2

@@ -7,6 +7,7 @@ using Turrets;
 using UI.Inventory;
 using UI.Shop;
 using UnityEngine;
+using UnityEngine.Localization;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -47,7 +48,7 @@ namespace Gameplay
         [SerializeField]
         private Progress energyProgress;
         
-        [Header("Shop Button Colours")]
+        [Header("Shop Button")]
         [Tooltip("Shop Button Colours Top when can afford")]
         private Color _defaultButtonTop;
         [Tooltip("Shop Button Colours Bottom when can afford")]
@@ -58,6 +59,9 @@ namespace Gameplay
         [Tooltip("Shop Button Colours Bottom when can afford")]
         [SerializeField]
         private Color expensiveButtonBottom;
+        [Tooltip("The text to display")]
+        [SerializeField]
+        private LocalizedString shopText;
         
         [Tooltip("The GlyphsLookup index in the scene")]
         [SerializeField]
@@ -70,24 +74,21 @@ namespace Gameplay
         {
             _buildManager = BuildManager.instance;
             _levelData = _buildManager.GetComponent<GameManager>().levelData;
+            
             // It should only be greater than 0 if we've loaded a save
             if (nextCost == 0)
-            {
                 nextCost = _levelData.initialSelectionCost;
-            }
             else
-            {
                 _hasPlayerMadePurchase = true;
-            }
 
             _defaultButtonTop = energyProgress.outColorA;
             _defaultButtonBottom = energyProgress.outColorB;
-
+            
             // Update button text
             powercellsText.text = "<sprite=\"UI-Powercell\" name=\"full\"> " + nextCost;
-            GameStats.OnGainMoney += CalculateEnergy;
+            GameStats.OnGainEnergy += CalculateCells;
             GameStats.OnGainPowercell += UpdateEnergyButton;
-            CalculateEnergy();
+            CalculateCells();
         }
         
         /// <summary>
@@ -96,8 +97,6 @@ namespace Gameplay
         public void RemoveModule(GameObject button)
         {
             Destroy(button);
-            GameManager.ModuleInventory.Remove(_selectedHandler);
-            _selectedHandler = new ModuleChainHandler();
         }
 
         /// <summary>
@@ -157,14 +156,17 @@ namespace Gameplay
             return (int) (_levelData.sellPercentage * nextCost);
         }
 
-        private void CalculateEnergy()
+        private void CalculateCells()
         {
-            while (GameStats.Money > nextCost)
+            var energyToSubtract = 0;
+            while (GameStats.Energy - energyToSubtract > nextCost)
             {
-                GameStats.Money -= nextCost;
                 nextCost += _levelData.selectionCostIncrement;
+                energyToSubtract += nextCost;
                 GameStats.Powercells++;
             }
+            if (energyToSubtract > 0)
+                GameStats.Energy -= energyToSubtract;
             UpdateEnergyButton();
         }
 
@@ -173,16 +175,16 @@ namespace Gameplay
             energyProgress.outColorA = expensiveButtonTop;
             energyProgress.outColorB = expensiveButtonBottom;
             powercellsText.color = expensiveButtonTop;
-            powercellsText.text = "<sprite=\"UI-Powercell\" name=\"empty\"> " + 0;
+            powercellsText.text = shopText.GetLocalizedString() + " - <sprite=\"UI-Powercell\" name=\"empty\"> " + 0;
             if (GameStats.Powercells > 0)
             {
                 energyProgress.outColorA = _defaultButtonTop;
                 energyProgress.outColorB = _defaultButtonBottom;
                 powercellsText.color = new Color(1,1,1);
-                powercellsText.text = "<sprite=\"UI-Powercell\" name=\"full\"> " + GameStats.Powercells;
+                powercellsText.text = shopText.GetLocalizedString() + " - <sprite=\"UI-Powercell\" name=\"full\"> " + GameStats.Powercells;
             }
 
-            energyProgress.percentage = GameStats.Money / (float)nextCost;
+            energyProgress.percentage = GameStats.Energy / (float)nextCost;
         }
     }
 }

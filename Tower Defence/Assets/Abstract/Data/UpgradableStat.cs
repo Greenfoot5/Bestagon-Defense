@@ -120,7 +120,8 @@ namespace Abstract.Data
         /// <returns>The stats as a formatted string</returns>
         public override string ToString()
         {
-            return $"{modifier * stat:#,##0.#}";
+            float value = modifier * stat;
+            return value > 50 ? $"{value:#,##0.#}" : $"{value:#0.0##}";
         }
     }
 }

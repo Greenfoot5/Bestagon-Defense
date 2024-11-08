@@ -11,16 +11,16 @@ namespace Gameplay
     {
         private static bool _active;
 
-        private static int _money;
-        [Tooltip("How much money the player starts the level with")]
-        public int startMoney = 200;
-        public static int Money
+        private static int _energy;
+        [Tooltip("How much energy the player starts the level with")]
+        public int startEnergy = 200;
+        public static int Energy
         {
-            get => _money;
+            get => _energy;
             set
             {
-                _money = value;
-                OnGainMoney?.Invoke();
+                _energy = value;
+                OnGainEnergy?.Invoke();
             }
         }
         
@@ -69,7 +69,6 @@ namespace Gameplay
         }
         public static void PopulateLives(int lives)
         {
-            Debug.Log("Populating Lives " + lives);
             _lives = lives;
         }
 
@@ -79,7 +78,7 @@ namespace Gameplay
         public static event RoundProgressEvent OnRoundProgress;
         public static event GameOverEvent OnGameOver;
         public static event LoseLife OnLoseLife;
-        public static event GainMoney OnGainMoney;
+        public static event GainMoney OnGainEnergy;
         public static event GainCell OnGainPowercell;
         
         /// <summary>
@@ -89,7 +88,8 @@ namespace Gameplay
         {
             if (!_active)
             {
-                Money = startMoney;
+                _energy = startEnergy;
+                _powercells = 0;
                 _lives = startLives;
                 _rounds = 0;
             }

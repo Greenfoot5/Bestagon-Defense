@@ -13,10 +13,5 @@ MonoBehaviour:
   m_Name: RangeT1
   m_EditorClassIdentifier: 
   moduleTier: 1
-  upgradable: 1
-  accentColor: {r: 0.5176471, g: 0.85882354, b: 0.10980392, a: 1}
-  displayName: Range I
-  tagline: Visionary
-  icon: {fileID: -1435114285472068323, guid: 16c979c866f439b4b988e7020b313794, type: 3}
-  effectText: Increases Range by 10%
-  percentageChange: 0.1
+  isUpgradableTo: 1
+  percentageChange: 0.2

@@ -1,3 +1,4 @@
+using System.Collections;
 using Abstract.Data;
 using MaterialLibrary.Hexagons;
 using TMPro;
@@ -52,6 +53,9 @@ namespace UI.Shop
         [Tooltip("The TurretStat used to display the range")]
         [SerializeField]
         private TurretStat range;
+        [Tooltip("Modifies the stats TMP to all have the same size")]
+        [SerializeField]
+        private TextAutoSizeController sizeController;
 
         [Header("Colors")]
         [Tooltip("The Hexagons shader background of the card")]
@@ -115,6 +119,8 @@ namespace UI.Shop
             
             // Adds the click event to the card
             bg.GetComponent<Button>().onClick.AddListener(delegate { MakeSelection(shop); });
+
+            StartCoroutine(Size());
         }
 
         /// <summary>
@@ -129,6 +135,12 @@ namespace UI.Shop
         
             shop.SpawnNewTurret(_turretBlueprint);
             TurretInfo.instance.DisplayTurretInventory();
+        }
+
+        private IEnumerator Size()
+        {
+            yield return null;
+            sizeController.Size();
         }
     }
 }

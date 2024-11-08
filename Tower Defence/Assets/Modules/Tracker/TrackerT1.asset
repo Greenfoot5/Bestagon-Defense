@@ -13,13 +13,6 @@ MonoBehaviour:
   m_Name: TrackerT1
   m_EditorClassIdentifier: 
   moduleTier: 1
-  accentColor: {r: 0.7882353, g: 0.26666668, b: 0.98039216, a: 1}
-  displayName: Tracker I
-  tagline: High gear
-  icon: {fileID: -4242299120216371416, guid: 16c979c866f439b4b988e7020b313794, type: 3}
-  effectText: 'Rotates to enemies 40% faster
-
-    Damage increased by 10%'
-  rotationSpeedPercentageChange: 0.4
-  damagePercentageChange: 0.1
-  gunnerFireRateCapChange: 0.1
+  isUpgradableTo: 1
+  rotationSpeedPercentageChange: 0.05
+  damagePercentageChange: 0.3

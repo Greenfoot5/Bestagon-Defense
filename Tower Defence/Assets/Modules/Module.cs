@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Enemies;
 using Turrets;
 using UnityEngine;
 
@@ -20,13 +18,13 @@ namespace Modules
         protected abstract Type[] ValidTypes { get; }
 
         /// <summary>
-        /// Checks if a turret is of a valid type for the module to work
+        /// Checks if a DamagerObject is of a valid type for the module to work
         /// </summary>
-        /// <param name="turret">The turret to check</param>
-        /// <returns>If the turret is in the valid types</returns>
-        public virtual bool ValidModule(Turret turret)
+        /// <param name="damager">The DamagerObject to check</param>
+        /// <returns>If the DamagerObject is in the valid types</returns>
+        public virtual bool ValidModule(Damager damager)
         {
-            return ValidTypes == null || ValidTypes.Contains(turret.GetType());
+            return ValidTypes == null || ValidTypes.Any(type => type.IsInstanceOfType(damager));
         }
         
         /// <summary>
@@ -37,37 +35,17 @@ namespace Modules
         {
             return ValidTypes;
         }
-        
+
         /// <summary>
-        /// Called when a module is added to a turret
+        /// Called when a module is added to a damager
         /// </summary>
-        /// <param name="turret">The turret to modify</param>
-        public virtual void AddModule(Turret turret) { }
-        
+        /// <param name="damager">The damager to modify</param>
+        public abstract void AddModule(Damager damager);
+
         /// <summary>
         /// Called when a module is removed from a turret
         /// </summary>
-        /// <param name="turret">The turret to modify</param>
-        public virtual void RemoveModule(Turret turret) { }
-        
-        /// <summary>
-        /// Called when a turret makes an attack
-        /// </summary>
-        /// <param name="turret">The turret that attacked</param>
-        public virtual void OnAttack(Turret turret) { }
-
-        /// <summary>
-        /// Called when a turret that fires bullets shoots
-        /// </summary>
-        /// <param name="bullet">The bullet to modify</param>
-        public virtual void OnShoot(Bullet bullet) { }
-
-        /// <summary>
-        /// Called when a turret its an enemy
-        /// </summary>
-        /// <param name="targets">The enemy/ies to apply effect to</param>
-        /// <param name="turret">The turret that attacked the enemies</param>
-        /// <param name="bullet">The bullet that hit the enemies</param>
-        public virtual void OnHit(IEnumerable<Enemy> targets, Turret turret, Bullet bullet = null) { }
+        /// <param name="damager">The turret to modify</param>
+        public abstract void RemoveModule(Damager damager);
     }
 }

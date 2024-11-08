@@ -4,6 +4,7 @@ using Abstract.Data;
 using MaterialLibrary;
 using MaterialLibrary.GlowBox;
 using TMPro;
+using Turrets;
 using UI.Glyphs;
 using UI.Modules;
 using UnityEngine;
@@ -93,6 +94,11 @@ namespace UI.Inventory
             }
 
             turretTypes = module.GetModule().GetValidTypes();
+        }
+
+        public bool IsValid(Damager damager)
+        {
+            return _module.ValidModule(damager);
         }
     }
 }

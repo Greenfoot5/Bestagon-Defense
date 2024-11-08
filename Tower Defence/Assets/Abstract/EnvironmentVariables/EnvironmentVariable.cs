@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Abstract.EnvironmentVariables
@@ -5,7 +6,7 @@ namespace Abstract.EnvironmentVariables
     /// <summary>
     /// Allows us to store data and get it depending on if the game is in the editor, stable or development build.
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public struct EnvironmentVariable
     {
         [SerializeField]
@@ -29,12 +30,14 @@ namespace Abstract.EnvironmentVariables
         {
 #if UNITY_EDITOR
             return editor;
-#elif DEVELOPMENT_BUILD
-            if (Application.version.Contains("alpha")) 
-                return alphaBuild;
-            return nightlyBuild;
 #else
-            return Application.version.Contains("beta") ? betaBuild : stable;
+            if (Application.version.ToLower().Contains("alpha")) 
+                return alphaBuild;
+            else if (Application.version.ToLower().Contains("nightly"))
+                return nightlyBuild;
+            else if (Application.version.ToLower().Contains("beta"))
+                return betaBuild;
+            return stable;
 #endif
         }
         
@@ -43,7 +46,7 @@ namespace Abstract.EnvironmentVariables
         /// </summary>
         public void SetData()
         {
-            System.Environment.SetEnvironmentVariable(name, GetData());
+            Environment.SetEnvironmentVariable(name, GetData());
         }
     }
 }

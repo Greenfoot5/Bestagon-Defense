@@ -12,7 +12,7 @@ using UnityEngine.UI;
 namespace Enemies
 {
     /// <summary>
-    /// The base skeleton for the enemy, holding it's stats and abilities
+    /// The base skeleton for the enemy, holding its stats and abilities
     /// </summary>
     public class Enemy : MonoBehaviour
     {
@@ -301,7 +301,7 @@ namespace Enemies
             WaveSpawner.enemiesAlive--;
         
             // Grant money and destroy self
-            GameStats.Money += deathMoney;
+            GameStats.Energy += deathMoney;
             Destroy(gameObject);
         }
 
@@ -316,7 +316,7 @@ namespace Enemies
             // Let our other systems know the enemy reached the end
             GameStats.Lives -= deathLives;
             WaveSpawner.enemiesAlive--;
-            GameStats.Money += endPathMoney;
+            GameStats.Energy += endPathMoney;
         
             Destroy(gameObject);
         }

@@ -19,28 +19,19 @@ namespace Modules.Damage
         /// <summary>
         /// Increases the damage for a turret
         /// </summary>
-        /// <param name="turret">The turret to increase damage for</param>
-        public override void AddModule(Turret turret)
+        /// <param name="damager">The turret to increase damage for</param>
+        public override void AddModule(Damager damager)
         {
-            turret.damage.AddModifier(percentageChange);
+            damager.damage.AddModifier(percentageChange);
         }
         
         /// <summary>
         /// Removes a damage upgrade for a turret
         /// </summary>
-        /// <param name="turret">The turret to remove a damage upgrade for</param>
-        public override void RemoveModule(Turret turret)
+        /// <param name="damager">The turret to remove a damage upgrade for</param>
+        public override void RemoveModule(Damager damager)
         {
-            turret.damage.TakeModifier(percentageChange);
-        }
-        
-        /// <summary>
-        /// Increases a bullet's damage
-        /// </summary>
-        /// <param name="bullet">The bullet to increase damage for</param>
-        public override void OnShoot(Bullet bullet)
-        {
-            bullet.damage.AddModifier(percentageChange);
+            damager.damage.TakeModifier(percentageChange);
         }
     }
 }

@@ -2,7 +2,6 @@
 using Gameplay;
 using Turrets;
 using UI.Inventory;
-using Unity.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -136,7 +135,7 @@ namespace Levels._Nodes
         public void SellTurret(int sellAmount)
         {
             // Grant the money
-            GameStats.Money += sellAmount;
+            GameStats.Energy += sellAmount;
 
             // Spawn the sell effect
             GameObject effect = Instantiate(_buildManager.sellEffect, transform.position, Quaternion.identity);

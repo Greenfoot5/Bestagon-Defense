@@ -1,7 +1,7 @@
 ![Asset License: Attribution 4.0 International](https://img.shields.io/badge/Asset%20License-CC%20BY%204.0-lightgrey)
 ![Code License: Apache 2.0](https://img.shields.io/badge/Code%20License-Apache%202.0-lightgrey)
 ![Support Platforms: Android | MacOS/OS X | Windows](https://img.shields.io/badge/platform-Android_|_MacOS/OSX_|_Windows-lightgrey)
-![Unity Version: 2022.3.10f1](https://img.shields.io/static/v1?logo=unity&label=Unity%20Version&message=2022.3.10f1&color=blue)
+![Unity Version: 6000.0.25f1](https://img.shields.io/static/v1?logo=unity&label=Unity%20Version&message=6000.0.25f1&color=blue)
 
 ![Bestagon Defence](Tower%20Defence/Assets/UI/Branding/Bestagon_Wordmark.png)
 

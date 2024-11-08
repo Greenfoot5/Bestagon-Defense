@@ -99,7 +99,7 @@ namespace Abstract.Saving
             
             if (FileManager.WriteToFile(sceneName + "Save.dat", sd.ToJson()))
             {
-                Debug.Log("Saving " + sceneName + " successful");
+                //Debug.Log("Saving " + sceneName + " successful");
             }
         }
 
@@ -126,7 +126,7 @@ namespace Abstract.Saving
             var sd = new SaveLevel();
             sd.LoadFromJson(json);
 
-            return sd.version == Application.version;
+            return sd.Version == Application.version;
         }
 
         public static void ClearSave(string sceneName)

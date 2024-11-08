@@ -360,7 +360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4856178690950891518
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4119,7 +4119,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretSelectionUI: {fileID: 7349952435930394342, guid: 5453fbd1fffdc4a799b811ae56769adb, type: 3}
-  moduleSelectionUI: {fileID: 7349952435930394342, guid: 2c152cea0b9334ff7b4ae9dfbbcfe040, type: 3}
+  moduleSelectionUI: {fileID: 7349952435930394342, guid: 1fd7562f294fb4ebfa9c3ec91a6f36e8, type: 3}
+  lifeSelectionUI: {fileID: 7349952435930394342, guid: 2c152cea0b9334ff7b4ae9dfbbcfe040, type: 3}
   shop: {fileID: 4077244561648582632}
 --- !u!1 &4077244561414875947
 GameObject:
@@ -4617,16 +4618,29 @@ MonoBehaviour:
   nextCost: 0
   powercellsText: {fileID: 4077244561523284678}
   energyProgress: {fileID: 6923508768487608851}
-  expensiveButtonTop: {r: 0.7921569, g: 0.011764706, b: 0.27058825, a: 1}
+  expensiveButtonTop: {r: 0.8509804, g: 0.011764706, b: 0.2901961, a: 1}
   expensiveButtonBottom: {r: 0.50980395, g: 0.03529412, b: 0.1882353, a: 1}
+  shopText:
+    m_TableReference:
+      m_TableCollectionName: GUID:a6170bad920ce47ac8d85f7255dd7a10
+    m_TableEntryReference:
+      m_KeyId: 13806592842522624
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   glyphsLookup:
     sprites:
+    - {fileID: 11400000, guid: 49504fee69ac947e29cccad1da730902, type: 2}
     - {fileID: 11400000, guid: 49504fee69ac947e29cccad1da730902, type: 2}
     - {fileID: 11400000, guid: e3767d3ff0aee4d4b8b3375f8677b042, type: 2}
     - {fileID: 11400000, guid: fa447f2b0617b42ff9f08e910fa3e554, type: 2}
     - {fileID: 11400000, guid: bed22f2549eb24cf59e80fef4cf4c712, type: 2}
     - {fileID: 11400000, guid: f0c726913c1531b4c9df8908f0a880fd, type: 2}
     - {fileID: 11400000, guid: 601c522ea0e4147ea86812ab1a1ece7d, type: 2}
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &3949709464969229406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8276,7 +8290,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7011522273200859090
 RectTransform:
   m_ObjectHideFlags: 0

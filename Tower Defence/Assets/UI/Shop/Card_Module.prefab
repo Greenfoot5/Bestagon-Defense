@@ -1014,6 +1014,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Icon
       objectReference: {fileID: 0}
+    - target: {fileID: 4062421759546837549, guid: 199784de83837a343bb9f0740a40d2ce, type: 3}
+      propertyPath: m_fontSize
+      value: 35.9
+      objectReference: {fileID: 0}
     - target: {fileID: 5982173759769933209, guid: 199784de83837a343bb9f0740a40d2ce, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

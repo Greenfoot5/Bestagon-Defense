@@ -33,7 +33,7 @@ Material:
     - _GlowClamp: 0.5
     - _GlowIntensity: 0.3
     - _GlowOpacity: 0.7
-    - _Opacity: 1
+    - _Opacity: 0.1
     - _Stencil: 1
     - _StencilComp: 4
     - _StencilOp: 0

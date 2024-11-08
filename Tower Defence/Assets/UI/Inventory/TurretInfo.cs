@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Abstract.Data;
 using Gameplay;
 using Levels._Nodes;
@@ -137,7 +136,10 @@ namespace UI.Inventory
                 cycleTargetingButton.SetActive(false);
             }
 
-            // Rebuild the Modules and add the stats
+            // // Rebuild the Modules and add the stats
+            // if (moduleInventoryPage.activeSelf)
+            //     OpenModuleInventory();
+            // else
             OpenTurretInfo();
         }
         
@@ -149,11 +151,6 @@ namespace UI.Inventory
         {
             return _target != null ? _target.turret : null;
         }
-
-        public void AddButton(ModuleChainHandler handler, GameObject button)
-        {
-            
-        }
         
         /// <summary>
         /// Applies a module to the currently selected turret
@@ -163,6 +160,7 @@ namespace UI.Inventory
             bool isApplied = _target.ApplyModuleToTurret(handler);
             if (!isApplied) return;
             
+            GameManager.ModuleInventory.Remove(handler);
             shop.RemoveModule(button);
             UpdateModules();
             OpenTurretInfo();
@@ -173,9 +171,9 @@ namespace UI.Inventory
         /// </summary>
         private void CycleTargeting()
         {
-            Array types = Enum.GetValues(typeof(TargetingMethod));
+            Array types = Enum.GetValues(typeof(DynamicTurret.TargetingMethod));
             var currentMethod = (int)_target.turret.GetComponent<DynamicTurret>().targetingMethod;
-            _target.turret.GetComponent<DynamicTurret>().targetingMethod = (TargetingMethod)( (currentMethod + 1) % types.Length);
+            _target.turret.GetComponent<DynamicTurret>().targetingMethod = (DynamicTurret.TargetingMethod)( (currentMethod + 1) % types.Length);
             
             // Update our button text
             cycleTargetingButton.transform.GetChild(0).GetComponent<TMP_Text>().text = "<b>Targeting:</b>\n" +
@@ -286,8 +284,7 @@ namespace UI.Inventory
             foreach (Transform child in moduleInventoryContent)
             {
                 var item = child.GetComponent<ModuleInventoryItem>();
-                if (_target != null && (item.turretTypes == null ||
-                    item.turretTypes.Contains(_target.turret.GetComponent<Turret>().GetType())))
+                if (_target != null && item.IsValid(_target.turret.GetComponent<Damager>()))
                 {
                     item.bg.color = item.accent;
                     item.modulesBg.color = item.accent * new Color(1, 1, 1, 0.16f);
@@ -317,10 +314,6 @@ namespace UI.Inventory
             }
             
             Show();
-            Debug.Log(inventoryTitle);
-            Debug.Log(_target);
-            Debug.Log(_target.turretBlueprint);
-            Debug.Log(_target.turretBlueprint.displayName);
             inventoryTitle.text = _target.turretBlueprint.displayName.GetLocalizedString();
             turretInfoPage.SetActive(true);
             turretInventoryPage.SetActive(false);

@@ -19,35 +19,60 @@ namespace Turrets.Laser
         [Tooltip("The particle effect that's spawned at the end of the laser's line")]
         private ParticleSystem impactEffect;
 
+        // Laser Duration
+        [Tooltip("How long the laser lasts before it goes on cooldown")]
+        public UpgradableStat laserDuration = new(1f);
+        /// <summary> How long left until the next attack </summary>
+        public float durationCountdown;
+        [Tooltip("How long the laser should go on cooldown for")]
+        public UpgradableStat laserCooldown = new(1f);
+        /// <summary> How long left until the next attack </summary>
+        public float cooldownCountdown;
+
         /// <summary>
         /// Fires the laser if the turret have a target and are looking at them.
         /// Otherwise rotate to target if there is one.
         /// </summary>
         private void Update()
         {
-            // Don't do anything if the turret doesn't have a target
-            // or fire rate is <= 0
-            if (target == null || fireRate.GetStat() == 0)
+            durationCountdown -= Time.deltaTime;
+            
+            if (cooldownCountdown >= 0 && durationCountdown <= 0)
             {
+                cooldownCountdown -= Time.deltaTime;
+
+                if (target != null)
+                    LookAtTarget();
+                
                 if (!lineRenderer.enabled) return;
                 
                 lineRenderer.enabled = false;
                 impactEffect.Stop();
+                return;
+            }
+            
+            // Don't do anything if the turret doesn't have a target
+            // or fire rate is <= 0
+            if (target == null || laserDuration.GetStat() < 0)
+            {
                 return;
             }
         
             // Rotates the turret each frame
             LookAtTarget();
-
-            if (!IsLookingAtTarget())
+            
+            // One of the two laser timers expired
+            if (durationCountdown <= 0)
             {
-                if (!lineRenderer.enabled) return;
-                
-                lineRenderer.enabled = false;
-                impactEffect.Stop();
+                if (IsLookingAtTarget())
+                {
+                    durationCountdown = laserDuration.GetStat();
+                    cooldownCountdown = laserCooldown.GetStat();
+                }
+
                 return;
             }
-
+            
             Attack();
         }
         
@@ -63,27 +88,20 @@ namespace Turrets.Laser
             Vector3 direction = (firePoint.up * range.GetStat());
             Vector3 endPosition = (direction + triangleCentre);
             
-            
             // Get all enemies the laser hits
             var results = new List<Collider2D>();
-            Physics2D.OverlapCapsule(direction/2 + triangleCentre, new Vector2(range.GetStat(), lineRenderer.endWidth), 
+            Physics2D.OverlapCapsule(direction/2 + triangleCentre, new Vector2(lineRenderer.endWidth, range.GetStat()), 
                 CapsuleDirection2D.Vertical, transform.rotation.y, new ContactFilter2D().NoFilter(), results);
             List<Enemy> enemies = results.Select(result => result.transform.GetComponent<Enemy>()).ToList();
             enemies.RemoveAll(x => x == null);
+            
+            base.Attack(this);
+            HitMany(enemies, this);
             
             // Deal damage to every enemy hit
             foreach (Enemy enemy in enemies)
             {
                 enemy.TakeDamage(damage.GetStat() * Time.deltaTime, gameObject);
-            }
-
-            foreach (ModuleChainHandler handler in moduleHandlers)
-            {
-                handler.GetModule().OnAttack(this);
-            }
-            foreach (ModuleChainHandler handler in moduleHandlers)
-            {
-                handler.GetModule().OnHit(enemies, this);
             }
 
             // Enable visuals
