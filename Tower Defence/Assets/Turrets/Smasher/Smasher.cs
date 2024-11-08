@@ -26,8 +26,7 @@ namespace Turrets.Smasher
             }
             
             // Don't do anything if no enemy is in range
-            var results = new Collider2D[128];
-            Physics2D.OverlapCircleNonAlloc(transform.position, range.GetStat(), results);
+            Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, range.GetStat());
             if (!results.Any(x => 
                     x != null && x.CompareTag(enemyTag)))
             {
