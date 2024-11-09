@@ -245,6 +245,9 @@ namespace UI.Inventory
             GameObject addModule = Instantiate(addModuleButton, modules);
             addModule.GetComponent<Button>().onClick.AddListener(OpenModuleInventory);
             
+            modules.GetComponent<TriangleLayout>().SetLayoutHorizontal();
+            modules.GetComponent<TriangleLayout>().SetLayoutVertical();
+            
             // Display the radius of the turret
             _target.turret.GetComponent<Turret>().UpdateRange();
         }

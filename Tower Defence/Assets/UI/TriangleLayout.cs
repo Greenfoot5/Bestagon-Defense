@@ -30,7 +30,7 @@ namespace UI
         
         [Tooltip("The size of each cell in the layout")]
         [SerializeField]
-        private Vector2 cellSize = new Vector2(50f, 50f);
+        private Vector2 cellSize = new(50f, 50f);
         [Tooltip("The spacing between each cell in the layout")]
         [SerializeField]
         public Vector2 spacing;
@@ -44,6 +44,7 @@ namespace UI
         /// </summary>
         public void SetLayoutHorizontal()
         {
+            Debug.Log("Setting Horizontal Layout");
             if (!isFlippedHorizontally)
             {
                 // Loops through each of the children
@@ -129,6 +130,7 @@ namespace UI
         /// </summary>
         public void SetLayoutVertical()
         {
+            Debug.Log("Setting Vertical Layout");
             if (!isFlippedHorizontally)
             {
                 // Loop through all the children

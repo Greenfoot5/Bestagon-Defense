@@ -1,9 +1,12 @@
 ﻿using Abstract.Data;
 using Gameplay;
 using Turrets;
+using UI;
 using UI.Inventory;
+using UI.Modules;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Levels._Nodes
 {
@@ -14,13 +17,18 @@ namespace Levels._Nodes
     {
         [Tooltip("The colour to set the node when it's being hovered over and the player is trying to build something")]
         public Color hoverColour;
-        [Tooltip("The colour to set the node if the placement is invalid")]
-        public Color invalidColour;
         private Color _defaultColour;
         
         [Tooltip("A turret that starts on the node")]
         [SerializeField]
         private TurretBlueprint initialTurret;
+
+        [Tooltip("The GameObject to spawn the module icons as a child of")]
+        [SerializeField]
+        private Transform modulesDisplay;
+        [Tooltip("The prefab of a module icon to instantiate to display the turret's modules")]
+        [SerializeField]
+        private GameObject moduleIconPrefab;
         
         // Turret info
         [HideInInspector]
@@ -222,12 +230,18 @@ namespace Levels._Nodes
         /// </summary>
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (turret != null)
+            {
+                UpdateModules();
+                modulesDisplay.gameObject.SetActive(true);
+            }
+            
             // Make sure the player is trying to build
             if (!_buildManager.HasTurretToBuild)
             {
                 return;
             }
-            // Check if the player can afford the selected turret
+            
             _rend.material.color = hoverColour;
         }
     
@@ -237,7 +251,38 @@ namespace Levels._Nodes
         /// <param name="eventData"></param>
         public void OnPointerExit(PointerEventData eventData)
         {
+            if (turret != null)
+            {
+                modulesDisplay.gameObject.SetActive(false);
+            }
+            
             _rend.material.color = _defaultColour;
+        }
+        
+        /// <summary>
+        /// Updates the render of the modules for a turret
+        /// </summary>
+        private void UpdateModules()
+        {
+            // Removes module icons created from the previously selected turret
+            for (var i = 0; i < modulesDisplay.childCount; i++)
+                Destroy(modulesDisplay.GetChild(i).gameObject);
+            
+            // Add each Module as an icon
+            foreach (ModuleChainHandler handle in turret.GetComponent<Turret>().moduleHandlers)
+            {
+                Debug.Log("Adding Module");
+                GameObject moduleIcon = Instantiate(moduleIconPrefab, modulesDisplay);
+                moduleIcon.name = "_" + moduleIcon.name;
+                moduleIcon.GetComponent<ModuleIcon>().SetData(handle);
+                foreach (Image image in moduleIcon.GetComponentsInChildren<Image>())
+                {
+                    image.raycastTarget = false;
+                }
+            }
+
+            modulesDisplay.GetComponent<TriangleLayout>().SetLayoutHorizontal();
+            modulesDisplay.GetComponent<TriangleLayout>().SetLayoutVertical();
         }
     }
 }
