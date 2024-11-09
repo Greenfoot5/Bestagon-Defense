@@ -106,7 +106,6 @@ namespace Gameplay
             saveData.Powercells = GameStats.Powercells;
             saveData.WaveIndex = GameStats.Rounds - 1;
             saveData.RandomState = Random.state;
-            Debug.Log("Getting nextCost from Save Data");
             saveData.ShopCost = shop.GetComponent<Shop>().nextCost;
             saveData.Nodes = new List<SaveLevel.NodeData>();
             saveData.TurretInventory = new List<TurretBlueprint>();
@@ -157,7 +156,6 @@ namespace Gameplay
             GameStats.Lives = saveData.Lives;
             GameStats.PopulateRounds(saveData.WaveIndex + 1);
             Random.state = saveData.RandomState;
-            Debug.Log("Setting nextCost from Save Data");
             var shopComponent = shop.GetComponent<Shop>();
             shopComponent.nextCost = saveData.ShopCost;
             GameStats.Powercells = saveData.Powercells;

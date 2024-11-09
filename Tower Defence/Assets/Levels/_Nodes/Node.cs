@@ -275,7 +275,6 @@ namespace Levels._Nodes
             // Add each Module as an icon
             foreach (ModuleChainHandler handle in turret.GetComponent<Turret>().moduleHandlers)
             {
-                Debug.Log("Adding Module");
                 GameObject moduleIcon = Instantiate(moduleIconPrefab, modulesDisplay);
                 moduleIcon.name = "_" + moduleIcon.name;
                 moduleIcon.GetComponent<ModuleIcon>().SetData(handle);
