@@ -41,7 +41,7 @@ namespace Turrets.Laser
             {
                 cooldownCountdown -= Time.deltaTime;
 
-                if (target != null)
+                if (Target is not null)
                     LookAtTarget();
                 
                 if (!lineRenderer.enabled) return;
@@ -53,7 +53,7 @@ namespace Turrets.Laser
             
             // Don't do anything if the turret doesn't have a target
             // or fire rate is <= 0
-            if (target == null || laserDuration.GetStat() < 0)
+            if (Target is null || laserDuration.GetStat() < 0)
             {
                 return;
             }

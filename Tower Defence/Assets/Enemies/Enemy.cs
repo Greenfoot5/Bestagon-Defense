@@ -73,13 +73,15 @@ namespace Enemies
         public List<string> uniqueEffects;
         
         // Abilities for each trigger
-        private readonly List<EnemyAbility> _timerAbilities = new List<EnemyAbility>();
-        private readonly List<(EnemyAbility ability, int count)> _hitAbilities = new List<(EnemyAbility, int)>();
-        private readonly List<EnemyAbility> _deathAbilities = new List<EnemyAbility>();
-        private readonly List<EnemyAbility> _finishAbilities = new List<EnemyAbility>();
+        private readonly List<EnemyAbility> _timerAbilities = new();
+        private readonly List<(EnemyAbility ability, int count)> _hitAbilities = new();
+        private readonly List<EnemyAbility> _deathAbilities = new();
+        private readonly List<EnemyAbility> _finishAbilities = new();
 
         // If the enemy has died
         private bool _isDead;
+        public delegate void DeathEvent();
+        public event DeathEvent OnDeath;
         
         /// <summary>
         /// Grants abilities and sets current stats to max when spawning the enemy
@@ -100,7 +102,7 @@ namespace Enemies
         /// Grants the enemy an ability so they can use it when triggered
         /// </summary>
         /// <param name="ability">The ability to grant</param>
-        public void GrantAbility(EnemyAbility ability)
+        private void GrantAbility(EnemyAbility ability)
         {
             // TODO - Have better ability checking. Perhaps check if one is a higher tier than another,
             // TODO - or, for an extra challenge, reset the timer on the current one.
@@ -287,6 +289,8 @@ namespace Enemies
             if (_isDead)
                 return;
             _isDead = true;
+
+            OnDeath?.Invoke();
             
             // Only do the abilities if the enemy isn't stunned
             if (speed.GetStat() > 0)
@@ -322,9 +326,9 @@ namespace Enemies
         }
         
         /// <summary>
-        /// Activates an enumerable of abilities
+        /// Activates an IEnumerable of abilities
         /// </summary>
-        /// <param name="abilities">The enumerable of abilities to activate</param>
+        /// <param name="abilities">The IEnumerable of abilities to activate</param>
         /// <param name="source">The GameObject that triggered the activation (if any)</param>
         /// <exception cref="ArgumentOutOfRangeException">An ability has an invalid targeting type</exception>
         private void ActivateAbilities(IEnumerable<EnemyAbility> abilities, GameObject source)

@@ -34,7 +34,7 @@ namespace Turrets
         private bool aggressiveRetargeting;
         
         [Tooltip("The current target")]
-        protected Transform target;
+        protected Transform Target;
         [Tooltip("The Enemy script of the current target")]
         private Enemy _targetEnemy;
 
@@ -77,9 +77,9 @@ namespace Turrets
         private void UpdateTarget()
         {
             // If the turret is not aggressively retargeting, check if the target is still in range
-            if (!aggressiveRetargeting && target != null)
+            if (!aggressiveRetargeting && Target != null)
             {
-                float distanceToEnemy = Vector3.Distance(transform.position, target.position);
+                float distanceToEnemy = Vector3.Distance(transform.position, Target.position);
                 if (distanceToEnemy <= range.GetStat()) return;
             }
 
@@ -101,7 +101,7 @@ namespace Turrets
             // Check there are enemies in range, and if not, the turret has no target
             if (enemiesInRange.Length == 0)
             {
-                target = null;
+                Target = null;
                 return;
             }
 
@@ -165,16 +165,21 @@ namespace Turrets
                 }
             }
             
-            // Check if the turret have a valid target
-            if (mostValuableEnemy != null)
+            // We have found a valid target
+            if (mostValuableEnemy is not null)
             {
-                target = mostValuableEnemy.transform;
-                _targetEnemy = target.GetComponent<Enemy>();
+                if (_targetEnemy is not null)
+                    _targetEnemy.OnDeath -= UpdateTarget;
+                Target = mostValuableEnemy.transform;
+                _targetEnemy = Target.GetComponent<Enemy>();
+                _targetEnemy.OnDeath += UpdateTarget;
             }
             // Set our target to null if there is none
             else
             {
-                target = null;
+                _targetEnemy.OnDeath -= UpdateTarget;
+                Target = null;
+                _targetEnemy = null;
             }
         }
         
@@ -183,7 +188,7 @@ namespace Turrets
         /// </summary>
         protected void LookAtTarget()
         {
-            Vector2 aimDir = (target.position - partToRotate.position).normalized;
+            Vector2 aimDir = (Target.position - partToRotate.position).normalized;
 
             float rotationAngleNeed = Vector2.SignedAngle(partToRotate.up, aimDir);
             float zAngle = Mathf.Clamp(rotationAngleNeed, -rotationSpeed.GetStat() * Time.deltaTime,

@@ -45,7 +45,7 @@ namespace Turrets.Gunner
             }
             
             // Don't do anything if the turret doesn't have a target
-            if (target == null)
+            if (Target is null)
             {
                 if (fireCountdown <= 0f)
                 {
@@ -135,7 +135,7 @@ namespace Turrets.Gunner
             GameObject bulletGo = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             bulletGo.name = "_" + bulletGo.name;
             var bullet = bulletGo.GetComponent<Bullet>();
-            bullet.Seek(target, this);
+            bullet.Seek(Target, this);
             
             base.Attack(this);
         }
