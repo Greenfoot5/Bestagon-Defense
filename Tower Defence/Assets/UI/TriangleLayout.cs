@@ -44,7 +44,6 @@ namespace UI
         /// </summary>
         public void SetLayoutHorizontal()
         {
-            Debug.Log("Setting Horizontal Layout");
             if (!isFlippedHorizontally)
             {
                 // Loops through each of the children
@@ -130,7 +129,6 @@ namespace UI
         /// </summary>
         public void SetLayoutVertical()
         {
-            Debug.Log("Setting Vertical Layout");
             if (!isFlippedHorizontally)
             {
                 // Loop through all the children

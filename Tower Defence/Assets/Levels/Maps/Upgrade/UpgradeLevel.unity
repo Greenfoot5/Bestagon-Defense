@@ -9364,10 +9364,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 2057348010}
     m_Modifications:
     - target: {fileID: 5782079356602982464, guid: a2097a488113d46eca02849b0d52a9fc, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5782079356602982464, guid: a2097a488113d46eca02849b0d52a9fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -9879,14 +9875,6 @@ PrefabInstance:
       propertyPath: startLives
       value: 15
       objectReference: {fileID: 0}
-    - target: {fileID: 5782079356602982466, guid: a2097a488113d46eca02849b0d52a9fc, type: 3}
-      propertyPath: startMoney
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 5782079356602982467, guid: a2097a488113d46eca02849b0d52a9fc, type: 3}
-      propertyPath: nodeUI
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5782079356602982470, guid: a2097a488113d46eca02849b0d52a9fc, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -9895,10 +9883,6 @@ PrefabInstance:
       propertyPath: ui
       value: 
       objectReference: {fileID: 128067068}
-    - target: {fileID: 5782079356602982492, guid: a2097a488113d46eca02849b0d52a9fc, type: 3}
-      propertyPath: transition
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5782079356602982493, guid: a2097a488113d46eca02849b0d52a9fc, type: 3}
       propertyPath: shop
       value: 

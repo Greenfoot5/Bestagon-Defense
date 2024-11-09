@@ -17,6 +17,14 @@ namespace Gameplay
         public GameObject buildEffect;
         [Tooltip("The effect spawned when a turret is sold")]
         public GameObject sellEffect;
+        
+                
+        [Tooltip("The prefab to use when displaying potential range when building")]
+        [SerializeField]
+        private GameObject rangePreview;
+        [Tooltip("The current range preview")]
+        [HideInInspector]
+        public GameObject currentPreview;
 
         private TurretBlueprint _turretToBuild;
         private GameObject _buildingButton;
@@ -50,6 +58,10 @@ namespace Gameplay
         {
             _turretToBuild = turret;
             _buildingButton = buttonToDelete;
+            currentPreview = Instantiate(rangePreview);
+            float range = turret.prefab.GetComponent<Turret>().range.GetStat();
+            currentPreview.transform.localScale = new Vector3(range * 2, range * 2, 1);
+            currentPreview.GetComponent<SpriteRenderer>().color = turret.accent;
         }
         
         /// <summary>

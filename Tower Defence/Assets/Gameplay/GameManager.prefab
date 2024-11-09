@@ -219,6 +219,7 @@ MonoBehaviour:
     - 1
   timeBetweenWaves: 5
   preparationTime: 8
+  waveRepeatIndex: 0
   waveCountdownText: {fileID: 0}
   waveProgress: {fileID: 0}
   waveText: {fileID: 0}
@@ -281,6 +282,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildEffect: {fileID: 2228279973635050725, guid: 0819bd4b36b114943ba247527c0225db, type: 3}
   sellEffect: {fileID: 710779272522642178, guid: c237ec1a850104d038377b19c877601e, type: 3}
+  rangePreview: {fileID: 3840866613127654574, guid: 33a2ca766c59048d28d3061eaf523c9c, type: 3}
+  currentPreview: {fileID: 0}
 --- !u!114 &5782079356602982466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d637c033ce9ab4c078c663272157689e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMoney: 300
+  startEnergy: 200
   startLives: 20
 --- !u!114 &5782079356602982493
 MonoBehaviour:

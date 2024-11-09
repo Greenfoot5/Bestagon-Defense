@@ -243,6 +243,8 @@ namespace Levels._Nodes
             }
             
             _rend.material.color = hoverColour;
+            BuildManager.instance.currentPreview.transform.position = transform.position;
+            BuildManager.instance.currentPreview.SetActive(true);
         }
     
         /// <summary>
@@ -257,6 +259,8 @@ namespace Levels._Nodes
             }
             
             _rend.material.color = _defaultColour;
+            if (BuildManager.instance.currentPreview != null)
+                BuildManager.instance.currentPreview.SetActive(false);
         }
         
         /// <summary>
