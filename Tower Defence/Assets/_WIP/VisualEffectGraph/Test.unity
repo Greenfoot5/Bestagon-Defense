@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 1358514134}
   - component: {fileID: 1358514136}
   - component: {fileID: 1358514135}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: InstakillEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,8 +386,8 @@ VFXRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -965640333
+  m_SortingLayer: 4
   m_SortingOrder: 0
 --- !u!2083052967 &1358514136
 VisualEffect:
@@ -406,7 +406,10 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 1.2
+        m_Name: size
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -441,7 +444,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1254230633595922370, guid: 458780032aac64edd9cb81311c5de419, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1766261579634831074, guid: 458780032aac64edd9cb81311c5de419, type: 3}
       propertyPath: m_LocalPosition.x

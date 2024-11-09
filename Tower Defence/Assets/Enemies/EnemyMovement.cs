@@ -48,6 +48,9 @@ namespace Enemies
         /// </summary>
         private void Update()
         {
+            if (_enemy is null)
+                return;
+            
             // If the enemy is moving backwards
             if (_enemy.speed.GetTrueStat() < 0)
             {

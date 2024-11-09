@@ -188,12 +188,17 @@ namespace Turrets
         /// </summary>
         protected void LookAtTarget()
         {
-            Vector2 aimDir = (Target.position - partToRotate.position).normalized;
+            try
+            {
+                Vector2 aimDir = (Target.position - partToRotate.position).normalized;
 
-            float rotationAngleNeed = Vector2.SignedAngle(partToRotate.up, aimDir);
-            float zAngle = Mathf.Clamp(rotationAngleNeed, -rotationSpeed.GetStat() * Time.deltaTime,
-                rotationSpeed.GetStat() * Time.deltaTime);
-            partToRotate.Rotate(0f, 0f, zAngle);
+                float rotationAngleNeed = Vector2.SignedAngle(partToRotate.up, aimDir);
+                float zAngle = Mathf.Clamp(rotationAngleNeed, -rotationSpeed.GetStat() * Time.deltaTime,
+                    rotationSpeed.GetStat() * Time.deltaTime);
+                partToRotate.Rotate(0f, 0f, zAngle);
+            }
+            catch (MissingReferenceException)
+            { }
         }
 
         /// <summary>
