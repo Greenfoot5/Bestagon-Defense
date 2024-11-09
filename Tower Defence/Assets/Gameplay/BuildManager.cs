@@ -69,6 +69,7 @@ namespace Gameplay
         /// </summary>
         public void BuiltTurret()
         {
+            Destroy(currentPreview);
             Destroy(_buildingButton);
             GameManager.TurretInventory.Remove(_turretToBuild);
             _turretToBuild = null;
