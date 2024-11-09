@@ -95,7 +95,7 @@ namespace Turrets.Gunner
         {
             if (isIncrease)
             {
-                _fireRateIncrease *= spinMultiplier.GetStat();
+                _fireRateIncrease += spinMultiplier.GetStat();
                 if (_fireRateIncrease > maxFireRate.GetStat())
                 {
                     _fireRateIncrease = maxFireRate.GetStat();
@@ -103,7 +103,7 @@ namespace Turrets.Gunner
             }
             else
             {
-                _fireRateIncrease /= spinCooldown.GetStat();
+                _fireRateIncrease -= spinCooldown.GetStat();
                 if (_fireRateIncrease < 1f)
                 {
                     _fireRateIncrease = 1f;
