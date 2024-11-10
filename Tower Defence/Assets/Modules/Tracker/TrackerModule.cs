@@ -1,5 +1,6 @@
 using System;
 using Turrets;
+using Turrets.Choker;
 using Turrets.Gunner;
 using Turrets.Laser;
 using Turrets.Shooter;
@@ -13,7 +14,7 @@ namespace Modules.Tracker
     [CreateAssetMenu(fileName = "TrackerModuleT0", menuName = "Modules/Tracker")]
     public class TrackerModule : Module
     {
-        protected override Type[] ValidTypes => new[] { typeof(Shooter), typeof(Laser), typeof(Gunner) };
+        protected override Type[] ValidTypes => new[] { typeof(Shooter), typeof(Laser), typeof(Gunner), typeof(Choker) };
 
         [SerializeField]   
         [Tooltip("The percentage to modify the rotation speed of the turret by")]

@@ -1,5 +1,6 @@
 using System;
 using Turrets;
+using Turrets.Choker;
 using Turrets.Gunner;
 using Turrets.Lancer;
 using Turrets.Shooter;
@@ -14,7 +15,7 @@ namespace Modules.FireRate
     [CreateAssetMenu(fileName = "FireRateT0", menuName = "Modules/Fire Rate")]
     public class FireRateModule : Module
     {
-        protected override Type[] ValidTypes => new[] { typeof(Shooter), typeof(Smasher), typeof(Gunner), typeof(Lancer) };
+        protected override Type[] ValidTypes => new[] { typeof(Shooter), typeof(Smasher), typeof(Gunner), typeof(Lancer), typeof(Choker) };
         
         [Tooltip("What percentage to modify the fire rate of the turret by.\n\n" +
                  "If it's a gunner turret, the percentage to modify the fire rate cap, spin cooldown and spin multiplier")]
