@@ -20,7 +20,7 @@ namespace Turrets
         public bool useLocation;
 
         [Header("Types")]
-        [Tooltip("Hits all enemies on path, but does not destroy itself")]
+        [Tooltip("Hits all enemies on path")]
         public bool isEthereal;
         
         [Header("Stats")]

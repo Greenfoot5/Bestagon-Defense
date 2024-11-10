@@ -9,7 +9,7 @@ namespace Turrets
     public abstract class Damager : PlacedObject
     {
         [Tooltip("How much damage the turret deals")]
-        public UpgradableStat damage;
+        public UpgradableStat damage = new(100f);
         
         // System
         [Tooltip("What GameObject tag the damager can hit")]
