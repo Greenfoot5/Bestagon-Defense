@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Turrets;
+using Turrets.Choker;
 using Turrets.Gunner;
 using Turrets.Lancer;
 using Turrets.Laser;
@@ -25,7 +26,8 @@ namespace Abstract
             typeof(Laser),
             typeof(Smasher),
             typeof(Gunner),
-            typeof(Lancer)
+            typeof(Lancer),
+            typeof(Choker)
         };
         
         [Tooltip("The list of TurretGlyphs to use")]
@@ -54,7 +56,7 @@ namespace Abstract
             }
             catch (Exception ex)
             {
-                if (!(ex is IndexOutOfRangeException) && !(ex is ArgumentOutOfRangeException)) throw;
+                if (ex is not IndexOutOfRangeException && ex is not ArgumentOutOfRangeException) throw;
             
                 Debug.LogError("Can't find sprite of type " + t);
                 return sprites[0];

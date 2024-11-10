@@ -22,6 +22,8 @@ namespace Turrets
         [Header("Types")]
         [Tooltip("Hits all enemies on path")]
         public bool isEthereal;
+        [Tooltip("Hits the first enemy it touches, rather than just target")]
+        public bool willHitFirst;
         
         [Header("Stats")]
         [Tooltip("The speed of the bullet")]
@@ -106,8 +108,10 @@ namespace Turrets
         /// <summary>
         /// Called when the bullet hits the target
         /// </summary>
-        private void HitTarget(bool isEnemy)
+        private void HitTarget(bool isEnemy, Transform enemy = null)
         {
+            enemy ??= target;
+            
             // Spawn hit effect
             Transform position = transform;
             GameObject effectIns = Instantiate(impactEffect, position.position, position.rotation);
@@ -121,7 +125,7 @@ namespace Turrets
                 if (explosionRadius.GetStat() > 0f)
                     Explode();
                 else
-                    Damage(target);
+                    Damage(enemy);
             }
             else
             {
@@ -132,6 +136,7 @@ namespace Turrets
             // Destroy so the bullet only hits the target once
             Destroy(gameObject);
         }
+
     
         /// <summary>
         /// Used to deal damage to a single enemy
@@ -183,16 +188,20 @@ namespace Turrets
         /// <param name="col">The collider that was touched</param>
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (!isEthereal) return;
+            if (!isEthereal && !willHitFirst) return;
 
             if (_hitEnemies.Contains(col.gameObject.GetInstanceID())) return;
             _hitEnemies.Add(col.gameObject.GetInstanceID());
 
-                // We don't want to hit the target twice
+            // We don't want to hit the target twice
             if (target != null && target == col.transform) return;
 
-            if (col.transform.CompareTag("Enemy"))
+            if (!col.transform.CompareTag("Enemy")) return;
+            
+            if (!willHitFirst)
                 Damage(col.gameObject.GetComponent<Enemy>());
+            else
+                HitTarget(true, col.transform);
         }
     }
 }

@@ -49,6 +49,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -129,11 +132,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04bf2ba7db56e47a0b4f37a944e23a48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _source: {fileID: 0}
+  source: {fileID: 0}
   target: {fileID: 0}
   targetLocation: {x: 0, y: 0, z: 0}
   useLocation: 0
   isEthereal: 0
+  onlyFirstTouch: 0
   speed:
     stat: 5
     modifier: 1
@@ -141,6 +145,6 @@ MonoBehaviour:
     stat: 1
     modifier: 0
   knockbackAmount:
-    stat: 0
+    stat: 1
     modifier: 0
   impactEffect: {fileID: 5606335261930595536, guid: 410840a991e414225baff388418be600, type: 3}

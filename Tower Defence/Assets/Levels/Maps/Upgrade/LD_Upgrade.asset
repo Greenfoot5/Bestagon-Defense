@@ -199,6 +199,15 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
       variable: {fileID: 11400000, guid: b54cb3d9e6f25430dbcb163e806032f4, type: 2}
+    - useConstant: 0
+      item: {fileID: 11400000, guid: 5b45ab7ef354c4bd290f0ba291f75687, type: 2}
+      constantValue:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+      variable: {fileID: 11400000, guid: b54cb3d9e6f25430dbcb163e806032f4, type: 2}
   turretDuplicateCheck: 1
   moduleHandlers:
     list:

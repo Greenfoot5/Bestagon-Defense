@@ -183,6 +183,14 @@ MonoBehaviour:
     m_Key: Title/Turret
     m_Metadata:
       m_Items: []
+  - m_Id: 250760211242934272
+    m_Key: Choker/Basic/Display Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 250760321012064256
+    m_Key: Choker/Basic/Tagline
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
