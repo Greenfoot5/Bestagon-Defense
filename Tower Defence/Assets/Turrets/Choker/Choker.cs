@@ -77,7 +77,6 @@ namespace Turrets.Choker
                 bullet.name = "_" + bullet.name;
                 
                 float bulletAngle = firePoint.eulerAngles.z + Random.Range(partSpread.GetStat() / -2, partSpread.GetStat() / 2);
-                Debug.Log(bulletAngle);
                 bullet.eulerAngles = new Vector3(0, 0, bulletAngle);
 
                 float radian = (bulletAngle + 90) * Mathf.Deg2Rad;

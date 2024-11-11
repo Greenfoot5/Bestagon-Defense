@@ -8,6 +8,7 @@ using Gameplay;
 using Gameplay.Waves;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Enemies
 {
@@ -289,6 +290,8 @@ namespace Enemies
             if (_isDead)
                 return;
             _isDead = true;
+            
+            DeathBitManager.DropEnergy(transform.position, deathMoney);
 
             OnDeath?.Invoke();
             
@@ -303,9 +306,7 @@ namespace Enemies
         
             // Let the wave spawner know the enemy is dead
             WaveSpawner.enemiesAlive--;
-        
-            // Grant money and destroy self
-            GameStats.Energy += deathMoney;
+            
             Destroy(gameObject);
         }
 
