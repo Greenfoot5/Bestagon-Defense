@@ -102,7 +102,12 @@ namespace Gameplay
         public void PopulateSaveData(SaveLevel saveData)
         {
             saveData.Lives = GameStats.Lives;
-            int droppedEnergy = DeathBitManager.Bits.Count * DeathBitManager.BitValue + DeathBitManager.Bytes.Count * DeathBitManager.ByteValue;
+            var droppedEnergy = 0;
+            foreach (DeathEnergy particle in DeathBitManager.Particles)
+            {
+                if (!particle.IsAnimating)
+                    droppedEnergy += particle.Value;
+            }
             saveData.Energy = GameStats.Energy + droppedEnergy;
             saveData.Powercells = GameStats.Powercells;
             saveData.WaveIndex = GameStats.Rounds - 1;
