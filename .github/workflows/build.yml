@@ -98,7 +98,7 @@ jobs:
         with:
           projectPath: 'Tower Defence'
           targetPlatform: ${{ matrix.targetPlatform }}
-          androidKeystoreName: user # This file won't exist, but this property needs to exist.
+          androidKeystoreName: bestagon.keystore # This file won't exist, but this property needs to exist.
           androidKeystoreBase64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
           androidKeystorePass: ${{ secrets.ANDROID_KEYSTORE_PASS }}
           androidKeyaliasName: ${{ secrets.ANDROID_KEYALIAS_NAME }}
