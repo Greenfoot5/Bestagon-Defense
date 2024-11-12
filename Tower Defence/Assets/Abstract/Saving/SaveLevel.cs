@@ -18,6 +18,7 @@ namespace Abstract.Saving
             public string uuid;
             public TurretBlueprint turretBlueprint;
             public List<ModuleChainHandler> moduleChainHandlers;
+            public DynamicTurret.TargetingMethod targetingMethod;
             public Quaternion turretRotation;
         }
         public List<NodeData> Nodes;

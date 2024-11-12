@@ -24,8 +24,8 @@ namespace Gameplay
         [SerializeField]
         private Material byteMaterial;
 
-        private static readonly List<Tuple<Matrix4x4, int>> Bits = new();
-        private static readonly List<Tuple<Matrix4x4, int>> Bytes = new();
+        internal static readonly List<Tuple<Matrix4x4, int>> Bits = new();
+        internal static readonly List<Tuple<Matrix4x4, int>> Bytes = new();
         
         private RenderParams _bitRender;
         private RenderParams _byteRender;
@@ -33,9 +33,9 @@ namespace Gameplay
 
         private const float CatchRadius = 2f;
         [Tooltip("How much energy 1 bit is worth")]
-        private const int BitValue = 1;
+        internal const int BitValue = 1;
         [Tooltip("How much energy 1 byte is worth")]
-        private const int ByteValue = 3;
+        internal const int ByteValue = 3;
         [Tooltip("How much to scale bit material by")]
         private const float BitScale = 0.4f;
         [Tooltip("How much to scale byte material by")]

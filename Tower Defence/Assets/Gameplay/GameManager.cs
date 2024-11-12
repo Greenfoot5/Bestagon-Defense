@@ -102,7 +102,8 @@ namespace Gameplay
         public void PopulateSaveData(SaveLevel saveData)
         {
             saveData.Lives = GameStats.Lives;
-            saveData.Energy = GameStats.Energy;
+            int droppedEnergy = DeathBitManager.Bits.Count * DeathBitManager.BitValue + DeathBitManager.Bytes.Count * DeathBitManager.ByteValue;
+            saveData.Energy = GameStats.Energy + droppedEnergy;
             saveData.Powercells = GameStats.Powercells;
             saveData.WaveIndex = GameStats.Rounds - 1;
             saveData.RandomState = Random.state;
@@ -118,14 +119,19 @@ namespace Gameplay
                 {
                     continue;
                 }
+
+                var turret = node.turret.GetComponent<Turret>();
                 
                 var nodeData = new SaveLevel.NodeData
                 {
                     uuid = node.name,
                     turretBlueprint = node.turretBlueprint,
                     turretRotation = node.turret.transform.rotation,
-                    moduleChainHandlers = node.turret.GetComponent<Turret>().moduleHandlers
+                    moduleChainHandlers = turret.moduleHandlers
                 };
+
+                if (turret.GetType().IsSubclassOf(typeof(DynamicTurret)))
+                    nodeData.targetingMethod = ((DynamicTurret)turret).targetingMethod;
                 saveData.Nodes.Add(nodeData);
             }
             
@@ -172,6 +178,12 @@ namespace Gameplay
                     foreach (ModuleChainHandler moduleHandler in nodeData.moduleChainHandlers)
                     {
                         node.LoadModule(moduleHandler);
+                    }
+                    
+                    var turret = node.turret.GetComponent<Turret>();
+                    if (turret.GetType().IsSubclassOf(typeof(DynamicTurret)))
+                    {
+                        ((DynamicTurret)turret).targetingMethod = nodeData.targetingMethod;
                     }
                 }
             }
