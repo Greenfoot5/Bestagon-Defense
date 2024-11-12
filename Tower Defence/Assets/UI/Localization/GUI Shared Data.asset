@@ -243,16 +243,10 @@ MonoBehaviour:
     m_Key: Resource/Life/Effect
     m_Metadata:
       m_Items: []
-  - m_Id: 20018500012597248
-    m_Key: Resource/Life/Title
-    m_Metadata:
-      m_Items: []
-  - m_Id: 20018537140576256
-    m_Key: Resource/Life/Tagline
-    m_Metadata:
-      m_Items: []
-  - m_Id: 20227354377838592
-    m_Key: TypePanel/Resource
+  - m_Id: 162669266375532544
+    m_Key: 'Settings/EnergyPickup
+
+'
     m_Metadata:
       m_Items: []
   m_Metadata:

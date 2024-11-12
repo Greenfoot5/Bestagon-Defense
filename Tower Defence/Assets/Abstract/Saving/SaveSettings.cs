@@ -8,7 +8,8 @@ namespace Abstract.Saving
     /// </summary>
     public class SaveSettings
     { 
-        public Locale locale;
+        public Locale Locale;
+        public bool HasEnergyPickup = true;
         
         /// <summary>
         /// Translates the class into json format

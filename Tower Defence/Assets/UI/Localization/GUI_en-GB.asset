@@ -361,16 +361,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 1943649921315110921
-  - m_Id: 20018500012597248
-    m_Localized: Revitalise
-    m_Metadata:
-      m_Items: []
-  - m_Id: 20018537140576256
-    m_Localized: Live Longer
-    m_Metadata:
-      m_Items: []
-  - m_Id: 20227354377838592
-    m_Localized: Resource
+  - m_Id: 162669266375532544
+    m_Localized: Energy Pickup
     m_Metadata:
       m_Items: []
   references:

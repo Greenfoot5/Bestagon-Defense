@@ -7,6 +7,9 @@ namespace Gameplay
     [RequireComponent(typeof(UnityEngine.Camera))]
     public class DeathBitManager: MonoBehaviour
     {
+        // If energy drops are enabled at all
+        public static bool dropsEnergy;
+        
         [Tooltip("Set to Unity's default Quad mesh")]
         [SerializeField]
         private Mesh mesh;
@@ -51,6 +54,12 @@ namespace Gameplay
 
         public static void DropEnergy(Vector3 position, int value, Quaternion? rotation = null, Vector3? scale = null)
         {
+            if (!dropsEnergy)
+            {
+                GameStats.Energy += value;
+                return;
+            }
+
             rotation ??= Quaternion.identity;
             scale ??= Vector3.one;
             

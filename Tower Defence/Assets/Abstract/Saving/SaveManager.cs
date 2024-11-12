@@ -29,7 +29,8 @@ namespace Abstract.Saving
             {
                 var sd = new SaveSettings();
                 sd.LoadFromJson(json);
-                LocalizationSettings.SelectedLocale = sd.locale;
+                LocalizationSettings.SelectedLocale = sd.Locale;
+                DeathBitManager.dropsEnergy = sd.HasEnergyPickup;
             }
             else
             {

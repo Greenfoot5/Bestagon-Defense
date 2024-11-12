@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using Abstract.Saving;
+using Gameplay;
 using TMPro;
 using UI.Transition;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
+using UnityEngine.UI;
 
 namespace Levels.Generic.Settings
 {
@@ -17,6 +19,9 @@ namespace Levels.Generic.Settings
         [SerializeField]
         [Tooltip("The dropdown to select language/locale ")]
         private TMP_Dropdown dropdown;
+        [SerializeField]
+        [Tooltip("The dropdown to enable/disable energy pickups")]
+        private Toggle energyBitToggle;
         
         /// <summary>
         /// Loads all the UI & settings the player can change
@@ -44,6 +49,9 @@ namespace Levels.Generic.Settings
 
             dropdown.value = selected;
             dropdown.onValueChanged.AddListener(LocaleSelected);
+
+            energyBitToggle.isOn = DeathBitManager.dropsEnergy;
+            energyBitToggle.onValueChanged.AddListener(EnergyDropsToggled);
         }
         
         /// <summary>
@@ -53,6 +61,12 @@ namespace Levels.Generic.Settings
         private void LocaleSelected(int index)
         {
             LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[index];
+            SaveJsonData(this);
+        }
+
+        private void EnergyDropsToggled(bool status)
+        {
+            DeathBitManager.dropsEnergy = status;
             SaveJsonData(this);
         }
 
@@ -81,7 +95,8 @@ namespace Levels.Generic.Settings
         /// <param name="saveData">The SaveSettings to load</param>
         public void PopulateSaveData(SaveSettings saveData)
         {
-            saveData.locale = LocalizationSettings.SelectedLocale;
+            saveData.Locale = LocalizationSettings.SelectedLocale;
+            saveData.HasEnergyPickup = DeathBitManager.dropsEnergy;
         }
         
         /// <summary>
@@ -98,7 +113,8 @@ namespace Levels.Generic.Settings
         /// <param name="saveData">The SaveSettings to load</param>
         public void LoadFromSaveData(SaveSettings saveData)
         {
-            LocalizationSettings.SelectedLocale = saveData.locale;
+            LocalizationSettings.SelectedLocale = saveData.Locale;
+            DeathBitManager.dropsEnergy = saveData.HasEnergyPickup;
         }
 
         public void PrivacyPolicy()

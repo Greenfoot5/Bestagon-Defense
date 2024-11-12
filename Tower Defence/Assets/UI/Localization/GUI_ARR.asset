@@ -227,17 +227,13 @@ MonoBehaviour:
     m_Localized: 
     m_Metadata:
       m_Items: []
-  - m_Id: 20018537140576256
-    m_Localized: Sail Longer
-    m_Metadata:
-      m_Items: []
   - m_Id: 20018362405871616
     m_Localized: 
     m_Metadata:
       m_Items:
       - rid: 1943649921315110920
-  - m_Id: 20227354377838592
-    m_Localized: Booty
+  - m_Id: 162669266375532544
+    m_Localized: Manual Booty Collection
     m_Metadata:
       m_Items: []
   references:
