@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 namespace Gameplay
 {
@@ -8,7 +10,7 @@ namespace Gameplay
     public class DeathBitManager: MonoBehaviour
     {
         // If energy drops are enabled at all
-        public static bool dropsEnergy;
+        public static bool dropsEnergy = true;
         
         [Tooltip("Set to Unity's default Quad mesh")]
         [SerializeField]
@@ -22,8 +24,8 @@ namespace Gameplay
         [SerializeField]
         private Material byteMaterial;
 
-        private static readonly List<Matrix4x4> Bits = new();
-        private static readonly List<Matrix4x4> Bytes = new();
+        private static readonly List<Tuple<Matrix4x4, int>> Bits = new();
+        private static readonly List<Tuple<Matrix4x4, int>> Bytes = new();
         
         private RenderParams _bitRender;
         private RenderParams _byteRender;
@@ -50,6 +52,8 @@ namespace Gameplay
                 layer = gameObject.layer
             };
             _camera = GetComponent<UnityEngine.Camera>();
+
+            GameStats.OnRoundProgress += CleanMap;
         }
 
         public static void DropEnergy(Vector3 position, int value, Quaternion? rotation = null, Vector3? scale = null)
@@ -70,19 +74,19 @@ namespace Gameplay
                 Vector3 placePos = position + new Vector3(0.8f * Random.value - 0.4f, 0.8f * Random.value - 0.4f, -1f);
                 if (valueLeft < ByteValue)
                 {
-                    Bits.Add(Matrix4x4.TRS(placePos, rotation.Value, scale.Value * BitScale));
+                    Bits.Add(new Tuple<Matrix4x4, int>(Matrix4x4.TRS(placePos, rotation.Value, scale.Value * BitScale), GameStats.Rounds));
                     valueLeft -= BitValue;
                 }
                 else
                 {
                     if (Random.value >= 0.5f)
                     {
-                        Bits.Add(Matrix4x4.TRS(placePos, rotation.Value, scale.Value * BitScale));
+                        Bits.Add(new Tuple<Matrix4x4, int>(Matrix4x4.TRS(placePos, rotation.Value, scale.Value * BitScale), GameStats.Rounds));
                         valueLeft -= BitValue;
                     }
                     else
                     {
-                        Bytes.Add(Matrix4x4.TRS(placePos, rotation.Value, scale.Value * ByteScale));
+                        Bytes.Add(new Tuple<Matrix4x4, int>(Matrix4x4.TRS(placePos, rotation.Value, scale.Value * ByteScale), GameStats.Rounds));
                         valueLeft -= ByteValue;
                     }
                 }
@@ -92,13 +96,13 @@ namespace Gameplay
 
         private void LateUpdate()
         {
-            foreach (Matrix4x4 particle in Bits)
+            foreach (Tuple<Matrix4x4, int> particle in Bits)
             {
-                Graphics.RenderMesh(_bitRender, mesh, 0, particle);
+                Graphics.RenderMesh(_bitRender, mesh, 0, particle.Item1);
             }
-            foreach (Matrix4x4 particle in Bytes)
+            foreach (Tuple<Matrix4x4, int> particle in Bytes)
             {
-                Graphics.RenderMesh(_byteRender, mesh, 0, particle);
+                Graphics.RenderMesh(_byteRender, mesh, 0, particle.Item1);
             }
         }
 
@@ -109,7 +113,7 @@ namespace Gameplay
             
             for (var i=0; i < Bits.Count; ++i)
             {
-                if ((mousePos - Bits[i].GetPosition()).sqrMagnitude < CatchRadius * CatchRadius)
+                if ((mousePos - Bits[i].Item1.GetPosition()).sqrMagnitude < CatchRadius * CatchRadius)
                 {
                     Bits.RemoveAt(i);
                     GameStats.Energy += BitValue;
@@ -119,7 +123,30 @@ namespace Gameplay
             
             for (var i=0; i < Bytes.Count; ++i)
             {
-                if ((mousePos - Bytes[i].GetPosition()).sqrMagnitude < CatchRadius * CatchRadius)
+                if ((mousePos - Bytes[i].Item1.GetPosition()).sqrMagnitude < CatchRadius * CatchRadius)
+                {
+                    Bytes.RemoveAt(i);
+                    GameStats.Energy += ByteValue;
+                    i--;
+                }
+            }
+        }
+
+        private void CleanMap()
+        {
+            for (var i=0; i < Bits.Count; ++i)
+            {
+                if (Bits[i].Item2 <= GameStats.Rounds - 3)
+                {
+                    Bits.RemoveAt(i);
+                    GameStats.Energy += BitValue;
+                    i--;
+                }
+            }
+            
+            for (var i=0; i < Bytes.Count; ++i)
+            {
+                if (Bytes[i].Item2 <= GameStats.Rounds - 3)
                 {
                     Bytes.RemoveAt(i);
                     GameStats.Energy += ByteValue;
