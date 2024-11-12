@@ -82,3 +82,7 @@ crashlytics-build.properties
 
 # Ignore Environment Data
 *[Hh]idden*
+
+# Game-ci
+/[Aa]rtifacts/
+/[Cc]odeCoverage/

@@ -13,7 +13,7 @@ jobs:
     runs-on: ${{ matrix.jobOS }}
     strategy:
       fail-fast: false
-      max-parallel: 1
+      max-parallel: 2
       matrix:
         include:
           # Temporarily disabled as it wasn't working
@@ -27,8 +27,8 @@ jobs:
             jobOS: ubuntu-latest
 #          - targetPlatform: iOS # Build an iOS player.
 #            jobOS: ubuntu-latest
-#          - targetPlatform: Android # Build an Android .apk standalone app.
-#            jobOS: ubuntu-latest
+          - targetPlatform: Android # Build an Android .apk standalone app.
+            jobOS: ubuntu-latest
 #          - targetPlatform: WebGL # WebGL.
 #            jobOS: ubuntu-latest
         
@@ -51,6 +51,14 @@ jobs:
         with:
           path: Library
           key: Library-${{ matrix.targetPlatform }}
+          
+      - uses: actions/cache@v3
+        with:
+          path: 'Tower Defense'
+          key: Library-BestagonDefense-${{matrix.targetPlatform}}
+          restore-keys: |
+            Library-MyProjectName-
+            Library-
 
       - uses: game-ci/unity-builder@v4
         env:
@@ -85,7 +93,7 @@ jobs:
           androidKeystorePass: ${{ secrets.ANDROID_KEYSTORE_PASS }}
           androidKeyaliasName: ${{ secrets.ANDROID_KEYALIAS_NAME }}
           androidKeyaliasPass: ${{ secrets.ANDROID_KEYALIAS_PASS }}
-          androidTargetSdkVersion: AndroidApiLevel31
+          androidTargetSdkVersion: AndroidApiLevel35
         if: ${{ matrix.targetPlatform == 'Android' }}
 
       - uses: actions/upload-artifact@v3
