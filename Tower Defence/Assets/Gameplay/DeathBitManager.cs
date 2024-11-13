@@ -31,6 +31,12 @@ namespace Gameplay
         private UnityEngine.Camera _camera;
 
         private const float CatchRadius = 2f;
+        
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void Init()
+        {
+            Particles.Clear();
+        }
 
         private void Start()
         {
@@ -68,7 +74,6 @@ namespace Gameplay
                 Particles.Add(new DeathEnergy(placePos, rotation.Value, scale.Value, particleValue, GameStats.Rounds));
                 valueLeft -= particleValue;
             }
-            
         }
 
         private void LateUpdate()

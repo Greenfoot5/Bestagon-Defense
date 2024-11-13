@@ -43,6 +43,13 @@ namespace Gameplay
 
         public static readonly List<TurretBlueprint> TurretInventory = new();
         public static readonly List<ModuleChainHandler> ModuleInventory = new();
+        
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void Init()
+        {
+            TurretInventory.Clear();
+            ModuleInventory.Clear();
+        }
 
         private void Awake()
         {
