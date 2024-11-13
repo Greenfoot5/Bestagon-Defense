@@ -67,6 +67,7 @@ namespace Turrets.Shooter
             bulletGo.name = "_" + bulletGo.name;
             var bullet = bulletGo.GetComponent<Bullet>();
             bullet.Seek(Target, this);
+            Shoot(bullet);
 
             base.Attack(this);
         }

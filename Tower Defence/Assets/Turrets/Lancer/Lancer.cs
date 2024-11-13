@@ -129,6 +129,8 @@ namespace Turrets.Lancer
             Vector3 endPosition = (direction + transform.position);
             
             bullet.Seek(endPosition, this);
+            
+            Shoot(bullet);
         }
     }
 }

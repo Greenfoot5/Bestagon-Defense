@@ -82,7 +82,9 @@ namespace Turrets.Choker
                 float radian = (bulletAngle + 90) * Mathf.Deg2Rad;
                 var bulletDirection = new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
                 //bullet.position = 
-                bullet.GetComponent<Bullet>().Seek((Vector2)firePoint.position + bulletDirection * range.GetStat(), this);
+                var bulletComponent = bullet.GetComponent<Bullet>();
+                bulletComponent.Seek((Vector2)firePoint.position + bulletDirection * range.GetStat(), this);
+                Shoot(bulletComponent);
             }
             
             base.Attack(this);

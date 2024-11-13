@@ -138,6 +138,7 @@ namespace Turrets.Gunner
             bullet.Seek(Target, this);
             
             base.Attack(this);
+            Shoot(bullet);
         }
     }
 }
