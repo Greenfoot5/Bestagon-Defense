@@ -186,6 +186,14 @@ MonoBehaviour:
     m_Localized: Cannon
     m_Metadata:
       m_Items: []
+  - m_Id: 250760211242934272
+    m_Localized: Grapeshot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 250760321012064256
+    m_Localized: Not real fruit
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

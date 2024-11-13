@@ -1,7 +1,7 @@
 using System;
 using Turrets;
+using Turrets.Choker;
 using Turrets.Gunner;
-using Turrets.Lancer;
 using Turrets.Shooter;
 using Turrets.Smasher;
 using UnityEngine;
@@ -14,7 +14,51 @@ namespace Modules.Bombs
     [CreateAssetMenu(fileName = "BombsT0", menuName = "Modules/Bombs")]
     public class BombsModule : Module
     {
-        protected override Type[] ValidTypes => new[] { typeof(Shooter), typeof(Gunner), typeof(Smasher), typeof(Lancer)};
+        // Choker - Fewer shots, are explosive
+        // Gunner - Small explosive bullets
+        // Lancer - No change
+        // Laser - No effect
+        // Shooter - Targets location, significant explosion, slight slow of bullet speed
+        // Smasher - Larger range & damage
+        protected override Type[] ValidTypes => new[] { typeof(Choker), typeof(Gunner), typeof(Shooter), typeof(Smasher)};
+
+        [Header("Choker")]
+        [Tooltip("Additive percentage modifier to part explosion radius")]
+        [SerializeField]
+        private float chokerExplosionRadiusChange;
+        [Tooltip("Additive percentage modifier to part count")]
+        [SerializeField]
+        private float chokerBulletCountChange;
+        [Tooltip("Additive percentage modifier to choker damage")]
+        [SerializeField]
+        private float chokerDamageChange;
+
+        [Header("Gunner")]
+        [Tooltip("Additive percentage modifier to pellet explosion radius")]
+        [SerializeField]
+        private float gunnerExplosionRadiusChange;
+        [Tooltip("Additive percentage modifier to gunner damage")]
+        [SerializeField]
+        private float gunnerDamageChange;
+
+        [Header("Shooter")]
+        [Tooltip("Additive percentage modifier to bullet explosion radius")]
+        [SerializeField]
+        private float shooterExplosionRadiusChange;
+        [Tooltip("Additive percentage modifier to bullet speed")]
+        [SerializeField]
+        private float shooterBulletSpeedChange;
+        [Tooltip("Additive percentage modifier to shooter damage")]
+        [SerializeField]
+        private float shooterDamageChange;
+        
+        [Header("Smasher")]
+        [SerializeField]
+        [Tooltip("The percentage to modify the damage of smasher by")]
+        private float smasherDamageChange;
+        [SerializeField]
+        [Tooltip("The percentage to modify the range of smasher by")]
+        private float smasherRangeChange;
         
         [Header("Shooter, Gunner & Lancer")]
         [Tooltip("What percentage to modify the explosion radius of bullets by")]
@@ -37,14 +81,6 @@ namespace Modules.Bombs
         [Tooltip("The percentage to modify the knockback of the bullet")]
         [SerializeField]
         private float knockbackPercentageChange;
-
-        [Header("Smasher")]
-        [SerializeField]
-        [Tooltip("The percentage to modify the damage of smasher by")]
-        private float smasherDamageChange;
-        [SerializeField]
-        [Tooltip("The percentage to modify the range of smasher by")]
-        private float smasherRangeChange;
         
         /// <summary>
         /// Changes the turret's stats when added
@@ -55,14 +91,13 @@ namespace Modules.Bombs
             damager.OnShoot += OnShoot;
             switch (damager)
             {
+                case Choker choker:
+                    choker.partCount.AddModifier(chokerBulletCountChange);
+                    choker.damage.AddModifier(chokerDamageChange);
+                    break;
                 case Smasher smasher:
                     smasher.damage.AddModifier(smasherDamageChange);
                     smasher.range.AddModifier(smasherRangeChange);
-                    break;
-                case Turret turret:
-                    turret.damage.AddModifier(damagePercentageChange);
-                    turret.fireRate.AddModifier(fireRatePercentageChange);
-                    turret.range.AddModifier(rangePercentageChange);
                     break;
             }
         }
@@ -76,14 +111,13 @@ namespace Modules.Bombs
             damager.OnShoot -= OnShoot;
             switch (damager)
             {
+                case Choker choker:
+                    choker.partCount.TakeModifier(chokerBulletCountChange);
+                    choker.damage.TakeModifier(chokerDamageChange);
+                    break;
                 case Smasher smasher:
                     smasher.damage.TakeModifier(smasherDamageChange);
                     smasher.range.TakeModifier(smasherRangeChange);
-                    break;
-                case Turret turret:
-                    turret.damage.TakeModifier(damagePercentageChange);
-                    turret.fireRate.TakeModifier(fireRatePercentageChange);
-                    turret.range.TakeModifier(rangePercentageChange);
                     break;
             }
         }
@@ -94,13 +128,19 @@ namespace Modules.Bombs
         /// <param name="bullet">The bullet to add stats for</param>
         private void OnShoot(Bullet bullet)
         {
-            bullet.explosionRadius.AddModifier(explosionRadiusChange);
-            bullet.speed.AddModifier(speedPercentageChange);
-            bullet.knockbackAmount.AddModifier(knockbackPercentageChange);
-            if (bullet.useLocation) return;
-            
-            bullet.useLocation = true;
-            bullet.targetLocation = bullet.target.position;
+            switch (bullet.source)
+            {
+                case Choker:
+                    bullet.explosionRadius.AddModifier(chokerExplosionRadiusChange);
+                    break;
+            }
+            // bullet.explosionRadius.AddModifier(explosionRadiusChange);
+            // bullet.speed.AddModifier(speedPercentageChange);
+            // bullet.knockbackAmount.AddModifier(knockbackPercentageChange);
+            // if (bullet.useLocation) return;
+            //
+            // bullet.useLocation = true;
+            // bullet.targetLocation = bullet.target.position;
         }
     }
 }

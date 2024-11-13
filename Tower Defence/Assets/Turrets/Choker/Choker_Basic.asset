@@ -31,7 +31,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  glyph: {fileID: 0}
+  glyph: {fileID: 11400000, guid: d46e9e147d0784edda8315cd2b342829, type: 2}
   accent: {r: 0.9647059, g: 0.39215687, b: 0.21960784, a: 1}
   prefab: {fileID: 3974544501041316794, guid: 211e27fde75b3450985a28086d794684, type: 3}
   moduleHandlers: []
