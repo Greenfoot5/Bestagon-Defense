@@ -68,7 +68,7 @@ namespace Turrets.Choker
             //attackEffect?.Play();
 
             // Any decimal count is a chance for an additional part
-            int count = ((int)partCount.GetStat()) + (Random.value < partCount.GetStat() % 10 ? 1 : 0);
+            int count = ((int)partCount.GetStat()) + (Random.value < (partCount.GetStat() % 1f) ? 1 : 0);
             
             // float oneSegment = spreadSize / (spreadAmount - 1);
             for (var i = 0; i < count; i++)
