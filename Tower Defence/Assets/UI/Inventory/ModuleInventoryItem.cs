@@ -43,7 +43,7 @@ namespace UI.Inventory
         private Transform applicableGlyphs;
         
         [Tooltip("The list of types the turret has")]
-        public Type[] turretTypes;
+        public Type[] TurretTypes;
         //[HideInInspector]
         [Tooltip("The original accent colour")]
         public Color accent;
@@ -93,7 +93,7 @@ namespace UI.Inventory
                 }
             }
 
-            turretTypes = module.GetModule().GetValidTypes();
+            TurretTypes = module.GetModule().GetValidTypes();
         }
 
         public bool IsValid(Damager damager)

@@ -14,19 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moduleTier: 1
   isUpgradableTo: 1
-  chokerExplosionRadiusChange: 0.4
+  chokerExplosionRadiusChange: 0.3
   chokerBulletCountChange: -0.2
   chokerDamageChange: 0.2
-  gunnerExplosionRadiusChange: 0
-  gunnerDamageChange: 0
-  shooterExplosionRadiusChange: 0
-  shooterBulletSpeedChange: 0
-  shooterDamageChange: 0
+  gunnerExplosionRadiusChange: 0.1
+  gunnerDamageChange: 0.3
+  shooterExplosionRadiusChange: 0.2
+  shooterBulletSpeedChange: 0.1
+  shooterDamageChange: 0.3
   smasherDamageChange: 0.1
   smasherRangeChange: 0.1
-  explosionRadiusChange: 0.3
-  damagePercentageChange: 0.35
-  fireRatePercentageChange: -0.05
-  rangePercentageChange: -0.1
-  speedPercentageChange: -0.05
-  knockbackPercentageChange: -0.05

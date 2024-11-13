@@ -60,28 +60,6 @@ namespace Modules.Bombs
         [Tooltip("The percentage to modify the range of smasher by")]
         private float smasherRangeChange;
         
-        [Header("Shooter, Gunner & Lancer")]
-        [Tooltip("What percentage to modify the explosion radius of bullets by")]
-        [SerializeField]
-        private float explosionRadiusChange;
-        [Tooltip("What percentage to modify the damage of the turret by")]
-        [SerializeField]
-        private float damagePercentageChange;
-        [Tooltip("What percentage to modify the fire rate of the turret by")]
-        [SerializeField]
-        private float fireRatePercentageChange;
-        [Tooltip("What percentage to modify the range of the turret by")]
-        [SerializeField]
-        private float rangePercentageChange;
-        [Tooltip("What percentage to modify the speed of the bullet by")]
-        [SerializeField]
-        private float speedPercentageChange;
-        
-        [Header("Lancer Only")]
-        [Tooltip("The percentage to modify the knockback of the bullet")]
-        [SerializeField]
-        private float knockbackPercentageChange;
-        
         /// <summary>
         /// Changes the turret's stats when added
         /// </summary>
@@ -94,6 +72,12 @@ namespace Modules.Bombs
                 case Choker choker:
                     choker.partCount.AddModifier(chokerBulletCountChange);
                     choker.damage.AddModifier(chokerDamageChange);
+                    break;
+                case Gunner gunner:
+                    gunner.damage.AddModifier(gunnerDamageChange);
+                    break;
+                case Shooter shooter:
+                    shooter.damage.AddModifier(shooterDamageChange);
                     break;
                 case Smasher smasher:
                     smasher.damage.AddModifier(smasherDamageChange);
@@ -115,6 +99,12 @@ namespace Modules.Bombs
                     choker.partCount.TakeModifier(chokerBulletCountChange);
                     choker.damage.TakeModifier(chokerDamageChange);
                     break;
+                case Gunner gunner:
+                    gunner.damage.TakeModifier(gunnerDamageChange);
+                    break;
+                case Shooter shooter:
+                    shooter.damage.TakeModifier(shooterDamageChange);
+                    break;
                 case Smasher smasher:
                     smasher.damage.TakeModifier(smasherDamageChange);
                     smasher.range.TakeModifier(smasherRangeChange);
@@ -133,14 +123,16 @@ namespace Modules.Bombs
                 case Choker:
                     bullet.explosionRadius.AddModifier(chokerExplosionRadiusChange);
                     break;
+                case Gunner:
+                    bullet.explosionRadius.AddModifier(gunnerExplosionRadiusChange);
+                    break;
+                case Shooter:
+                    bullet.explosionRadius.TakeModifier(shooterExplosionRadiusChange);
+                    bullet.speed.AddModifier(shooterBulletSpeedChange);
+                    bullet.useLocation = true;
+                    bullet.targetLocation = bullet.target.position;
+                    break;
             }
-            // bullet.explosionRadius.AddModifier(explosionRadiusChange);
-            // bullet.speed.AddModifier(speedPercentageChange);
-            // bullet.knockbackAmount.AddModifier(knockbackPercentageChange);
-            // if (bullet.useLocation) return;
-            //
-            // bullet.useLocation = true;
-            // bullet.targetLocation = bullet.target.position;
         }
     }
 }

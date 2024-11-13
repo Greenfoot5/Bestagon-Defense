@@ -63,7 +63,7 @@ namespace UI.Inventory
         /// Creates and setups the Selection UI.
         /// </summary>
         /// <param name="turret">The turret the option selects</param>
-        public void Init (TurretBlueprint turret)
+        public void Init(TurretBlueprint turret)
         {
             _turretBlueprint = turret;
             
