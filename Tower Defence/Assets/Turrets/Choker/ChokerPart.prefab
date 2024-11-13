@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -965640333
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -1934763926249293170, guid: d12d28cafee734440814092e0361f751, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -144,11 +144,12 @@ MonoBehaviour:
     modifier: 1
   explosionRadius:
     stat: 1
-    modifier: 0
+    modifier: 0.5
   knockbackAmount:
     stat: 1
     modifier: 0
   impactEffect: {fileID: 5606335261930595536, guid: c2d2424315e494963bc4e61cdbbea4e2, type: 3}
+  explodeEffect: {fileID: 3614551220431262685, guid: e463f638177af4ef6bbc674749ce5749, type: 3}
 --- !u!58 &36408766473696717
 CircleCollider2D:
   m_ObjectHideFlags: 0

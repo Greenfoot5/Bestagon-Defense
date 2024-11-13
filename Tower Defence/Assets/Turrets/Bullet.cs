@@ -3,6 +3,7 @@ using Abstract.Data;
 using Enemies;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.VFX;
 
 namespace Turrets
 {
@@ -34,7 +35,11 @@ namespace Turrets
         public UpgradableStat knockbackAmount;
     
         [Tooltip("The effect spawned when the bullet hit's a target")]
-        public GameObject impactEffect;
+        [SerializeField]
+        private GameObject impactEffect;
+        [Tooltip("Explosion Effect")]
+        [SerializeField]
+        private GameObject explodeEffect;
         
         private readonly List<int> _hitEnemies = new();
         
@@ -113,8 +118,7 @@ namespace Turrets
             enemy ??= target;
             
             // Spawn hit effect
-            Transform position = transform;
-            GameObject effectIns = Instantiate(impactEffect, position.position, position.rotation);
+            GameObject effectIns = Instantiate(impactEffect, transform.position, transform.rotation);
             effectIns.name = "_" + effectIns.name;
 
             Destroy(effectIns, 2f);
@@ -162,6 +166,18 @@ namespace Turrets
         /// </summary>
         private void Explode()
         {
+            if (explosionRadius.GetStat() > 0f && explodeEffect is not null)
+            {
+                
+                // Spawn explode effect
+                GameObject effectIns = Instantiate(explodeEffect, transform.position, transform.rotation);
+                var visualEffect = effectIns.GetComponent<VisualEffect>();
+                visualEffect.SetFloat("size", explosionRadius.GetStat() * 2.5f);
+                visualEffect.Play();
+                effectIns.name = "_" + effectIns.name;
+                Destroy(effectIns, 1f);
+            }
+
             // Gets all the enemies in the AoE and calls Damage on them
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius.GetStat());
             foreach (Collider2D collider2d in colliders)

@@ -77,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -965640333
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 32ce8a74034f64e42a16b69e97c9b3df, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -107,7 +107,7 @@ MonoBehaviour:
   targetLocation: {x: 0, y: 0, z: 0}
   useLocation: 0
   isEthereal: 1
-  onlyFirstTouch: 0
+  willHitFirst: 0
   speed:
     stat: 7
     modifier: 1
@@ -118,6 +118,7 @@ MonoBehaviour:
     stat: 3
     modifier: 1
   impactEffect: {fileID: 5606335261930595536, guid: 79704d342ebc848e4811ae6127d42c40, type: 3}
+  explodeEffect: {fileID: 3614551220431262685, guid: 70e344efa0f0342978bdcac93587b4e1, type: 3}
 --- !u!50 &7073124783216694538
 Rigidbody2D:
   serializedVersion: 5
