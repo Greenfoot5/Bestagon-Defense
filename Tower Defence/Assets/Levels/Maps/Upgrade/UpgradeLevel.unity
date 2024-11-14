@@ -8982,6 +8982,10 @@ PrefabInstance:
       propertyPath: glyphsLookup.sprites.Array.size
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4077244561523284678, guid: 4804c306899ea47ffbe14d11731a53dc, type: 3}
+      propertyPath: m_fontSize
+      value: 48.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4077244561523284679, guid: 4804c306899ea47ffbe14d11731a53dc, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
