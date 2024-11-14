@@ -127,7 +127,7 @@ VFXRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -965640333
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
 --- !u!1 &4868753465829466092
 GameObject:
@@ -204,7 +204,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 925339771
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6f1bcabc952884af8b16bc42da6ecc5f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -323,7 +323,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 925339771
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 80386a548ca014f19af136c8390a752b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -402,13 +402,13 @@ MonoBehaviour:
     modifier: 1
   rangeDisplay: {fileID: 5500896712579330018}
   fireRate:
-    stat: 0.4
+    stat: 0.5
     modifier: 1
   fireCountdown: 0
   bulletPrefab: {fileID: 8554329261332597528, guid: c304e75bdf8b948d8937d7b591b1edc5, type: 3}
   attackEffect: {fileID: 8646537639444958779}
   bulletRange:
-    stat: 3
+    stat: 3.5
     modifier: 1
   firePoint: {fileID: 5009289029243488887}
   partToRotate: {fileID: 367774791884787270}

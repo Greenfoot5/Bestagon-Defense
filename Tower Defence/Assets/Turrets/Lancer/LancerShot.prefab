@@ -115,7 +115,7 @@ MonoBehaviour:
     stat: 0
     modifier: 1
   knockbackAmount:
-    stat: 3
+    stat: 3.5
     modifier: 1
   impactEffect: {fileID: 5606335261930595536, guid: 79704d342ebc848e4811ae6127d42c40, type: 3}
   explodeEffect: {fileID: 3614551220431262685, guid: 70e344efa0f0342978bdcac93587b4e1, type: 3}
