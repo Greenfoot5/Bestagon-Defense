@@ -13,7 +13,7 @@ namespace _WIP
 {
     public class RemoteConfig : MonoBehaviour
     {
-        private static readonly BestagonVersion Version = new(1, 1, 10);
+        private static readonly BestagonVersion Version = new(2, 0, 1);
 
         private static async Task InitializeRemoteConfigAsync()
         {
