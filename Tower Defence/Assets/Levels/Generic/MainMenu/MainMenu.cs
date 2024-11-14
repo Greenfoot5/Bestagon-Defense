@@ -3,6 +3,7 @@ using Abstract.Saving;
 using TMPro;
 using UI.Transition;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Levels.Generic.MainMenu
@@ -17,9 +18,10 @@ namespace Levels.Generic.MainMenu
         [Tooltip("The wordmark/logo on the main screen to colour based on version")]
         private Image wordmark;
 
+        [FormerlySerializedAs("nightlyColor")]
         [SerializeField]
-        [Tooltip("The colour to make the wordmark if it's a nightly build")]
-        private Color nightlyColor;
+        [Tooltip("The colour to make the wordmark if it's a dev build")]
+        private Color devColor;
         [SerializeField]
         [Tooltip("The colour to make the wordmark if it's a alpha build")]
         private Color alphaColor;
@@ -103,9 +105,9 @@ namespace Levels.Generic.MainMenu
         /// </summary>
         private void ColourWordmark()
         {
-            if (Application.version.Contains("nightly"))
+            if (Application.version.Contains("dev"))
             {
-                wordmark.color = nightlyColor;
+                wordmark.color = devColor;
             }
             else if (Application.version.Contains("alpha"))
             {

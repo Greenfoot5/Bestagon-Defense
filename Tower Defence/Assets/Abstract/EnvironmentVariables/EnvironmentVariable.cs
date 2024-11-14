@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Abstract.EnvironmentVariables
 {
@@ -18,7 +19,7 @@ namespace Abstract.EnvironmentVariables
         [SerializeField]
         private string alphaBuild;
         [SerializeField]
-        private string nightlyBuild;
+        [FormerlySerializedAs("nightlyBuild")] private string devBuild;
         [SerializeField]
         private string editor;
         
@@ -33,8 +34,8 @@ namespace Abstract.EnvironmentVariables
 #else
             if (Application.version.ToLower().Contains("alpha")) 
                 return alphaBuild;
-            else if (Application.version.ToLower().Contains("nightly"))
-                return nightlyBuild;
+            else if (Application.version.ToLower().Contains("dev"))
+                return devBuild;
             else if (Application.version.ToLower().Contains("beta"))
                 return betaBuild;
             return stable;
