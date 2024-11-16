@@ -69,11 +69,10 @@ namespace UI.Shop
         
         /// <summary>
         /// Refunds (part of) the cost of the selection opening and closes it.
-        /// Does not decrement the selection cost amount
         /// </summary>
         public void Refund()
         {
-            int refundAmount = shop.nextCost - _levelData.selectionCostIncrement;
+            int refundAmount = shop.GetEnergyCost();
             GameStats.Energy += (int) (refundAmount * _levelData.refundPercentage);
             transform.parent.gameObject.SetActive(false);
             Time.timeScale = 1f;

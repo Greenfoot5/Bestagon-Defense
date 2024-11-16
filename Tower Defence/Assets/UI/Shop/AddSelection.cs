@@ -71,7 +71,7 @@ namespace UI.Shop
                 Destroy(transform.GetChild(i).gameObject);
             }
             
-            int selectionCount = shop.HasPlayerMadePurchase() ? _levelData.selectionCount : _levelData.initialSelectionCount;
+            int selectionCount = shop.HasPlayerMadePurchase() ? _levelData.selectionChoices : _levelData.initialChoices;
             // Tracks what the game has given the player, so the game don't give duplicates
             var selectedTypes = new Type[selectionCount];
             var selectedNames = new string[selectionCount];

@@ -605,48 +605,10 @@ MonoBehaviour:
         m_RotationOrder: 0
       variable: {fileID: 11400000, guid: b54cb3d9e6f25430dbcb163e806032f4, type: 2}
   moduleDuplicateCheck: 2
-  hasInitialSelection: 1
-  initialSelectionCount: 4
-  selectionCount: 3
-  selectionCost:
-    useConstant: 1
-    constantValue:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 61
-        inSlope: 0
-        outSlope: 22
-        tangentMode: 65
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1
-        value: 83
-        inSlope: 22
-        outSlope: 22
-        tangentMode: 69
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 2
-        value: 105
-        inSlope: 22
-        outSlope: 0
-        tangentMode: 69
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 0
-      m_RotationOrder: 4
-    variable: {fileID: 0}
-  mode: 0
-  initialSelectionCost: 61
-  selectionCostIncrement: 22
+  initialSelectionCount: 1
+  initialChoices: 4
+  selectionChoices: 3
+  selectionCostFormula: 0.16*x^2+22*x+61
   health:
     useConstant: 0
     constantValue:

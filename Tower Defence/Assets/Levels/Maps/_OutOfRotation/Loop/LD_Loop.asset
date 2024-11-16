@@ -1592,8 +1592,8 @@ MonoBehaviour:
       m_RotationOrder: 4
     variable: {fileID: 0}
   hasInitialSelection: 1
-  initialSelectionCount: 3
-  selectionCount: 3
+  initialSelectionChoice: 3
+  selectionChoices: 3
   initialSelectionCost: 10
   selectionCostIncrement: 15
   health:

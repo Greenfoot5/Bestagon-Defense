@@ -28,7 +28,7 @@ namespace Abstract.Saving
         public int Lives;
         public int WaveIndex;
         public Random.State RandomState;
-        public int ShopCost;
+        public int TotalCellsCollected;
 
         public List<TurretBlueprint> TurretInventory;
         public List<ModuleChainHandler> ModuleInventory;

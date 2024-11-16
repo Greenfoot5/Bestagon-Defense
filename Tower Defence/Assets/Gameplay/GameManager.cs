@@ -119,7 +119,7 @@ namespace Gameplay
             saveData.Powercells = GameStats.Powercells;
             saveData.WaveIndex = GameStats.Rounds - 1;
             saveData.RandomState = Random.state;
-            saveData.ShopCost = shop.GetComponent<Shop>().nextCost;
+            saveData.TotalCellsCollected = shop.GetComponent<Shop>().totalCellsCollected;
             saveData.Nodes = new List<SaveLevel.NodeData>();
             saveData.TurretInventory = new List<TurretBlueprint>();
             saveData.ModuleInventory = new List<ModuleChainHandler>();
@@ -175,7 +175,7 @@ namespace Gameplay
             GameStats.PopulateRounds(saveData.WaveIndex + 1);
             Random.state = saveData.RandomState;
             var shopComponent = shop.GetComponent<Shop>();
-            shopComponent.nextCost = saveData.ShopCost;
+            shopComponent.totalCellsCollected = saveData.TotalCellsCollected;
             GameStats.Powercells = saveData.Powercells;
             GameStats.Energy = saveData.Energy;
 

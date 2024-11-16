@@ -43,24 +43,18 @@ namespace Levels.Maps
         public WeightedCurveList<ModuleChainHandler> moduleHandlers;
         [Tooltip("What type of duplicate check to perform, if any, against the rest of the selection")]
         public DuplicateTypes moduleDuplicateCheck = DuplicateTypes.ByType;
-        
+
         [Header("Selection Counts")]
-        [Tooltip("Is there an initial selection?")]
-        public bool hasInitialSelection = true;
+        [Tooltip("How many times should the initial selection be shown?")]
+        public int initialSelectionCount = 1;
         [Tooltip("How many options to display in the first selection")]
-        public int initialSelectionCount = 3;
-        [Tooltip("How many options to display in selections after the first")]
-        public int selectionCount = 3;
-
+        public int initialChoices = 3;
+        [Tooltip("How many options to display in selections after the initial")]
+        public int selectionChoices = 3;
+        
         [Header("Costs")]
-        [Tooltip("Shows how costs scale per wave")]
-        public CurvedReference selectionCost;
-
-        public WrapMode mode;
-        [Tooltip("The initial cost to open the selection")]
-        public int initialSelectionCost;
-        [Tooltip("The amount to increase the selection cost by every time it's is opened")]
-        public int selectionCostIncrement;
+        [Tooltip("Shows how costs scale per wave.\nMust be valid formula for ExpressionEvaluator.Evaluate\n\"x\" is the input")]
+        public string selectionCostFormula;
 
         [Header("Wave Scaling")]
         [Tooltip("What to multiply the enemy health by for every wave")]

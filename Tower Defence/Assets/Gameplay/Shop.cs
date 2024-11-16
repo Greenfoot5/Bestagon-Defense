@@ -41,7 +41,8 @@ namespace Gameplay
         [FormerlySerializedAs("selectionCost")] [Range(0, Mathf.Infinity)]
         [HideInInspector]
         public int nextCost;
-        private bool _hasPlayerMadePurchase;
+        [HideInInspector]
+        public int totalCellsCollected;
         
         [FormerlySerializedAs("shopButton")] [FormerlySerializedAs("turretInventoryButton")] [SerializeField]
         private TextMeshProUGUI powercellsText;
@@ -76,10 +77,7 @@ namespace Gameplay
             _levelData = _buildManager.GetComponent<GameManager>().levelData;
             
             // It should only be greater than 0 if we've loaded a save
-            if (nextCost == 0)
-                nextCost = _levelData.initialSelectionCost;
-            else
-                _hasPlayerMadePurchase = true;
+            nextCost = GetEnergyCost();
 
             _defaultButtonTop = energyProgress.outColorA;
             _defaultButtonBottom = energyProgress.outColorB;
@@ -105,7 +103,6 @@ namespace Gameplay
         /// <param name="turret">The blueprint of the turret to add</param>
         public void SpawnNewTurret(TurretBlueprint turret)
         {
-            _hasPlayerMadePurchase = true;
             // Add and display the new item
             GameObject turretButton = Instantiate(defaultTurretButton, turretInventory.transform);
             turretButton.name = "_" + turretButton.name;
@@ -143,7 +140,7 @@ namespace Gameplay
         /// <returns>If the player has made a purchase</returns>
         public bool HasPlayerMadePurchase()
         {
-            return _hasPlayerMadePurchase || (!_levelData.hasInitialSelection);
+            return totalCellsCollected - GameStats.Powercells > _levelData.initialSelectionCount;
         }
         
         public int GetSellPercentage()
@@ -159,9 +156,12 @@ namespace Gameplay
         private void CalculateCells()
         {
             var energyToSubtract = 0;
-            while (GameStats.Energy - energyToSubtract > nextCost)
+            Debug.Log(GameStats.Energy);
+            while (GameStats.Energy - energyToSubtract > nextCost && nextCost != 0)
             {
-                nextCost += _levelData.selectionCostIncrement;
+                totalCellsCollected += 1;
+                nextCost = GetEnergyCost();
+                Debug.Log(nextCost);
                 energyToSubtract += nextCost;
                 GameStats.Powercells++;
             }
@@ -185,6 +185,17 @@ namespace Gameplay
             }
 
             energyProgress.percentage = GameStats.Energy / (float)nextCost;
+        }
+
+        /// <summary>
+        /// To make sure the expression evaluator is doing the right thing each time, there's a function.
+        /// </summary>
+        public int GetEnergyCost()
+        {
+            ExpressionEvaluator.Evaluate(_levelData.selectionCostFormula.Replace("x", $"({totalCellsCollected.ToString()})"), out int output);
+            if (output == 0)
+                Debug.LogError("Energy Cost was 0, likely an issue with formula");
+            return output;
         }
     }
 }
