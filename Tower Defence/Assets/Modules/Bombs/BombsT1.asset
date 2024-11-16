@@ -15,7 +15,7 @@ MonoBehaviour:
   moduleTier: 1
   isUpgradableTo: 1
   chokerExplosionRadiusChange: 0.3
-  chokerBulletCountChange: -0.2
+  chokerBulletCountChange: 0.8
   chokerDamageChange: 0.2
   gunnerExplosionRadiusChange: 0.1
   gunnerDamageChange: 0.3

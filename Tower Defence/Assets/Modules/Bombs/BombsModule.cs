@@ -26,7 +26,7 @@ namespace Modules.Bombs
         [Tooltip("Additive percentage modifier to part explosion radius")]
         [SerializeField]
         private float chokerExplosionRadiusChange;
-        [Tooltip("Additive percentage modifier to part count")]
+        [Tooltip("Multiplicative percentage modifier to part count")]
         [SerializeField]
         private float chokerBulletCountChange;
         [Tooltip("Additive percentage modifier to choker damage")]
@@ -70,7 +70,7 @@ namespace Modules.Bombs
             switch (damager)
             {
                 case Choker choker:
-                    choker.partCount.AddModifier(chokerBulletCountChange);
+                    choker.partCount.MultiplyModifier(chokerBulletCountChange);
                     choker.damage.AddModifier(chokerDamageChange);
                     break;
                 case Gunner gunner:
@@ -96,7 +96,7 @@ namespace Modules.Bombs
             switch (damager)
             {
                 case Choker choker:
-                    choker.partCount.TakeModifier(chokerBulletCountChange);
+                    choker.partCount.DivideModifier(chokerBulletCountChange);
                     choker.damage.TakeModifier(chokerDamageChange);
                     break;
                 case Gunner gunner:
