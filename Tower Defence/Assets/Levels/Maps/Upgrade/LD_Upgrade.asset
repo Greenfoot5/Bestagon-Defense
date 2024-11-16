@@ -20,9 +20,9 @@ MonoBehaviour:
       weight: 1
     - item: {fileID: 11400000, guid: d2db62c1bef594027b45aec4631e1e6a, type: 2}
       weight: 1
-    - item: {fileID: 11400000, guid: 679643e6d11db41afa216c584e276c87, type: 2}
-      weight: 1
     - item: {fileID: 11400000, guid: 0f0a6da7d36a64a3a89ddcc104e995c0, type: 2}
+      weight: 1
+    - item: {fileID: 11400000, guid: 5b45ab7ef354c4bd290f0ba291f75687, type: 2}
       weight: 1
   initialDuplicateCheck: 1
   turretOptionWeight:
@@ -605,7 +605,7 @@ MonoBehaviour:
         m_RotationOrder: 0
       variable: {fileID: 11400000, guid: b54cb3d9e6f25430dbcb163e806032f4, type: 2}
   moduleDuplicateCheck: 2
-  initialSelectionCount: 1
+  initialSelectionCount: 2
   initialChoices: 4
   selectionChoices: 3
   selectionCostFormula: 0.16*x^2+22*x+61
