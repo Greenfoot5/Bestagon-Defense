@@ -192,7 +192,7 @@ MonoBehaviour:
   aggressiveRetargeting: 0
   firePoint: {fileID: 1483480927}
   rotationSpeed:
-    stat: 85
+    stat: 90
     modifier: 1
   partToRotate: {fileID: 4656168879664339822}
   bulletPrefab: {fileID: 8554329261332597528, guid: f5932ea4c6cd3495991c45cab1a0da14, type: 3}

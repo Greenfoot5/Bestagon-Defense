@@ -5039,7 +5039,7 @@ MonoBehaviour:
   aggressiveRetargeting: 0
   firePoint: {fileID: 5009289029243488887}
   rotationSpeed:
-    stat: 80
+    stat: 85
     modifier: 1
   partToRotate: {fileID: 367774791884787270}
   lineRenderer: {fileID: 2486436700464072617}
