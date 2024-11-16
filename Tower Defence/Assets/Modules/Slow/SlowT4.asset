@@ -16,3 +16,4 @@ MonoBehaviour:
   isUpgradableTo: 1
   slowPercentage: 0.33
   duration: 4
+  damageChange: 0.7

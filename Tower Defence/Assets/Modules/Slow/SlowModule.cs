@@ -7,7 +7,6 @@ using Turrets.Choker;
 using Turrets.Gunner;
 using Turrets.Lancer;
 using Turrets.Shooter;
-using Turrets.Smasher;
 using UnityEngine;
 
 namespace Modules.Slow
@@ -29,6 +28,10 @@ namespace Modules.Slow
         [Tooltip("How long each slow stack should last")]
         private float duration;
 
+        [SerializeField]
+        [Tooltip("Multiplicative percentage modifier to damage")]
+        private float damageChange;
+
         /// <summary>
         /// Modifies the stats of the turret when applied
         /// </summary>
@@ -36,6 +39,7 @@ namespace Modules.Slow
         public override void AddModule(Damager damager)
         {
             damager.OnHit += OnHit;
+            damager.damage.MultiplyModifier(damageChange);
         }
         
         /// <summary>
@@ -45,6 +49,7 @@ namespace Modules.Slow
         public override void RemoveModule(Damager damager)
         {
             damager.OnHit -= OnHit;
+            damager.damage.DivideModifier(damageChange);
         }
 
         /// <summary>
