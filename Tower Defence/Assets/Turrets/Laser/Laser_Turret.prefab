@@ -4811,7 +4811,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 925339771
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -4920,7 +4920,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 925339771
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 0616cd5a169944126b1b4373e396c061, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4977,7 +4977,7 @@ GameObject:
   - component: {fileID: 6835315489516308997}
   - component: {fileID: 2486436700464072617}
   m_Layer: 0
-  m_Name: LaserBeamer
+  m_Name: Laser_Turret
   m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5039,7 +5039,7 @@ MonoBehaviour:
   aggressiveRetargeting: 0
   firePoint: {fileID: 5009289029243488887}
   rotationSpeed:
-    stat: 70
+    stat: 80
     modifier: 1
   partToRotate: {fileID: 367774791884787270}
   lineRenderer: {fileID: 2486436700464072617}
@@ -5098,7 +5098,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 925339771
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: -1
   m_Positions:
   - {x: 0, y: 0.25, z: 0}
@@ -5245,7 +5245,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 925339771
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: b0d66c46c128e42dea0d49513dbb683b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
