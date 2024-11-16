@@ -144,7 +144,7 @@ MonoBehaviour:
     modifier: 1
   explosionRadius:
     stat: 1
-    modifier: 0.5
+    modifier: 0
   knockbackAmount:
     stat: 1
     modifier: 0
