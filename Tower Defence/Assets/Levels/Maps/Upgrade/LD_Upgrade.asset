@@ -289,7 +289,7 @@ MonoBehaviour:
       variable: {fileID: 11400000, guid: b54cb3d9e6f25430dbcb163e806032f4, type: 2}
     - useConstant: 1
       item:
-        chain: {fileID: 11400000, guid: 1f607adabd390408e85118b1cffe1d8b, type: 2}
+        chain: {fileID: 11400000, guid: 5c9594279dd7a47909087f486ebd2e17, type: 2}
         tier: 1
       constantValue:
         serializedVersion: 2
@@ -519,7 +519,7 @@ MonoBehaviour:
       variable: {fileID: 11400000, guid: b54cb3d9e6f25430dbcb163e806032f4, type: 2}
     - useConstant: 1
       item:
-        chain: {fileID: 11400000, guid: 1f607adabd390408e85118b1cffe1d8b, type: 2}
+        chain: {fileID: 11400000, guid: 5c9594279dd7a47909087f486ebd2e17, type: 2}
         tier: 2
       constantValue:
         serializedVersion: 2
@@ -608,7 +608,7 @@ MonoBehaviour:
   initialSelectionCount: 2
   initialChoices: 4
   selectionChoices: 3
-  selectionCostFormula: 0.16*x^2+22*x+61
+  selectionCostFormula: 0.18*x^2+19*x+61
   health:
     useConstant: 0
     constantValue:
