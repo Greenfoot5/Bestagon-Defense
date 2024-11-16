@@ -176,7 +176,7 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   damage:
-    stat: 50
+    stat: 30
     modifier: 1
   enemyTag: Enemy
   moduleHandlers: []
