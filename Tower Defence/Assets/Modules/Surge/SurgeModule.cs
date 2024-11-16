@@ -3,7 +3,7 @@ using System.Collections;
 using System.Linq;
 using Abstract;
 using Turrets;
-using Turrets.Gunner;
+using Turrets.Choker;
 using Turrets.Lancer;
 using Turrets.Shooter;
 using Turrets.Smasher;
@@ -18,11 +18,10 @@ namespace Modules.Surge
     [CreateAssetMenu(fileName = "SurgeT0", menuName = "Modules/Surge")]
     public class SurgeModule : Module
     {
-        protected override Type[] ValidTypes => new[] { typeof(Shooter), typeof(Smasher), typeof(Gunner), typeof(Lancer) };
+        protected override Type[] ValidTypes => new[] { typeof(Shooter), typeof(Smasher), typeof(Lancer), typeof(Choker) };
         
-        [SerializeField]
-        [Tooltip("The damage to deal to an enemy every tick")]
-        private float fireRateChange;
+        [Header("Effect Details")]
+        
         [SerializeField]
         [Tooltip("How many ticks to burn the enemy for")]
         private int duration;
@@ -36,6 +35,40 @@ namespace Modules.Surge
         [SerializeField]
         [Tooltip("The VFX to spawn when the ends it's turret surge")]
         private GameObject surgeEndEffect;
+        
+        [Header("Shooter Surging")]
+        [SerializeField]
+        [Tooltip("Additive percentage modifier to shooter's fire rate when surging")]
+        private float surgeShooterFireRateChange;
+        [SerializeField]
+        [Tooltip("Additive percentage modifier to shooter's damage when surging")]
+        private float surgeShooterDamageChange;
+        
+        [Header("Smasher Surging")]
+        [SerializeField]
+        [Tooltip("Additive percentage modifier to smasher's fire rate when surging")]
+        private float surgeSmasherFireRateChange;
+        [SerializeField]
+        [Tooltip("Additive percentage modifier to smasher's range when surging")]
+        private float surgeSmasherRangeChange;
+        
+        [Header("Lancer Surging")]
+        [SerializeField]
+        [Tooltip("Additive percentage modifier to lancer's fire rate when surging")]
+        private float surgeLancerFireRateChange;
+        [SerializeField]
+        [Tooltip("Additive percentage modifier to lancer's bullet knockback when surging")]
+        private float surgeLancerKnockbackChange;
+        
+        
+        [Header("Module effect (when not surging)")]
+        
+        [SerializeField]
+        [Tooltip("Additive percentage modifier to part fire rate")]
+        private float fireRateChange;
+        [SerializeField]
+        [Tooltip("Additive percentage modifier to part damage")]
+        private float damageChange;
 
         /// <summary>
         /// Begins the surge effect on the turret

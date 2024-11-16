@@ -156,12 +156,10 @@ namespace Gameplay
         private void CalculateCells()
         {
             var energyToSubtract = 0;
-            Debug.Log(GameStats.Energy);
             while (GameStats.Energy - energyToSubtract > nextCost && nextCost != 0)
             {
                 totalCellsCollected += 1;
                 nextCost = GetEnergyCost();
-                Debug.Log(nextCost);
                 energyToSubtract += nextCost;
                 GameStats.Powercells++;
             }
