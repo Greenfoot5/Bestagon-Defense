@@ -48,6 +48,7 @@ namespace Gameplay
                 layer = gameObject.layer
             };
             _camera = UnityEngine.Camera.main;
+            Particles.Clear();
 
             GameStats.OnRoundProgress += CleanMap;
         }
