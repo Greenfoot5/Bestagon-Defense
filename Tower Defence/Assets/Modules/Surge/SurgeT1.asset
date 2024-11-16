@@ -13,13 +13,18 @@ MonoBehaviour:
   m_Name: SurgeT1
   m_EditorClassIdentifier: 
   moduleTier: 1
-  accentColor: {r: 0.38431373, g: 0.6745098, b: 0.7921569, a: 1}
-  displayName: Surge I
-  tagline: Electrifying
-  icon: {fileID: -3358934479966026082, guid: 16c979c866f439b4b988e7020b313794, type: 3}
-  effectText: Temporarily boost fire rate
-  fireRateChange: 1.75
-  duration: 3
-  cooldown: 4
+  isUpgradableTo: 1
+  duration: 2
+  cooldown: 2
   surgeEffect: {fileID: 2228279973635050725, guid: 30d6b563f37e744848a3350895d0ad01, type: 3}
   surgeEndEffect: {fileID: 2228279973635050725, guid: 071f1055de87b468a8810cddd8fb0e1d, type: 3}
+  surgeShooterFireRateChange: 2
+  surgeShooterDamageChange: 1.5
+  surgeSmasherFireRateChange: 1.5
+  surgeSmasherRangeChange: 1.5
+  surgeLancerFireRateChange: 2
+  surgeLancerKnockbackChange: 1.2
+  surgeChokerFireRateChange: 1.5
+  surgeChokerPartCountChange: 1.5
+  fireRateChange: 0.5
+  damageChange: 0.75

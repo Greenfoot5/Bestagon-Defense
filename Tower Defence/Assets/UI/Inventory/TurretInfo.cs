@@ -185,7 +185,7 @@ namespace UI.Inventory
         /// </summary>
         public void UpdateStats()
         {
-            if (_target.turret == null) return;
+            if (_target?.turret is null) return;
             var turret = _target.turret.GetComponent<Turret>();
             // Stats
             damage.SetData(turret.damage);

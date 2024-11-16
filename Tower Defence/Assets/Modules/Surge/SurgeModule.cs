@@ -38,36 +38,45 @@ namespace Modules.Surge
         
         [Header("Shooter Surging")]
         [SerializeField]
-        [Tooltip("Additive percentage modifier to shooter's fire rate when surging")]
+        [Tooltip("Multiplicative percentage modifier to shooter's fire rate when surging")]
         private float surgeShooterFireRateChange;
         [SerializeField]
-        [Tooltip("Additive percentage modifier to shooter's damage when surging")]
+        [Tooltip("Multiplicative percentage modifier to shooter's damage when surging")]
         private float surgeShooterDamageChange;
         
         [Header("Smasher Surging")]
         [SerializeField]
-        [Tooltip("Additive percentage modifier to smasher's fire rate when surging")]
+        [Tooltip("Multiplicative percentage modifier to smasher's fire rate when surging")]
         private float surgeSmasherFireRateChange;
         [SerializeField]
-        [Tooltip("Additive percentage modifier to smasher's range when surging")]
+        [Tooltip("Multiplicative percentage modifier to smasher's range when surging")]
         private float surgeSmasherRangeChange;
         
         [Header("Lancer Surging")]
         [SerializeField]
-        [Tooltip("Additive percentage modifier to lancer's fire rate when surging")]
+        [Tooltip("Multiplicative percentage modifier to lancer's fire rate when surging")]
         private float surgeLancerFireRateChange;
+        // TODO - Get this to work
         [SerializeField]
-        [Tooltip("Additive percentage modifier to lancer's bullet knockback when surging")]
+        [Tooltip("Multiplicative percentage modifier to lancer's arrow knockback when surging")]
         private float surgeLancerKnockbackChange;
         
+        [Header("Choker Surging")]
+        [SerializeField]
+        [Tooltip("Multiplicative percentage modifier to choker's fire rate when surging")]
+        private float surgeChokerFireRateChange;
+        [SerializeField]
+        [Tooltip("Multiplicative percentage modifier to choker's part count when surging")]
+        private float surgeChokerPartCountChange;
         
-        [Header("Module effect (when not surging)")]
+        
+        [Header("Cooldown effect")]
         
         [SerializeField]
-        [Tooltip("Additive percentage modifier to part fire rate")]
+        [Tooltip("Multiplicative percentage modifier to part fire rate")]
         private float fireRateChange;
         [SerializeField]
-        [Tooltip("Additive percentage modifier to part damage")]
+        [Tooltip("Multiplicative percentage modifier to part damage")]
         private float damageChange;
 
         /// <summary>
@@ -79,12 +88,18 @@ namespace Modules.Surge
             if (damager is not Turret turret) return;
             // LINQ to get the turret tier
             int tier = damager.moduleHandlers.Where(handler => handler.GetModule().GetType() == typeof(SurgeModule)).Select(handler => handler.GetTier()).FirstOrDefault();
+            
+            turret.fireRate.MultiplyModifier(fireRateChange);
+            turret.damage.MultiplyModifier(damageChange);
+            
             Runner.Run(Surge(turret, tier));
         }
 
         public override void RemoveModule(Damager damager)
         {
-            
+            if (damager is not Turret turret) return;
+            turret.fireRate.DivideModifier(fireRateChange);
+            turret.damage.DivideModifier(damageChange);
         }
 
         /// <summary>
@@ -100,7 +115,27 @@ namespace Modules.Surge
             while (turret != null && turret.moduleHandlers.Any(module => module.GetModule().GetType() == typeof(SurgeModule) && module.GetTier() == tier))
             {
                 // SURGE!
-                turret.fireRate.AddModifier(fireRateChange);
+                turret.fireRate.DivideModifier(fireRateChange);
+                turret.damage.DivideModifier(damageChange);
+                switch (turret)
+                {
+                    case Choker choker:
+                        choker.fireRate.MultiplyModifier(surgeChokerFireRateChange);
+                        choker.partCount.MultiplyModifier(surgeChokerPartCountChange);
+                        break;
+                    case Lancer lancer:
+                        lancer.fireRate.MultiplyModifier(surgeLancerFireRateChange);
+                        break;
+                    case Shooter shooter:
+                        shooter.fireRate.MultiplyModifier(surgeShooterFireRateChange);
+                        shooter.damage.MultiplyModifier(surgeShooterDamageChange);
+                        break;
+                    case Smasher smasher:
+                        smasher.fireRate.MultiplyModifier(surgeSmasherFireRateChange);
+                        smasher.range.MultiplyModifier(surgeSmasherRangeChange);
+                        turret.UpdateRange();
+                        break;
+                }
                 TurretInfo.instance.UpdateStats();
                 Vector3 position = turret.transform.position;
                 GameObject effect = Instantiate(surgeEffect, position, Quaternion.identity);
@@ -110,7 +145,27 @@ namespace Modules.Surge
 
                 yield return new WaitForSeconds(duration);
                 
-                turret.fireRate.TakeModifier(fireRateChange);
+                turret.fireRate.MultiplyModifier(fireRateChange);
+                turret.damage.MultiplyModifier(damageChange);
+                switch (turret)
+                {
+                    case Choker choker:
+                        choker.fireRate.DivideModifier(surgeChokerFireRateChange);
+                        choker.partCount.DivideModifier(surgeChokerPartCountChange);
+                        break;
+                    case Lancer lancer:
+                        lancer.fireRate.DivideModifier(surgeLancerFireRateChange);
+                        break;
+                    case Shooter shooter:
+                        shooter.fireRate.DivideModifier(surgeShooterFireRateChange);
+                        shooter.damage.DivideModifier(surgeShooterDamageChange);
+                        break;
+                    case Smasher smasher:
+                        smasher.fireRate.DivideModifier(surgeSmasherFireRateChange);
+                        smasher.range.DivideModifier(surgeSmasherRangeChange);
+                        turret.UpdateRange();
+                        break;
+                }
                 TurretInfo.instance.UpdateStats();
                 GameObject endEffect = Instantiate(surgeEndEffect, position, Quaternion.identity);
                 endEffect.name = "_" + endEffect.name;

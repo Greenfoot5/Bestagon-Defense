@@ -14,8 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moduleTier: 3
   isUpgradableTo: 1
-  fireRateChange: 4
-  duration: 2
-  cooldown: 3
+  duration: 8
+  cooldown: 8
   surgeEffect: {fileID: 2228279973635050725, guid: 30d6b563f37e744848a3350895d0ad01, type: 3}
   surgeEndEffect: {fileID: 2228279973635050725, guid: 071f1055de87b468a8810cddd8fb0e1d, type: 3}
+  surgeShooterFireRateChange: 6
+  surgeShooterDamageChange: 8
+  surgeSmasherFireRateChange: 3
+  surgeSmasherRangeChange: 5
+  surgeLancerFireRateChange: 4
+  surgeLancerKnockbackChange: 2
+  surgeChokerFireRateChange: 2
+  surgeChokerPartCountChange: 5
+  fireRateChange: 0.05
+  damageChange: 0.1
