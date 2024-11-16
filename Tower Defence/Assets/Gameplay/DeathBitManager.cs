@@ -6,7 +6,6 @@ using Random = UnityEngine.Random;
 
 namespace Gameplay
 {
-    [RequireComponent(typeof(UnityEngine.Camera))]
     public class DeathBitManager: MonoBehaviour
     {
         // If energy drops are enabled at all
@@ -48,7 +47,7 @@ namespace Gameplay
             {
                 layer = gameObject.layer
             };
-            _camera = GetComponent<UnityEngine.Camera>();
+            _camera = UnityEngine.Camera.main;
 
             GameStats.OnRoundProgress += CleanMap;
         }
@@ -94,7 +93,7 @@ namespace Gameplay
 
             for (var i = 0; i < Particles.Count; ++i)
             {
-                if ((mousePos - Particles[i].Position).sqrMagnitude < CatchRadius * CatchRadius)
+                if (((Vector2)(mousePos - Particles[i].Position)).sqrMagnitude < CatchRadius * CatchRadius)
                 {
                     Particles[i].Animate();
                 }
