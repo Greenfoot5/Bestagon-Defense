@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moduleTier: 2
   isUpgradableTo: 1
-  instakillChance: 0.03
+  instakillChance: 0.04
   instakillEffect: {fileID: 2873911785627223298, guid: 7aad072ab1b184d9db9f51aebd8433a2, type: 3}
