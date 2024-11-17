@@ -175,9 +175,10 @@ namespace Gameplay.Waves
             spawnedEnemy.layer = LayerMask.NameToLayer("Enemies");
         
             // Apply scaling
-            spawnedEnemy.GetComponent<Enemy>().maxHealth *= _levelData.health.Value.Evaluate(_waveIndex + 1);
-            spawnedEnemy.GetComponent<Enemy>().health = spawnedEnemy.GetComponent<Enemy>().maxHealth;
-        
+            var enemyComponent = spawnedEnemy.GetComponent<Enemy>();
+            enemyComponent.maxHealth *= _levelData.health.Value.Evaluate(_waveIndex + 1);
+            enemyComponent.health = spawnedEnemy.GetComponent<Enemy>().maxHealth;
+            
             enemiesAlive++;
         }
         
