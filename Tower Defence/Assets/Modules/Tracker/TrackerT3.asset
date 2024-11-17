@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moduleTier: 3
   isUpgradableTo: 1
-  rotationSpeedPercentageChange: 0.18
+  rotationSpeedPercentageChange: 0.9
   damagePercentageChange: 1.2
