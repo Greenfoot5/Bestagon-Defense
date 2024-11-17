@@ -264,24 +264,28 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   damage:
-    stat: 500
-    modifier: 1
+    stat: 650
+    additive: 1
+    multiplicative: 1
   enemyTag: Enemy
   moduleHandlers: []
   range:
     stat: 3
-    modifier: 1
+    additive: 1
+    multiplicative: 1
   rangeDisplay: {fileID: 4534400811254907043}
   fireRate:
-    stat: 0.65
-    modifier: 1
+    stat: 0.7
+    additive: 1
+    multiplicative: 1
   fireCountdown: 0
   targetingMethod: 0
   aggressiveRetargeting: 0
   firePoint: {fileID: 1483480927}
   rotationSpeed:
-    stat: 90
-    modifier: 1
+    stat: 115
+    additive: 1
+    multiplicative: 1
   partToRotate: {fileID: 4656168879664339822}
   bulletPrefab: {fileID: 8554329261332597528, guid: 73df7aaa5f02848a59285b946c547b07, type: 3}
   attackEffect: {fileID: 5545543769381975111}

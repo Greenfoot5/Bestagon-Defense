@@ -294,17 +294,20 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   damage:
-    stat: 90
-    modifier: 1
+    stat: 105
+    additive: 1
+    multiplicative: 1
   enemyTag: Enemy
   moduleHandlers: []
   range:
     stat: 1.5
-    modifier: 1
+    additive: 1
+    multiplicative: 1
   rangeDisplay: {fileID: 860021162364760526}
   fireRate:
     stat: 0.8
-    modifier: 1
+    additive: 1
+    multiplicative: 1
   fireCountdown: 0
   smashEffect: {fileID: 804290418093279872}
   references:
