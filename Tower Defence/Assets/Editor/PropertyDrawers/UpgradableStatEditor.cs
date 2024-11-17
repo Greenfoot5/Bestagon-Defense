@@ -21,11 +21,13 @@ namespace Editor.PropertyDrawers
             
             // The properties of UpgradableStat
             SerializedProperty statProp = property.FindPropertyRelative("stat");
-            SerializedProperty modProp = property.FindPropertyRelative("modifier");
+            SerializedProperty addProp = property.FindPropertyRelative("additive");
+            SerializedProperty multProp = property.FindPropertyRelative("multiplicative");
 
             // Get the value of the floats
             float statValue = statProp.floatValue;
-            float modValue = modProp.floatValue;
+            float addValue = addProp.floatValue;
+            float multValue = multProp.floatValue;
 
             // Set the percentage of the width the stat input will take
             const float statFieldPercent = 0.4f;
@@ -42,7 +44,7 @@ namespace Editor.PropertyDrawers
 
             // Add the fields to the gui
             statProp.floatValue = EditorGUI.FloatField(statPropInput, statValue);
-            EditorGUI.LabelField(modInputRect, $"* {modValue:##0.0#} = {statValue * modValue:#,##0.##}");
+            EditorGUI.LabelField(modInputRect, $"* {addValue * multValue:##0.0#} = {statValue * addValue * multValue:#,##0.##}");
 
             EditorGUI.EndProperty();
         }

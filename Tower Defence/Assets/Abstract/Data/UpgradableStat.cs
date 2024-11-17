@@ -13,7 +13,9 @@ namespace Abstract.Data
         [SerializeField]
         private float stat;
         [SerializeField]
-        private float modifier;
+        private float additive;
+        [SerializeField]
+        private float multiplicative;
         
         /// <summary>
         /// Creates an Upgradable stat, with default 1f for modifier
@@ -22,7 +24,8 @@ namespace Abstract.Data
         public UpgradableStat(float baseValue)
         {
             stat = baseValue;
-            modifier = 1f;
+            additive = 1f;
+            multiplicative = 1f;
         }
     
         /// <summary>
@@ -41,7 +44,7 @@ namespace Abstract.Data
         /// <returns>The current modifier</returns>
         public float GetModifier()
         {
-            return modifier;
+            return multiplicative * additive;
         }
 
         /// <summary>
@@ -51,7 +54,7 @@ namespace Abstract.Data
         /// <returns>The stat after being multiplied by the modifier</returns>
         public float GetStat()
         {
-            return stat * modifier <= 0f ? 0f : stat * modifier;
+            return stat * GetModifier() <= 0f ? 0f : stat * GetModifier();
         }
     
         /// <summary>
@@ -61,7 +64,7 @@ namespace Abstract.Data
         /// <returns>The stat after being multiplied by the modifier</returns>
         public float GetTrueStat()
         {
-            return stat * modifier;
+            return stat * GetModifier();
         }
         
         /// <summary>
@@ -80,7 +83,7 @@ namespace Abstract.Data
         /// <param name="newValue">How much increase the modifier by</param>
         public void AddModifier(float newValue)
         {
-            modifier += newValue;
+            additive += newValue;
         }
         
         /// <summary>
@@ -90,7 +93,7 @@ namespace Abstract.Data
         /// <param name="multiplier">What to multiply the modifier by</param>
         public void MultiplyModifier(float multiplier)
         {
-            modifier *= multiplier;
+            multiplicative *= multiplier;
         }
 
         /// <summary>
@@ -100,7 +103,7 @@ namespace Abstract.Data
         /// <param name="oldValue">How much decrease the modifier by</param>
         public void TakeModifier(float oldValue)
         {
-            modifier -= oldValue;
+            additive -= oldValue;
         }
         
         /// <summary>
@@ -110,7 +113,7 @@ namespace Abstract.Data
         /// <param name="multiplier">What to multiply the modifier by</param>
         public void DivideModifier(float multiplier)
         {
-            modifier /= multiplier;
+            multiplicative /= multiplier;
         }
         
         /// <summary>
@@ -120,7 +123,7 @@ namespace Abstract.Data
         /// <returns>The stats as a formatted string</returns>
         public override string ToString()
         {
-            float value = modifier * stat;
+            float value = GetModifier() * stat;
             return value > 50 ? $"{value:#,##0.#}" : $"{value:#0.0##}";
         }
     }
