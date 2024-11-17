@@ -124,7 +124,7 @@ namespace Abstract.Data
         public override string ToString()
         {
             float value = GetModifier() * stat;
-            return value > 50 ? $"{value:#,##0.#}" : $"{value:#0.0##}";
+            return value > 50 ? $"{value:#,##0.#}" : $"{value:#0.0#}";
         }
     }
 }
