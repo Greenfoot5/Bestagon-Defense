@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7135088833f09435eb5f708ff7aa7fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startSpeed: 2
+  startSpeed: 1.6
   maxHealth: 300
   knockbackModifier: 1
   speed:
