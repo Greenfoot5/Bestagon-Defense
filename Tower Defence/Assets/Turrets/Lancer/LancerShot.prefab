@@ -115,7 +115,7 @@ MonoBehaviour:
   explosionRadius:
     stat: 0
     additive: 0
-    multiplicative: 0
+    multiplicative: 1
   knockbackAmount:
     stat: 4
     additive: 1

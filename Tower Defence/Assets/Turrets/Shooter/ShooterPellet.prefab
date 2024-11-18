@@ -140,12 +140,15 @@ MonoBehaviour:
   willHitFirst: 0
   speed:
     stat: 5
-    modifier: 1
+    additive: 1
+    multiplicative: 1
   explosionRadius:
     stat: 1
-    modifier: 0
+    additive: 0
+    multiplicative: 1
   knockbackAmount:
     stat: 1
-    modifier: 0
+    additive: 0
+    multiplicative: 1
   impactEffect: {fileID: 5606335261930595536, guid: 410840a991e414225baff388418be600, type: 3}
   explodeEffect: {fileID: 3614551220431262685, guid: 89fa04f3be3c34544a62ff49ee4d0bfd, type: 3}

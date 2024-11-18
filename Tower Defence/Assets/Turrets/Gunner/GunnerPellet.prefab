@@ -145,10 +145,10 @@ MonoBehaviour:
   explosionRadius:
     stat: 1
     additive: 0
-    multiplicative: 0
+    multiplicative: 1
   knockbackAmount:
     stat: 1
     additive: 0
-    multiplicative: 0
+    multiplicative: 1
   impactEffect: {fileID: 5606335261930595536, guid: fe9ca66ea3d254ffc89b72b544d047c6, type: 3}
   explodeEffect: {fileID: 3614551220431262685, guid: 8feec3bfcc6bd40c0a06a01da9ae5e1b, type: 3}
