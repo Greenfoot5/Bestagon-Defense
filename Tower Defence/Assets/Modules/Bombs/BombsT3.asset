@@ -17,10 +17,10 @@ MonoBehaviour:
   chokerExplosionRadiusChange: 0.7
   chokerBulletCountChange: 0.6
   chokerDamageChange: 1.3
-  gunnerExplosionRadiusChange: 0.35
+  gunnerExplosionRadiusChange: 0.4
   gunnerDamageChange: 1.6
   shooterExplosionRadiusChange: 1
   shooterBulletSpeedChange: 0.3
   shooterDamageChange: 1.6
-  smasherDamageChange: 0.4
-  smasherRangeChange: 0.4
+  smasherDamageChange: 0.85
+  smasherRangeChange: 0.85
