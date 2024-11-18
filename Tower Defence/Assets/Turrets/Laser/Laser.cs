@@ -33,7 +33,7 @@ namespace Turrets.Laser
         /// Fires the laser if the turret have a target and are looking at them.
         /// Otherwise rotate to target if there is one.
         /// </summary>
-        private void Update()
+        private new void Update()
         {
             durationCountdown -= Time.deltaTime;
             

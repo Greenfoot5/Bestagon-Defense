@@ -86,7 +86,7 @@ namespace Turrets.Lancer
         /// <summary>
         /// Check for new enemies in attack range
         /// </summary>
-        private void Update()
+        private new void Update()
         {
             base.Update();
             

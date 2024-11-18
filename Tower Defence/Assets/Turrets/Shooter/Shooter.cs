@@ -21,7 +21,7 @@ namespace Turrets.Shooter
         /// Rotates towards the target if the turret have one.
         /// Shoots if the turret is looking towards the target
         /// </summary>
-        private void Update()
+        private new void Update()
         {
             base.Update();
             

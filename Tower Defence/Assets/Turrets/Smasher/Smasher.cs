@@ -17,7 +17,7 @@ namespace Turrets.Smasher
         /// <summary>
         /// Check for new enemies in radius and attacks if there are.
         /// </summary>
-        private void Update()
+        private new void Update()
         {
             base.Update();
             
