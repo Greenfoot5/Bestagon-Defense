@@ -75,6 +75,7 @@ namespace UI.Shop
             // Tracks what the game has given the player, so the game don't give duplicates
             var selectedTypes = new Type[selectionCount];
             var selectedNames = new string[selectionCount];
+            var hasLife = false;
             
             for (var i = 0; i < selectionCount; i++)
             {
@@ -86,10 +87,11 @@ namespace UI.Shop
                 }
                 else
                 {
-                    // Select if the game should get an Module or a turret
+                    // Select if the game should get a module, turret or life
+                    // Can only have one life option
                     float choice = Random.Range(0f, _levelData.turretOptionWeight.Value.Evaluate(GameStats.Rounds)
                                                     + _levelData.moduleOptionWeight.Value.Evaluate(GameStats.Rounds)
-                                                    + _levelData.lifeOptionWeight.Value.Evaluate(GameStats.Rounds));
+                                                    + (!hasLife ? 1 : 0) * _levelData.lifeOptionWeight.Value.Evaluate(GameStats.Rounds));
                     if (choice <= _levelData.moduleOptionWeight.Value.Evaluate(GameStats.Rounds))
                     {
                         // Grants an Module option
@@ -104,6 +106,7 @@ namespace UI.Shop
                     else
                     {
                         GenerateLifeItem();
+                        hasLife = true;
                     }
                 }
             }
