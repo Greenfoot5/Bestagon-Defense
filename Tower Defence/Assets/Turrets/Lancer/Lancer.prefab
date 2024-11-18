@@ -393,25 +393,25 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   damage:
-    stat: 175
+    stat: 160
     additive: 1
     multiplicative: 1
   enemyTag: Enemy
   moduleHandlers: []
   range:
-    stat: 1.5
+    stat: 2.5
     additive: 1
     multiplicative: 1
   rangeDisplay: {fileID: 5500896712579330018}
   fireRate:
-    stat: 0.75
+    stat: 0.35
     additive: 1
     multiplicative: 1
   fireCountdown: 0
   bulletPrefab: {fileID: 8554329261332597528, guid: c304e75bdf8b948d8937d7b591b1edc5, type: 3}
   attackEffect: {fileID: 8646537639444958779}
   bulletRange:
-    stat: 2.5
+    stat: 3.5
     additive: 1
     multiplicative: 1
   firePoint: {fileID: 5009289029243488887}

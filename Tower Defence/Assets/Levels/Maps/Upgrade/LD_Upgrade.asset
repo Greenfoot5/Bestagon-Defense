@@ -22,7 +22,7 @@ MonoBehaviour:
       weight: 1
     - item: {fileID: 11400000, guid: 0f0a6da7d36a64a3a89ddcc104e995c0, type: 2}
       weight: 1
-    - item: {fileID: 11400000, guid: 5b45ab7ef354c4bd290f0ba291f75687, type: 2}
+    - item: {fileID: 11400000, guid: 679643e6d11db41afa216c584e276c87, type: 2}
       weight: 1
   initialDuplicateCheck: 1
   turretOptionWeight:
