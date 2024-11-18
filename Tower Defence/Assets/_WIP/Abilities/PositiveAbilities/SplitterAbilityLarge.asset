@@ -21,5 +21,5 @@ MonoBehaviour:
   startCount: -1
   spawn: {fileID: 895393602812883857, guid: 2a25f7b9a58c143b6893c854f50e0627, type: 3}
   count: 2
-  spawnTimer: 0.2
+  spawnTimer: 0.4
   doSpawnFromStart: 0

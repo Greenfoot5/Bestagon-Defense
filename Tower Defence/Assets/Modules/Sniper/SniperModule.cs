@@ -1,7 +1,6 @@
 using System;
 using Turrets;
 using Turrets.Choker;
-using Turrets.Gunner;
 using Turrets.Lancer;
 using Turrets.Laser;
 using Turrets.Shooter;
@@ -15,7 +14,7 @@ namespace Modules.Sniper
     [CreateAssetMenu(fileName = "SniperT0", menuName = "Modules/Sniper")]
     public class SniperModule : Module
     {
-        protected override Type[] ValidTypes => new[] { typeof(Shooter), typeof(Laser), typeof(Gunner), typeof(Lancer) };
+        protected override Type[] ValidTypes => new[] { typeof(Shooter), typeof(Laser), typeof(Choker), typeof(Lancer) };
 
         [Header("Shooter")]
         [Tooltip("Additive percentage modifier to shooter's range")]

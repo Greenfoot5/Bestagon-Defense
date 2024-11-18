@@ -412,8 +412,8 @@ MonoBehaviour:
   attackEffect: {fileID: 8646537639444958779}
   bulletRange:
     stat: 2.5
-    additive: 0
-    multiplicative: 0
+    additive: 1
+    multiplicative: 1
   firePoint: {fileID: 5009289029243488887}
   partToRotate: {fileID: 367774791884787270}
   references:

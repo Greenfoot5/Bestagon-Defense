@@ -63,6 +63,7 @@ namespace _WIP.Abilities.PositiveAbilities
         /// <param name="targetMovement">The EnemyMovement to assign (for waypoints)</param>
         private IEnumerator SpawnEnemies(Transform transform, EnemyMovement targetMovement)
         {
+            Vector3 position = transform.position;
             for (var i = 0; i < count; i++)
             {
                 // Spawn from the enemy's location or from the start of the map
@@ -73,7 +74,7 @@ namespace _WIP.Abilities.PositiveAbilities
                 }
                 else
                 {
-                    Vector3 pos = transform.position;
+                    Vector3 pos = transform == null ? position : transform.position;
                     yield return new WaitForSeconds(spawnTimer);
                     GameObject enemy = Instantiate(spawn, pos, new Quaternion());
                     enemy.GetComponent<EnemyMovement>().waypointIndex = targetMovement.waypointIndex;

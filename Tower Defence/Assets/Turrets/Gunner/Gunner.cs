@@ -36,7 +36,7 @@ namespace Turrets.Gunner
         /// </summary>
         private new void Update()
         {
-            if (fireCountdown > fireRate.GetStat())
+            if (fireCountdown > 1 / fireRate.GetStat())
             {
                 fireCountdown = 1 / fireRate.GetStat();
             }

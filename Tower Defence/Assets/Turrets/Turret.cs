@@ -33,7 +33,7 @@ namespace Turrets
                 return;
             }
 
-            if (fireCountdown > fireRate.GetStat())
+            if (fireCountdown > 1 / fireRate.GetStat())
             {
                 fireCountdown = 1 / fireRate.GetStat();
             }

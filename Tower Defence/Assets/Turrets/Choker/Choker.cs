@@ -34,6 +34,7 @@ namespace Turrets.Choker
             if (Target is null)
             {
                 fireCountdown -= Time.deltaTime;
+                return;
             }
         
             // Rotates the turret each frame
