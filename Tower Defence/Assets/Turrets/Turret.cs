@@ -24,6 +24,20 @@ namespace Turrets
         {
             rangeDisplay.SetActive(false);
         }
+
+        protected void Update()
+        {
+            // If there's no fire rate, the turret shouldn't do anything
+            if (fireRate.GetStat() == 0)
+            {
+                return;
+            }
+
+            if (fireCountdown > fireRate.GetStat())
+            {
+                fireCountdown = 1 / fireRate.GetStat();
+            }
+        }
         
         /// <summary>
         /// Update the range shader's size

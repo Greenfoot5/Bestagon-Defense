@@ -88,11 +88,7 @@ namespace Turrets.Lancer
         /// </summary>
         private void Update()
         {
-            // If there's no fire rate, the turret shouldn't do anything
-            if (fireRate.GetStat() == 0)
-            {
-                return;
-            }
+            base.Update();
             
             // Don't do anything if no enemy is in range
             if (!HasATarget())

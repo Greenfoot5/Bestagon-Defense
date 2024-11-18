@@ -36,6 +36,11 @@ namespace Turrets.Gunner
         /// </summary>
         private void Update()
         {
+            if (fireCountdown > fireRate.GetStat())
+            {
+                fireCountdown = 1 / fireRate.GetStat();
+            }
+            
             // If there's no fire rate, the turret shouldn't do anything
             // However, it should rapidly cool down
             if (fireRate.GetStat() == 0)

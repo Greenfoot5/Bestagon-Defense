@@ -19,11 +19,7 @@ namespace Turrets.Smasher
         /// </summary>
         private void Update()
         {
-            // If there's no fire rate, the turret shouldn't do anything
-            if (fireRate.GetStat() == 0)
-            {
-                return;
-            }
+            base.Update();
             
             // Don't do anything if no enemy is in range
             Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, range.GetStat());

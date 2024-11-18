@@ -26,19 +26,14 @@ namespace Turrets.Choker
         /// Rotates towards the target if the turret have one.
         /// Shoots if the turret is looking towards the target
         /// </summary>
-        private void Update()
+        private new void Update()
         {
-            // If there's no fire rate, the turret shouldn't do anything
-            if (fireRate.GetStat() == 0)
-            {
-                return;
-            }
+            base.Update();
             
             // Don't do anything if the turret doesn't have a target
             if (Target is null)
             {
                 fireCountdown -= Time.deltaTime;
-                return;
             }
         
             // Rotates the turret each frame
