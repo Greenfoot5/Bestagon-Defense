@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc10d9db80e244b291978caa6ba6ec7, type: 3}
+  m_Name: SniperT3
+  m_EditorClassIdentifier: 
+  moduleTier: 3
+  isUpgradableTo: 1
+  shooterRangeChange: 2
+  shooterDamageChange: 3
+  shooterFireRateChange: -0.75
+  shooterBulletSpeedChange: 1.5
+  shooterBulletKnockbackChange: 4
+  lancerRangeChange: 2
+  lancerDamageChange: 2.5
+  lancerFireRateChange: -0.5
+  lancerArrowRangeChange: 1.5
+  lancerArrowSpeedChange: 1
+  lancerArrowKnockbackChange: 2
+  laserRangeChange: 3
+  laserDamageChange: 5
+  laserLaserDuration: 0.6
+  chokerRangeChange: 2
+  chokerDamageChange: 4
+  chokerFireRateChange: -0.3
+  chokerPartSpreadChange: 0.3

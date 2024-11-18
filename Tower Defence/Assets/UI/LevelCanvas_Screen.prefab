@@ -4644,6 +4644,7 @@ MonoBehaviour:
   defaultModuleButton: {fileID: 4985354737434308386, guid: ac85ed0e8185d4caab087c3c4d95c178, type: 3}
   selectionUI: {fileID: 3030562544499506770}
   nextCost: 0
+  totalCellsCollected: 0
   powercellsText: {fileID: 4077244561523284678}
   energyProgress: {fileID: 6923508768487608851}
   expensiveButtonTop: {r: 0.8509804, g: 0.011764706, b: 0.2901961, a: 1}
@@ -4655,7 +4656,7 @@ MonoBehaviour:
       m_KeyId: 13806592842522624
       m_Key: 
     m_FallbackState: 0
-    m_WaitForCompletion: 0
+    m_WaitForCompletion: 1
     m_LocalVariables: []
   glyphsLookup:
     sprites:
