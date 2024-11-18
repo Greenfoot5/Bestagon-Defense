@@ -7,6 +7,7 @@ using Turrets.Choker;
 using Turrets.Gunner;
 using Turrets.Lancer;
 using Turrets.Shooter;
+using Turrets.Smasher;
 using UnityEngine;
 
 namespace Modules.Slow
@@ -18,7 +19,7 @@ namespace Modules.Slow
     [CreateAssetMenu(fileName = "SlowT0", menuName = "Modules/Slow")]
     public class SlowModule : Module
     {
-        protected override Type[] ValidTypes => new[] { typeof(Shooter), typeof(Gunner), typeof(Lancer), typeof(Choker) };
+        protected override Type[] ValidTypes => new[] { typeof(Shooter), typeof(Gunner), typeof(Lancer), typeof(Choker), typeof(Smasher) };
         
         [SerializeField]
         [Tooltip("The percentage the slow the enemy's movement speed")]
