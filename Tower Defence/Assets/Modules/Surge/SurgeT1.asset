@@ -26,5 +26,5 @@ MonoBehaviour:
   surgeLancerKnockbackChange: 1.2
   surgeChokerFireRateChange: 1.5
   surgeChokerPartCountChange: 1.5
-  fireRateChange: 0.5
-  damageChange: 0.75
+  fireRateChange: 0.8
+  damageChange: 0.9
