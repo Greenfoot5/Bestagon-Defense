@@ -300,7 +300,7 @@ MonoBehaviour:
   enemyTag: Enemy
   moduleHandlers: []
   range:
-    stat: 1.5
+    stat: 1.65
     additive: 1
     multiplicative: 1
   rangeDisplay: {fileID: 860021162364760526}
