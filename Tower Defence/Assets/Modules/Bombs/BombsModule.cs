@@ -127,7 +127,7 @@ namespace Modules.Bombs
                     bullet.explosionRadius.AddModifier(gunnerExplosionRadiusChange);
                     break;
                 case Shooter:
-                    bullet.explosionRadius.TakeModifier(shooterExplosionRadiusChange);
+                    bullet.explosionRadius.AddModifier(shooterExplosionRadiusChange);
                     bullet.speed.AddModifier(shooterBulletSpeedChange);
                     bullet.useLocation = true;
                     bullet.targetLocation = bullet.target.position;

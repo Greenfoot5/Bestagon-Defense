@@ -177,6 +177,8 @@ namespace Turrets
             // Set our target to null if there is none
             else
             {
+                if (_targetEnemy is null)
+                    return;
                 _targetEnemy.OnDeath -= UpdateTarget;
                 Target = null;
                 _targetEnemy = null;

@@ -166,9 +166,8 @@ namespace Turrets
         /// </summary>
         private void Explode()
         {
-            if (explosionRadius.GetStat() > 0f && explodeEffect is not null)
+            if (explodeEffect is not null)
             {
-                
                 // Spawn explode effect
                 GameObject effectIns = Instantiate(explodeEffect, transform.position, transform.rotation);
                 var visualEffect = effectIns.GetComponent<VisualEffect>();
