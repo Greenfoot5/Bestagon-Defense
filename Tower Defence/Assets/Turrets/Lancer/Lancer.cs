@@ -72,7 +72,7 @@ namespace Turrets.Lancer
             {
                 layerMask = LayerMask.GetMask("Enemies")
             };
-            Physics2D.Raycast(firePoint.position, firePoint.up, contactFilter, results, range.GetStat());
+            Physics2D.Raycast(transform.position, firePoint.up, contactFilter, results, range.GetStat());
 
             // Loop through the hits to see if the turret can hit the target
             var foundEnemy = false;
