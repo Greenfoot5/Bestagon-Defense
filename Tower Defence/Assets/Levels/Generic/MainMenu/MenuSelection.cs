@@ -23,13 +23,13 @@ namespace Levels.Generic.MainMenu
         /// </summary>
         private void Start()
         {
-            if (!RemoteConfig.IsValidVersion())
-            {
-                menuCanvas.SetActive(false);
-                loginCanvas.SetActive(false);
-                updateCanvas.SetActive(true);
-            }
-            else if (!SetUsername.HasUsername())
+            // if (!RemoteConfig.IsValidVersion())
+            // {
+            //     menuCanvas.SetActive(false);
+            //     loginCanvas.SetActive(false);
+            //     updateCanvas.SetActive(true);
+            // }
+            if (!SetUsername.HasUsername())
             {
                 menuCanvas.SetActive(false);
                 loginCanvas.SetActive(true);

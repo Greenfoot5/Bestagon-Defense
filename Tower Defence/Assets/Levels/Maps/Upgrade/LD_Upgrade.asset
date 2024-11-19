@@ -579,8 +579,8 @@ MonoBehaviour:
       variable: {fileID: 11400000, guid: b54cb3d9e6f25430dbcb163e806032f4, type: 2}
   moduleDuplicateCheck: 2
   initialSelectionCount: 2
-  initialChoices: 4
-  selectionChoices: 3
+  initialChoices: 3
+  selectionChoices: 4
   selectionCostFormula: 0.17*x^2+19*x+41
   health:
     useConstant: 0
