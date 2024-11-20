@@ -14,6 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moduleTier: 3
   isUpgradableTo: 1
-  slowPercentage: 0.28
-  duration: 3.5
+  effect: {fileID: 11400000, guid: 773fbc7525f0741359a28c9a885e028d, type: 2}
   damageChange: 0.8

@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using Abstract;
 using Enemies;
 using Turrets;
 using Turrets.Choker;
@@ -20,14 +18,10 @@ namespace Modules.Slow
     public class SlowModule : Module
     {
         protected override Type[] ValidTypes => new[] { typeof(Shooter), typeof(Gunner), typeof(Lancer), typeof(Choker), typeof(Smasher) };
-        
+
         [SerializeField]
         [Tooltip("The percentage the slow the enemy's movement speed")]
-        private float slowPercentage;
-        
-        [SerializeField]
-        [Tooltip("How long each slow stack should last")]
-        private float duration;
+        private SlowEnemyEffect effect;
 
         [SerializeField]
         [Tooltip("Multiplicative percentage modifier to damage")]
@@ -62,33 +56,8 @@ namespace Modules.Slow
         private void OnHit(Enemy target, Damager damager, Bullet bullet = null)
         {
             if (damager is not Turret) return;
-            Runner.Run(SlowEnemy(target));
-        }
-        
-        /// <summary>
-        /// Applies the slow effect for a set duration
-        /// </summary>
-        /// <param name="target">The enemy to slow</param>
-        private IEnumerator SlowEnemy(Enemy target)
-        {
-            // Check the enemy is immune
-            if (target.uniqueEffects.Contains("Slow"))
-            {
-                yield break;
-            }
-            
-            float slowValue = 1f - slowPercentage;
-
-            if (target.speed.GetModifier() * slowValue <= 0.4f)
-            {
-                yield break;
-            }
-            
-            target.speed.MultiplyModifier(slowValue);
-
-            yield return new WaitForSeconds(duration);
-
-            target.speed.DivideModifier(slowValue);
+            SlowEnemyEffect newEffect = Instantiate(effect);
+            newEffect.Apply(target);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using _WIP.Abilities;
+using Abstract;
 using Abstract.Data;
 using Gameplay;
 using Gameplay.Waves;
@@ -71,6 +72,7 @@ namespace Enemies
         [Tooltip("A list of effect names (internal names) that the enemy is immune to" +
                  "\n\nDuring runtime, also contains any unique effects applied to the enemy as they are immune while they have it")]
         public List<string> uniqueEffects;
+        public Dictionary<string, EnemyEffect> ActiveEffects = new();
         
         // Abilities for each trigger
         private readonly List<EnemyAbility> _timerAbilities = new();
