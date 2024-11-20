@@ -52,7 +52,7 @@ namespace UI.Shop
         /// </summary>
         /// <param name="initHandler">The ModuleChainHandler the card is for</param>
         /// <param name="shop">The shop script</param>
-        public void Init (ModuleChainHandler initHandler, Gameplay.Shop shop)
+        public void Init (ModuleChainHandler initHandler, Shop shop)
         {
             handler = initHandler;
 
@@ -102,7 +102,7 @@ namespace UI.Shop
         /// Called when the player clicks on the card.
         /// </summary>
         /// <param name="shop"></param>
-        private void MakeSelection (Gameplay.Shop shop)
+        private void MakeSelection (Shop shop)
         {
             transform.parent.parent.gameObject.SetActive(false);
             Time.timeScale = 1f;

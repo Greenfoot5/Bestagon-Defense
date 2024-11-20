@@ -1,17 +1,16 @@
 ﻿using Abstract;
 using Abstract.Data;
+using Gameplay;
 using Levels.Maps;
 using MaterialLibrary.Trapezium;
 using TMPro;
 using Turrets;
 using UI.Inventory;
-using UI.Shop;
 using UnityEngine;
-using UnityEngine.Localization;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace Gameplay
+namespace UI.Shop
 {
     /// <summary>
     /// Handles the shop and inventory of the player
@@ -38,31 +37,34 @@ namespace Gameplay
         [Tooltip("The UI to display when the player opens the shop")]
         [SerializeField]
         private GameObject selectionUI;
-        [FormerlySerializedAs("selectionCost")] [Range(0, Mathf.Infinity)]
+        [FormerlySerializedAs("selectionCost")]
+        [Range(0, Mathf.Infinity)]
         [HideInInspector]
         public int nextCost;
         [HideInInspector]
         public int totalCellsCollected;
         
-        [FormerlySerializedAs("shopButton")] [FormerlySerializedAs("turretInventoryButton")] [SerializeField]
-        private TextMeshProUGUI powercellsText;
+        [Tooltip("Current count of powercells")]
         [SerializeField]
-        private Progress energyProgress;
+        private TMP_Text powercellCount;
+        [Tooltip("Current count of powercells")]
+        [SerializeField]
+        private Progress powercellProgress;
         
         [Header("Shop Button")]
         [Tooltip("Shop Button Colours Top when can afford")]
-        private Color _defaultButtonTop;
+        [SerializeField]
+        private Image buyButton;
+        private Button _buyButtonButton;
+        [Tooltip("Shop button image when can afford")]
+        [SerializeField]
+        private Sprite affordButtonImage;
+        [Tooltip("Shop button image when can't afford")]
+        [SerializeField]
+        private Sprite expensiveButtonImage;
         [Tooltip("Shop Button Colours Bottom when can afford")]
-        private Color _defaultButtonBottom;
-        [Tooltip("Shop Button Colours Top when can't afford")]
         [SerializeField]
-        private Color expensiveButtonTop;
-        [Tooltip("Shop Button Colours Bottom when can afford")]
-        [SerializeField]
-        private Color expensiveButtonBottom;
-        [Tooltip("The text to display")]
-        [SerializeField]
-        private LocalizedString shopText;
+        private GameObject expensiveButtonOverlay;
         
         [Tooltip("The GlyphsLookup index in the scene")]
         [SerializeField]
@@ -75,18 +77,15 @@ namespace Gameplay
         {
             _buildManager = BuildManager.instance;
             _levelData = _buildManager.GetComponent<GameManager>().levelData;
+            _buyButtonButton = buyButton.gameObject.GetComponent<Button>();
             
             // It should only be greater than 0 if we've loaded a save
             nextCost = GetEnergyCost();
-
-            _defaultButtonTop = energyProgress.outColorA;
-            _defaultButtonBottom = energyProgress.outColorB;
             
-            // Update button text
-            powercellsText.text = "<sprite=\"UI-Powercell\" name=\"full\"> " + nextCost;
             GameStats.OnGainEnergy += CalculateCells;
-            GameStats.OnGainPowercell += UpdateEnergyButton;
+            GameStats.OnGainPowercell += UpdateBuyButton;
             CalculateCells();
+            UpdateBuyButton();
         }
         
         /// <summary>
@@ -165,24 +164,30 @@ namespace Gameplay
             }
             if (energyToSubtract > 0)
                 GameStats.Energy -= energyToSubtract;
-            UpdateEnergyButton();
+            UpdateBuyButton();
         }
 
-        private void UpdateEnergyButton()
+        private void UpdateBuyButton()
         {
-            energyProgress.outColorA = expensiveButtonTop;
-            energyProgress.outColorB = expensiveButtonBottom;
-            powercellsText.color = expensiveButtonTop;
-            powercellsText.text = shopText.GetLocalizedString() + " - <sprite=\"UI-Powercell\" name=\"empty\"> " + 0;
             if (GameStats.Powercells > 0)
             {
-                energyProgress.outColorA = _defaultButtonTop;
-                energyProgress.outColorB = _defaultButtonBottom;
-                powercellsText.color = new Color(1,1,1);
-                powercellsText.text = shopText.GetLocalizedString() + " - <sprite=\"UI-Powercell\" name=\"full\"> " + GameStats.Powercells;
+                buyButton.sprite = affordButtonImage;
+                expensiveButtonOverlay.SetActive(false);
+                _buyButtonButton.enabled = true;
             }
-
-            energyProgress.percentage = GameStats.Energy / (float)nextCost;
+            else
+            {
+                buyButton.sprite = expensiveButtonImage;
+                expensiveButtonOverlay.SetActive(true);
+                _buyButtonButton.enabled = false;
+            }
+            UpdateEnergyCount();
+        }
+        
+        private void UpdateEnergyCount()
+        {
+            powercellCount.text = GameStats.Powercells.ToString();
+            powercellProgress.percentage = GameStats.Energy / (float)nextCost;
         }
 
         /// <summary>

@@ -73,7 +73,7 @@ namespace UI.Shop
         /// </summary>
         /// <param name="turret">The turret the option selects</param>
         /// <param name="shop">The Shop (allows the game to select the turret when the player clicks the panel)</param>
-        public void Init(TurretBlueprint turret, Gameplay.Shop shop)
+        public void Init(TurretBlueprint turret, Shop shop)
         {
             _turretBlueprint = turret;
             
@@ -128,7 +128,7 @@ namespace UI.Shop
         /// selecting it and closing the shop
         /// </summary>
         /// <param name="shop"></param>
-        private void MakeSelection(Gameplay.Shop shop)
+        private void MakeSelection(Shop shop)
         {
             transform.parent.parent.gameObject.SetActive(false);
             Time.timeScale = 1f;

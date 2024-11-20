@@ -249,6 +249,11 @@ MonoBehaviour:
 '
     m_Metadata:
       m_Items: []
+  - m_Id: 165629949228605440
+    m_Key: LevelCanvas_Screen/Prefab Mode in Context/LevelCanvas_Screen/ShopButton/Text
+      (TMP)
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

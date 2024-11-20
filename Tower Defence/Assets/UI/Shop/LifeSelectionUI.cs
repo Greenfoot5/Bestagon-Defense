@@ -32,7 +32,7 @@ namespace UI.Shop
         /// </summary>
         /// <param name="count">The amount of lives to grant</param>
         /// <param name="shop">The shop script</param>
-        public void Init (int count, Gameplay.Shop shop)
+        public void Init (int count, Shop shop)
         {
             _count = count;
 

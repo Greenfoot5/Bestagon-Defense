@@ -24,7 +24,7 @@ namespace UI.Shop
         private LevelData _levelData;
         [Tooltip("The Shop component in the scene")]
         [SerializeField]
-        private Gameplay.Shop shop;
+        private Shop shop;
         
         [Tooltip("The turrets already purchased")]
         private readonly List<Type> _turretTypes = new();

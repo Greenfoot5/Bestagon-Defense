@@ -11,7 +11,7 @@ namespace UI.Shop
     {
         [SerializeField]
         [Tooltip("The shop of the scene")]
-        private Gameplay.Shop shop;
+        private Shop shop;
         [SerializeField]
         [Tooltip("The component that spawns the cards")]
         private AddSelection selectionCardsParent;

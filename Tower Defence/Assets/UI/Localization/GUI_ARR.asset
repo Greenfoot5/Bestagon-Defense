@@ -236,6 +236,10 @@ MonoBehaviour:
     m_Localized: Manual Booty Collection
     m_Metadata:
       m_Items: []
+  - m_Id: 165629949228605440
+    m_Localized: BUY
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

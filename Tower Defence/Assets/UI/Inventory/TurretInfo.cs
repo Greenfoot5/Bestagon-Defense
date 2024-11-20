@@ -20,7 +20,7 @@ namespace UI.Inventory
 
         [Tooltip("The Shop component of the scene")]
         [SerializeField]
-        private Gameplay.Shop shop;
+        private Shop.Shop shop;
         [SerializeField]
         [Tooltip("The title for the inventory")]
         private TMP_Text inventoryTitle;
