@@ -1,4 +1,3 @@
-using _WIP;
 using UnityEngine;
 
 namespace Levels.Generic.MainMenu

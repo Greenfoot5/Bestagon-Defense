@@ -199,11 +199,11 @@ namespace Levels.Generic.LevelSelect
     public class LeaderboardEntry
     {
         [DataMember]
-        public readonly string name;
+        public readonly string Name;
         [DataMember(Name = "value")]
         private readonly string _value;
         [DataMember]
-        public readonly int position;
+        public readonly int Position;
 
         // If you want to parse the value yourself
         // The backend does not support strings as values

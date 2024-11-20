@@ -124,29 +124,29 @@ namespace _WIP
     public class BestagonVersion
     {
         [DataMember]
-        public float major;
+        public float Major;
         [DataMember]
-        public float minor;
+        public float Minor;
         [DataMember]
-        public float patch;
+        public float Patch;
 
         public BestagonVersion(float major, float minor, float patch)
         {
-            this.major = major;
-            this.minor = minor;
-            this.patch = patch;
+            Major = major;
+            Minor = minor;
+            Patch = patch;
         }
 
         public bool IsValidVersion(BestagonVersion comparison)
         {
             Debug.Log("comp = " + comparison);
             Debug.Log(ToString());
-            return !(major > comparison.major || minor > comparison.minor || patch > comparison.patch);
+            return !(Major > comparison.Major || Minor > comparison.Minor || Patch > comparison.Patch);
         }
 
         public override string ToString()
         {
-            return major + "." + minor + "." + patch;
+            return Major + "." + Minor + "." + Patch;
         }
     }
 }

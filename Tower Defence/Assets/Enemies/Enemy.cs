@@ -8,7 +8,6 @@ using Gameplay;
 using Gameplay.Waves;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 namespace Enemies
 {

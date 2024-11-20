@@ -1,4 +1,3 @@
-using Abstract.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

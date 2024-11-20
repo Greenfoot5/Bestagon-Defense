@@ -134,7 +134,7 @@ namespace Levels.Generic.LevelSelect
                 {
                     GameObject leaderboardItem = Instantiate(leaderboardEntry, leaderboardContent);
                     leaderboardItem.name = "_" + leaderboardItem.name;
-                    leaderboardItem.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = entry.name;
+                    leaderboardItem.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = entry.Name;
                     leaderboardItem.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = entry.GetValueAsString();
                 }
                 

@@ -1,3 +1,4 @@
+using System;
 using Modules;
 using Turrets;
 using UnityEngine;
@@ -9,8 +10,8 @@ namespace Abstract.Data
     /// As an SO cannot be instantiated, it cannot store the tier variable
     /// Also handles a few other useful things
     /// </summary>
-    [System.Serializable]
-    public struct ModuleChainHandler
+    [Serializable]
+    public struct ModuleChainHandler : IEquatable<ModuleChainHandler>
     {
         // The display levels of the modules
         private static readonly string[] Levels =
@@ -108,6 +109,21 @@ namespace Abstract.Data
         public bool ValidModule(Damager damager)
         {
             return chain.GetModule(tier).ValidModule(damager);
+        }
+
+        public bool Equals(ModuleChainHandler other)
+        {
+            return Equals(chain, other.chain) && tier == other.tier;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is ModuleChainHandler other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(chain, tier);
         }
     }
 }
