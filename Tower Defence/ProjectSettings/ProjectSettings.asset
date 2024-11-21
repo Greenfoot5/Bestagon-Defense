@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: dev.alchemix.bestagon
+  companyName: Alchemix.dev
   productName: Bestagon Defence
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -167,9 +167,9 @@ PlayerSettings:
   androidMinAspectRatio: 1
   applicationIdentifier:
     Android: dev.alchemix.bestagon.BestagonDefence
-    Standalone: com.Bestagon.Bestagon-Defence
+    Standalone: dev.alchemix.bestagon
   buildNumber:
-    Standalone: 1.1
+    Standalone: 2.0
     VisionOS: 0
     iPhone: 0
     tvOS: 0
