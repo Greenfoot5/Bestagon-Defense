@@ -139,12 +139,15 @@ namespace Gameplay
                 {
                     uuid = node.name,
                     turretBlueprint = node.turretBlueprint,
-                    turretRotation = node.turret.transform.rotation,
                     moduleChainHandlers = turret.moduleHandlers
                 };
 
                 if (turret.GetType().IsSubclassOf(typeof(DynamicTurret)))
+                {
+                    nodeData.turretRotation = ((DynamicTurret)turret).partToRotate.rotation;
                     nodeData.targetingMethod = ((DynamicTurret)turret).targetingMethod;
+                }
+
                 saveData.Nodes.Add(nodeData);
             }
             
@@ -187,7 +190,6 @@ namespace Gameplay
                     if (node.name != nodeData.uuid) continue;
                     
                     node.LoadTurret(nodeData.turretBlueprint);
-                    node.turret.transform.rotation = nodeData.turretRotation;
                     foreach (ModuleChainHandler moduleHandler in nodeData.moduleChainHandlers)
                     {
                         node.LoadModule(moduleHandler);
@@ -196,6 +198,7 @@ namespace Gameplay
                     var turret = node.turret.GetComponent<Turret>();
                     if (turret.GetType().IsSubclassOf(typeof(DynamicTurret)))
                     {
+                        ((DynamicTurret)turret).partToRotate.rotation = nodeData.turretRotation;
                         ((DynamicTurret)turret).targetingMethod = nodeData.targetingMethod;
                     }
                 }
