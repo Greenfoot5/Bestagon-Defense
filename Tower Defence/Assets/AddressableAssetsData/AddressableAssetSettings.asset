@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468a46d0ae32c3544b7d98094e6448a9, type: 3}
   m_Name: AddressableAssetSettings
   m_EditorClassIdentifier: 
-  m_DefaultGroup: 751ae2a2cb1e642f1b1e02576d1384e4
+  m_DefaultGroup: c770b9848014e4d6cae496813a6ceb94
   m_currentHash:
     serializedVersion: 2
-    Hash: bca41302a87bf20f1eb8cc397142a925
+    Hash: 4bad544bd9b1af71eade451c62f8932f
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
   m_DisableCatalogUpdateOnStart: 0
-  m_InternalIdNamingMode: 0
+  m_InternalIdNamingMode: 1
   m_InternalBundleIdMode: 1
   m_AssetLoadMode: 0
   m_BundledAssetProviderType:
@@ -53,18 +53,16 @@ MonoBehaviour:
     m_Id: 
   m_RemoteCatalogLoadPath:
     m_Id: 
-  m_ContentStateBuildPathProfileVariableName: 
+  m_ContentStateBuildPathProfileVariableName: <default settings path>
   m_CustomContentStateBuildPath: 
   m_ContentStateBuildPath: 
   m_BuildAddressablesWithPlayerBuild: 0
   m_overridePlayerVersion: 
   m_GroupAssets:
-  - {fileID: 11400000, guid: 33222b8bd97374d40b0456fbf9386403, type: 2}
   - {fileID: 11400000, guid: 55a0fd90718b847de9cfa8335bff51b5, type: 2}
   - {fileID: 11400000, guid: d1c2aa0001dd34355a2a6157cacab36e, type: 2}
   - {fileID: 11400000, guid: 8a2f1ca9497824c6693de345dbec7af7, type: 2}
   - {fileID: 11400000, guid: 23baedc045c5842dfb6a09cad3b2914f, type: 2}
-  - {fileID: 11400000, guid: 98f80093c2d7f44be8fbf1cf68689e8b, type: 2}
   - {fileID: 11400000, guid: c74433937f32744c792171026e55eec0, type: 2}
   - {fileID: 11400000, guid: 556e909a21f7d47b8a84fc74429e42b8, type: 2}
   - {fileID: 11400000, guid: 1c1cbb6f05c1e4523a7c201d757ff1f7, type: 2}
@@ -112,6 +110,8 @@ MonoBehaviour:
     - Locale-en-GB
     - Preload
     - Locale-ARR
+    - TurretBlueprint
+    - ModuleChain
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 4798f15eade334813a442ca31cf1c733, type: 2}

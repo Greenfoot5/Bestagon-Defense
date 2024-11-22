@@ -29,6 +29,12 @@ namespace Abstract.Data
         [SerializeField]
         private int tier;
 
+        public ModuleChainHandler(ModuleChain chain, int tier)
+        {
+            this.chain = chain;
+            this.tier = tier;
+        }
+
         /// <summary>
         /// Upgrade if we can.
         /// </summary>

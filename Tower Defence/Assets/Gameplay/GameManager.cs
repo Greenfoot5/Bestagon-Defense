@@ -139,12 +139,20 @@ namespace Gameplay
                 }
 
                 var turret = node.turret.GetComponent<Turret>();
+                List<string> names = new();
+                List<int> tiers = new();
+                foreach (ModuleChainHandler handler in turret.moduleHandlers)
+                {
+                    names.Add(handler.GetChain().name);
+                    tiers.Add(handler.GetTier());
+                }
                 
                 var nodeData = new SaveLevel.NodeData
                 {
                     uuid = node.name,
-                    turretBlueprint = node.turretBlueprint,
-                    moduleChainHandlers = turret.moduleHandlers
+                    blueprintName = node.turretBlueprint.name,
+                    moduleNames = names,
+                    moduleTiers = tiers
                 };
 
                 if (turret.GetType().IsSubclassOf(typeof(DynamicTurret)))
@@ -194,10 +202,10 @@ namespace Gameplay
                 {
                     if (node.name != nodeData.uuid) continue;
                     
-                    node.LoadTurret(nodeData.turretBlueprint);
-                    foreach (ModuleChainHandler moduleHandler in nodeData.moduleChainHandlers)
+                    node.LoadTurret(SaveLevel.Blueprints[nodeData.blueprintName]);
+                    for (var i = 0; i < nodeData.moduleNames.Count; i++)
                     {
-                        node.LoadModule(moduleHandler);
+                        node.LoadModule(new ModuleChainHandler(SaveLevel.Chains[nodeData.moduleNames[i]], nodeData.moduleTiers[i]));
                     }
                     
                     var turret = node.turret.GetComponent<Turret>();

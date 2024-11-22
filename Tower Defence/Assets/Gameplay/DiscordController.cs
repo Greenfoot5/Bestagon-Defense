@@ -153,6 +153,11 @@ namespace Gameplay
             _discord.GetActivityManager().ClearActivity((_) => { });
             _discord.RunCallbacks();
             _discord.Dispose();
+            
+            // Assign all events for Rich Presence updates
+            SceneManager.activeSceneChanged -= OnSceneChange;
+            GameStats.OnRoundProgress -= UpdateActivity;
+            GameStats.OnGameOver -= UpdateActivity;
         }
     }
 }

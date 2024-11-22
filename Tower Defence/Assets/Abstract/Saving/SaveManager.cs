@@ -125,9 +125,8 @@ namespace Abstract.Saving
             
             FileManager.LoadFromFile(sceneName + "Save.dat", out string json);
             var sd = new SaveLevel();
-            sd.LoadFromJson(json);
 
-            return sd.Version == Application.version;
+            return sd.LoadVersion(json) == Application.version;
         }
 
         public static void ClearSave(string sceneName)
