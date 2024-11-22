@@ -369,6 +369,18 @@ MonoBehaviour:
     m_Localized: SHOP
     m_Metadata:
       m_Items: []
+  - m_Id: 166355730590326784
+    m_Localized: Live Longer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166355899490754560
+    m_Localized: Resource
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166356062577876992
+    m_Localized: Life
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

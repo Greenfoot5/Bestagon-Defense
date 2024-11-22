@@ -240,6 +240,14 @@ MonoBehaviour:
     m_Localized: BUY
     m_Metadata:
       m_Items: []
+  - m_Id: 166355899490754560
+    m_Localized: Booty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166355730590326784
+    m_Localized: Sail Longer
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

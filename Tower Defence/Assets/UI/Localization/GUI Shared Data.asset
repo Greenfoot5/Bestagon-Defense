@@ -254,6 +254,18 @@ MonoBehaviour:
       (TMP)
     m_Metadata:
       m_Items: []
+  - m_Id: 166355730590326784
+    m_Key: Resource/Life/Tagline
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166355899490754560
+    m_Key: TypePanel/Resource
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166356062577876992
+    m_Key: Resource/Life/Title
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
