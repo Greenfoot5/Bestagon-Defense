@@ -90,6 +90,11 @@ namespace Gameplay
                 EndGame();
             }
         }
+
+        private void OnDestroy()
+        {
+            GameStats.OnLoseLife -= UpdateLives;
+        }
     
         /// <summary>
         /// Ends the game.

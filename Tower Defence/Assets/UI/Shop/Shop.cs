@@ -87,7 +87,13 @@ namespace UI.Shop
             CalculateCells();
             UpdateBuyButton();
         }
-        
+
+        private void OnDestroy()
+        {
+            GameStats.OnGainEnergy -= CalculateCells;
+            GameStats.OnGainPowercell -= UpdateBuyButton;
+        }
+
         /// <summary>
         /// Removes a module from the inventory
         /// </summary>

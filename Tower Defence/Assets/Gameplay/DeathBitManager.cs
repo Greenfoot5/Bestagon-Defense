@@ -53,6 +53,11 @@ namespace Gameplay
             GameStats.OnRoundProgress += CleanMap;
         }
 
+        private void OnDestroy()
+        {
+            GameStats.OnRoundProgress -= CleanMap;
+        }
+
         public static void DropEnergy(Vector3 position, int value, Quaternion? rotation = null, Vector3? scale = null)
         {
             if (!dropsEnergy)
