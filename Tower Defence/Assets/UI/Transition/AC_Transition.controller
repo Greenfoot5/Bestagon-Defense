@@ -33,7 +33,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Transition OUT
-  m_Speed: 1
+  m_Speed: 6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -9137787399468985949}
@@ -169,7 +169,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Transition IN
-  m_Speed: 1
+  m_Speed: 6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -6203744317521699797}
