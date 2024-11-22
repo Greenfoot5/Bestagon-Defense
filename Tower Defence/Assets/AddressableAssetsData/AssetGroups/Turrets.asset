@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Turrets
+  m_EditorClassIdentifier: 
+  m_GroupName: Turrets
+  m_GUID: 02b35a18f2ed040dcb89ca9ec9252de9
+  m_SerializeEntries:
+  - m_GUID: 0d5f1a13a72504c058f85636be33284b
+    m_Address: Assets/Turrets/Smasher/Smasher_Advanced.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e6d2889320bf4e3eaff513a492ccf6d
+    m_Address: Assets/Turrets/Laser/Laser_ElfEyes.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0f0a6da7d36a64a3a89ddcc104e995c0
+    m_Address: Assets/Turrets/Gunner/Gunner_Basic.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 200d032e925f4427581197dacf1c0089
+    m_Address: Assets/Turrets/Shooter/Shooter_Sharp.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 263ef519110164b4a93f4335a6c4966c
+    m_Address: Assets/Turrets/Laser/Laser_Melter.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3b530b333a94640959500f5c471e341e
+    m_Address: Assets/Turrets/Gunner/Gunner_Greyhound.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3be5e208f29584e1cb8fa31d536989e4
+    m_Address: Assets/Turrets/Lancer/Lancer_Magician.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3de012d76a1a4459eb31ed0bceb428d6
+    m_Address: Assets/Turrets/Lancer/Lancer_Wall.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 40dc94d320d594a5fad076af47f85c42
+    m_Address: Assets/Turrets/Laser/Laser_Basic.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4aedceea9b860486d9797fb4dfb62a16
+    m_Address: Assets/Turrets/Gunner/Gunner_Advanced.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 564156d9aff4b4edd9bad5078427e665
+    m_Address: Assets/Turrets/Gunner/Gunner_Mega.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5958a675ba690410eb9254a851560e75
+    m_Address: Assets/Turrets/Shooter/Shooter_Killer.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5b45ab7ef354c4bd290f0ba291f75687
+    m_Address: Assets/Turrets/Choker/Choker_Basic.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 679643e6d11db41afa216c584e276c87
+    m_Address: Assets/Turrets/Lancer/Lancer_Basic.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6d24a47595e484b97b993ef01fee2511
+    m_Address: Assets/Turrets/Lancer/Lancer_Advanced.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 957e7ef90aad744a4bf2718c30338651
+    m_Address: Assets/Turrets/Smasher/Smasher_Basic.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac091f4cd04e6400f8fa5eb75b85934b
+    m_Address: Assets/Turrets/Shooter/Shooter_Explosive.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d2db62c1bef594027b45aec4631e1e6a
+    m_Address: Assets/Turrets/Shooter/Shooter_Basic.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d34ca52000d774b7b8ca6a25dbf8b6b0
+    m_Address: Assets/Turrets/Shooter/Shooter_Advanced.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: defe6f09e3fbf44f49bd14d47ebcb305
+    m_Address: Assets/Turrets/Laser/Laser_Advanced.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e54b84b1744cd4b429fb1ed80a4f7314
+    m_Address: Assets/Turrets/Smasher/Smasher_Earthquake.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6e9e55f6df8a74e608f92b8e3a1f0b77, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 3d25f90f9c3c34e58be0e42810015f7c, type: 2}
+    - {fileID: 11400000, guid: 7e6d1633ac54c4db39a6aace85993585, type: 2}
