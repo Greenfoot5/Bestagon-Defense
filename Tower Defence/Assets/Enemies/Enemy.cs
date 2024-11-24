@@ -304,9 +304,6 @@ namespace Enemies
             GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
             effect.name = "_" + effect.name;
             Destroy(effect, effect.GetComponent<ParticleSystem>().main.duration);
-        
-            // Let the wave spawner know the enemy is dead
-            WaveSpawner.enemiesAlive--;
             
             Destroy(gameObject);
         }
@@ -321,7 +318,6 @@ namespace Enemies
             
             // Let our other systems know the enemy reached the end
             GameStats.Lives -= deathLives;
-            WaveSpawner.enemiesAlive--;
             GameStats.Energy += endPathMoney;
         
             Destroy(gameObject);

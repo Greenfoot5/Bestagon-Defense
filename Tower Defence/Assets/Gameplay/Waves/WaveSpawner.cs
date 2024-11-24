@@ -15,6 +15,16 @@ namespace Gameplay.Waves
     /// </summary>
     public class WaveSpawner : MonoBehaviour
     {
+        private enum State
+        {
+            // Countdown to next spawn
+            Countdown,
+            // Spawning Enemies
+            Spawning,
+            // Waiting for all enemies to die
+            Waiting,
+        }
+        
         [Tooltip("How many enemies are still alive in the level")]
         public static int enemiesAlive;
         
@@ -42,15 +52,14 @@ namespace Gameplay.Waves
         [SerializeField]
         [Tooltip("The text to display the current wave")]
         private TMP_Text waveText;
-    
-        // The current wave the player is on -1 (as it's indexed from 0)
+        
         private int _waveIndex;
         
         [SerializeField]
         [Tooltip("The location to spawn the enemies. Should be the first waypoint")]
         private Transform spawnPoint;
 
-        private bool _isSpawning;
+        private State _currentState = State.Waiting;
         private float _totalEnemies;
 
         private LevelData _levelData;
@@ -74,8 +83,13 @@ namespace Gameplay.Waves
             enemiesAlive = 0;
             _levelData = gameObject.GetComponent<GameManager>().levelData;
             _countdown = preparationTime;
-            _waveIndex = GameStats.Rounds;
-            waveText.text = waveCountText.GetLocalizedString() + GameStats.Rounds;
+            _waveIndex = GameStats.Rounds - 1;
+            GameStats.OnRoundProgress += UpdateWaveText;
+        }
+
+        private void OnDestroy()
+        {
+            GameStats.OnRoundProgress -= UpdateWaveText;
         }
         
         /// <summary>
@@ -83,40 +97,42 @@ namespace Gameplay.Waves
         /// </summary>
         private void Update()
         {
-            // Only reduce the countdown if there are no enemies remaining
-            if (enemiesAlive > 0 || _isSpawning)
+            switch (_currentState)
             {
-                if (_isSpawning)
+                case State.Spawning:
                     return;
-                waveProgress.percentage = enemiesAlive / _totalEnemies;
-                waveCountdownText.text = enemiesAliveText.GetLocalizedString();
-                return;
-            }
-
-            if (Mathf.Abs(_countdown - timeBetweenWaves) < 0.00000001f)
-            {
-                // Save the level
-                SaveJsonData(gameObject.GetComponent<GameManager>());
+                // If still waiting
+                case State.Waiting when enemiesAlive > 0:
+                    waveProgress.percentage = enemiesAlive / _totalEnemies;
+                    waveCountdownText.text = enemiesAliveText.GetLocalizedString();
+                    return;
+                // If done waiting
+                case State.Waiting when enemiesAlive <= 0:
+                    _currentState = State.Countdown;
+                    _waveIndex++;
+                    GameStats.Rounds = _waveIndex + 1;
+                    waveText.text = waveCountText.GetLocalizedString() + GameStats.Rounds;
+                    SaveJsonData(gameObject.GetComponent<GameManager>());
+                    break;
             }
 
             // If the countdown has finished, call the next wave
-            if (_countdown <= 0f)
+            if (_currentState == State.Countdown)
             {
-                // Save the level
-                SaveJsonData(gameObject.GetComponent<GameManager>());
-                // Start spawning in the enemies
-                StartCoroutine(SpawnWave());
-                // Reset the timer
-                _countdown = timeBetweenWaves;
+                _countdown -= Time.deltaTime;
+                _countdown = Mathf.Clamp(_countdown, 0f, Mathf.Infinity);
 
-                return;
+                waveCountdownText.text = $"{_countdown:0.00}";
+                waveProgress.percentage = _countdown / timeBetweenWaves;
+                
+                if (_countdown <= 0f)
+                {
+                    // Save the level
+                    SaveJsonData(gameObject.GetComponent<GameManager>());
+                    // Start spawning in the enemies
+                    StartCoroutine(SpawnWave());
+                }
             }
-
-            _countdown -= Time.deltaTime;
-            _countdown = Mathf.Clamp(_countdown, 0f, Mathf.Infinity);
-        
-            waveCountdownText.text = $"{_countdown:0.00}";
-            waveProgress.percentage = _countdown / timeBetweenWaves;
         }
     
         /// <summary>
@@ -124,14 +140,12 @@ namespace Gameplay.Waves
         /// </summary>
         private IEnumerator SpawnWave()
         {
-            _isSpawning = true;
+            _currentState = State.Spawning;
             waveCountdownText.text = spawningText.GetLocalizedString();
             Wave wave = waves[_waveIndex % waveRepeatIndex];
             if (GameStats.Rounds > waveRepeatIndex)
                 wave = waves[(_waveIndex - waveRepeatIndex) % (waves.Length - waveRepeatIndex) + waveRepeatIndex];
             
-            GameStats.Rounds = _waveIndex + 1;
-            waveText.text = waveCountText.GetLocalizedString() + GameStats.Rounds;
             _totalEnemies = 0;
 
             for (var i = 0; i < wave.enemySets.Length; i++)
@@ -158,9 +172,9 @@ namespace Gameplay.Waves
                     yield return new WaitForSeconds(wave.setDelays[i]);
                 }
             }
-
-            _waveIndex++;
-            _isSpawning = false;
+            
+            _countdown = timeBetweenWaves;
+            _currentState = State.Waiting;
         }
     
         /// <summary>
@@ -169,6 +183,8 @@ namespace Gameplay.Waves
         /// <param name="enemy">The enemy to spawn</param>
         private void SpawnEnemy(GameObject enemy)
         {
+            enemiesAlive++;
+            
             // Spawn Enemy
             GameObject spawnedEnemy = Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
             spawnedEnemy.name = "_" + spawnedEnemy.name;
@@ -179,7 +195,7 @@ namespace Gameplay.Waves
             enemyComponent.maxHealth *= _levelData.health.Value.Evaluate(_waveIndex + 1);
             enemyComponent.health = spawnedEnemy.GetComponent<Enemy>().maxHealth;
             
-            enemiesAlive++;
+            enemyComponent.OnDeath += () => { enemiesAlive--; };
         }
         
         /// <summary>
@@ -191,6 +207,11 @@ namespace Gameplay.Waves
             level.PopulateSaveData(saveData);
             
             SaveManager.SaveLevel(level, SceneManager.GetActiveScene().name);
+        }
+
+        private void UpdateWaveText()
+        {
+            waveText.text = waveCountText.GetLocalizedString() + GameStats.Rounds;
         }
     }
 }
