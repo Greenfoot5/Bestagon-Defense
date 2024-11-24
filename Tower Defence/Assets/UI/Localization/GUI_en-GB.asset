@@ -265,9 +265,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 91364149682176
-    m_Localized: 'GAME
-
-      PAUSED'
+    m_Localized: GAME PAUSED
     m_Metadata:
       m_Items: []
   - m_Id: 91663031590912
@@ -379,6 +377,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 166356062577876992
     m_Localized: Life
+    m_Metadata:
+      m_Items: []
+  - m_Id: 167080099352403968
+    m_Localized: Are you sure you wish to leave the level?
     m_Metadata:
       m_Items: []
   references:

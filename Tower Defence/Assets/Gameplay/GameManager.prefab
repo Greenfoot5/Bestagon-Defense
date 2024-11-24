@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5782079356602982467}
   - component: {fileID: 5782079356602982466}
   - component: {fileID: 5782079356602982493}
-  - component: {fileID: 5782079356602982492}
   - component: {fileID: 5782079356602982495}
   m_Layer: 0
   m_Name: GameManager
@@ -316,19 +315,6 @@ MonoBehaviour:
   livesBar: {fileID: 0}
   levelData: {fileID: 11400000, guid: 6f49670e531a1439c8d13bde5464212f, type: 2}
   nodeParent: {fileID: 0}
---- !u!114 &5782079356602982492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5782079356602982470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9fa1751a724547bdb8d3daa1af713bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ui: {fileID: 0}
 --- !u!114 &5782079356602982495
 MonoBehaviour:
   m_ObjectHideFlags: 0
