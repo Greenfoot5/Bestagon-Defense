@@ -74,11 +74,7 @@ namespace Abstract.Saving
         {
             // Matches the labels assigned to the addressables
             _turretOp = Addressables.LoadAssetsAsync<TurretBlueprint>(new List<string> { "TurretBlueprint" },
-                addressable =>
-                {
-                    Debug.Log(addressable.name);
-                    Blueprints.Add(addressable.name, addressable);
-                },
+                addressable => { Blueprints.Add(addressable.name, addressable); },
                 Addressables.MergeMode.Union);
             _turretOp.WaitForCompletion();
             _chainOp = Addressables.LoadAssetsAsync<ModuleChain>(new List<string> { "ModuleChain" },

@@ -81,7 +81,7 @@ namespace UI
         /// <summary>
         /// Pauses/unpauses the game, and enables/disables the UI by input button press
         /// </summary>
-        public void ToggleMenu(InputAction.CallbackContext ctx)
+        private void ToggleMenu(InputAction.CallbackContext ctx)
         {
             ui.SetActive(!ui.activeSelf);
             
