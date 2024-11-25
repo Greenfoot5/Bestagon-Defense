@@ -32,13 +32,16 @@ namespace Abstract.Saving
         public int Powercells;
         public int Lives;
         public int WaveIndex;
-        public Random.State RandomState;
         public int TotalCellsCollected;
+        
+        public Random.State RandomState;
+        public int RandomSeed;
+        public int ShopRandomN;
 
         public List<TurretBlueprint> TurretInventory;
         public List<ModuleChainHandler> ModuleInventory;
 
-        public readonly string Version = Application.version;
+        private readonly string _version = Application.version;
 
         public static readonly Dictionary<string, TurretBlueprint> Blueprints = new();
         public static readonly Dictionary<string, ModuleChain> Chains = new();
@@ -63,7 +66,7 @@ namespace Abstract.Saving
         {
             JsonUtility.FromJsonOverwrite(json, this);
 
-            return Version;
+            return _version;
         }
         
         /// <summary>

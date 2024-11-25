@@ -73,7 +73,6 @@ namespace Abstract.Data
                         {
                             if (items[k].item.GetSubtype() == pick.GetSubtype())
                             {
-                                Debug.Log("Duplicate removing " + items[k].item + $" because {items[k].item.GetSubtype()} == {pick.GetSubtype()}");
                                 items.RemoveAt(k);
                             }
                         }

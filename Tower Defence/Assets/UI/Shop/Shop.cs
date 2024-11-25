@@ -70,6 +70,8 @@ namespace UI.Shop
         [SerializeField]
         public TypeSpriteLookup glyphsLookup;
 
+        public static Squirrel3 random;
+
         /// <summary>
         /// Initialises values and set's starting prices
         /// </summary>
@@ -113,7 +115,7 @@ namespace UI.Shop
             turretButton.name = "_" + turretButton.name;
             turretButton.GetComponent<TurretInventoryItem>().Init(turret);
             
-            selectionUI.GetComponentInChildren<AddSelection>().AddTurretType(turret.prefab.GetComponent<Turret>().GetType());
+            selectionUI.GetComponentInChildren<GenerateShopSelection>().AddTurretType(turret.prefab.GetComponent<Turret>().GetType());
             GameManager.TurretInventory.Add(turret);
         }
         

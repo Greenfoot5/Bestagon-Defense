@@ -10,7 +10,7 @@ namespace Abstract
         public int tickDuration;
         public int ticksLeft;
         public int tier;
-        public bool isCancelled = false;
+        public bool isCancelled;
 
         protected Turret Target;
 
@@ -36,7 +36,6 @@ namespace Abstract
             if (ticksLeft <= 0)
             {
                 Remove();
-                yield break;
             }
         }
     }

@@ -124,11 +124,15 @@ namespace Gameplay
             saveData.Energy = GameStats.Energy + droppedEnergy;
             saveData.Powercells = GameStats.Powercells;
             saveData.WaveIndex = GameStats.Rounds - 1;
-            saveData.RandomState = Random.state;
             saveData.TotalCellsCollected = shop.GetComponent<Shop>().totalCellsCollected;
             saveData.Nodes = new List<SaveLevel.NodeData>();
             saveData.TurretInventory = new List<TurretBlueprint>();
             saveData.ModuleInventory = new List<ModuleChainHandler>();
+            
+            // Random
+            saveData.RandomState = Random.state;
+            saveData.RandomSeed = Shop.random.GetState().Item1;
+            saveData.ShopRandomN = Shop.random.GetState().Item2;
 
             // Node Data
             foreach (Node node in nodeParent.GetComponentsInChildren<Node>())
@@ -190,11 +194,14 @@ namespace Gameplay
             _startLives = GameStats.Lives;
             GameStats.Lives = saveData.Lives;
             GameStats.PopulateRounds(saveData.WaveIndex + 1);
-            Random.state = saveData.RandomState;
             var shopComponent = shop.GetComponent<Shop>();
             shopComponent.totalCellsCollected = saveData.TotalCellsCollected;
             GameStats.Powercells = saveData.Powercells;
             GameStats.Energy = saveData.Energy;
+            
+            // Random
+            Random.state = saveData.RandomState;
+            Shop.random = new Squirrel3(saveData.RandomSeed, saveData.ShopRandomN);
 
             foreach (SaveLevel.NodeData nodeData in saveData.Nodes)
             {

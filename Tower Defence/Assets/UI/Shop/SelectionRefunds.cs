@@ -14,7 +14,7 @@ namespace UI.Shop
         private Shop shop;
         [SerializeField]
         [Tooltip("The component that spawns the cards")]
-        private AddSelection selectionCardsParent;
+        private GenerateShopSelection selectionCardsParent;
 
         [Header("Buttons")]
         [SerializeField]

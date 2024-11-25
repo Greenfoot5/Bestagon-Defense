@@ -1,5 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using Abstract.Data;
+using UI.Shop;
+using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
+using Random = UnityEngine.Random;
 
 namespace Gameplay
 {
@@ -73,6 +77,7 @@ namespace Gameplay
         }
 
         public static GameControls controls;
+        private static int _randomSeed;
 
         // Events
         public static event RoundProgressEvent OnRoundProgress;
@@ -92,6 +97,9 @@ namespace Gameplay
                 _powercells = 0;
                 _lives = startLives;
                 _rounds = 0;
+                _randomSeed = Environment.TickCount;
+                Random.InitState(_randomSeed);
+                Shop.random = new Squirrel3(_randomSeed);
             }
 
             // Controls

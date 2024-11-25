@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 
 namespace UI.Shop
 {
-    public class AddSelection : MonoBehaviour
+    public class GenerateShopSelection : MonoBehaviour
     {
         [Tooltip("The game object for a turret selection card")]
         [SerializeField]
@@ -117,7 +117,7 @@ namespace UI.Shop
             // Grants a turret option
             var turrets = new WeightedList<TurretBlueprint>(_levelData.initialTurretSelection);
             TurretBlueprint selected = turrets.GetRandomItem(duplicateType: _levelData.initialDuplicateCheck,
-                previousPicks: selectedTurrets.Take(selectionIndex).ToArray());
+                previousPicks: selectedTurrets.Take(selectionIndex).ToArray(), rng: Shop.random);
             
             // Add the turret to the ui for the player to pick
             GenerateTurretUI(selected);
@@ -130,7 +130,7 @@ namespace UI.Shop
             // Grants a turret option
             WeightedList<TurretBlueprint> turrets = _levelData.turrets.ToWeightedList(GameStats.Rounds);
             TurretBlueprint selected = turrets.GetRandomItem(duplicateType: _levelData.turretDuplicateCheck,
-                previousPicks: selectedTurrets.Take(selectionIndex).ToArray());
+                previousPicks: selectedTurrets.Take(selectionIndex).ToArray(), rng: Shop.random);
             
             // Add the turret to the ui for the player to pick
             GenerateTurretUI(selected);
@@ -154,7 +154,7 @@ namespace UI.Shop
             }
             
             ModuleChainHandler selected = modules.GetRandomItem(duplicateType: _levelData.moduleDuplicateCheck,
-                previousPicks: selectedModules.Take(selectionIndex).ToArray());
+                previousPicks: selectedModules.Take(selectionIndex).ToArray(), rng: Shop.random);
 
             // Adds the Module as an option to the player
             GenerateModuleUI(selected);
