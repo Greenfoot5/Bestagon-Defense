@@ -6,7 +6,6 @@ using Gameplay;
 using Levels.Maps;
 using Turrets;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace UI.Shop
 {
@@ -89,7 +88,7 @@ namespace UI.Shop
                 {
                     // Select if the game should get a module, turret or life
                     // Can only have one life option
-                    float choice = Random.Range(0f, _levelData.turretOptionWeight.Value.Evaluate(GameStats.Rounds)
+                    float choice = Shop.random.Range(0f, _levelData.turretOptionWeight.Value.Evaluate(GameStats.Rounds)
                                                     + _levelData.moduleOptionWeight.Value.Evaluate(GameStats.Rounds)
                                                     + (!hasLife ? 1 : 0) * _levelData.lifeOptionWeight.Value.Evaluate(GameStats.Rounds));
                     if (choice <= _levelData.moduleOptionWeight.Value.Evaluate(GameStats.Rounds))
@@ -148,7 +147,6 @@ namespace UI.Shop
                 Type[] validTypes = modules[i].item.GetModule().GetValidTypes();
                 if (validTypes == null || validTypes.Any(x => _turretTypes.Contains(x))) continue;
                 
-                Debug.Log("Removing " + modules[i].item.GetModule().name);
                 modules.RemoveAt(i);
                 i--;
             }
