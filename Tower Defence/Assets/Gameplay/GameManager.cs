@@ -193,7 +193,7 @@ namespace Gameplay
         {
             _startLives = GameStats.Lives;
             GameStats.Lives = saveData.Lives;
-            GameStats.PopulateRounds(saveData.WaveIndex + 1);
+            GameStats.PopulateRounds(saveData.WaveIndex);
             var shopComponent = shop.GetComponent<Shop>();
             shopComponent.totalCellsCollected = saveData.TotalCellsCollected;
             GameStats.Powercells = saveData.Powercells;
