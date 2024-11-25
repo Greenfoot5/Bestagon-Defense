@@ -73,8 +73,8 @@ namespace UI.Shop
             
             int selectionCount = shop.HasPlayerMadePurchase() ? _levelData.selectionChoices : _levelData.initialChoices;
             // Tracks what the game has given the player, so the game don't give duplicates
-            var selectedTypes = new Type[selectionCount];
-            var selectedNames = new string[selectionCount];
+            var selectedTurrets = new List<TurretBlueprint>();
+            var selectedModules = new List<ModuleChainHandler>();
             var hasLife = false;
             
             for (var i = 0; i < selectionCount; i++)
@@ -83,7 +83,7 @@ namespace UI.Shop
                 if (!shop.HasPlayerMadePurchase())
                 {
                     // Grants an Module option
-                    GenerateInitialItem(i, ref selectedTypes, ref selectedNames);
+                    selectedTurrets.Add(GenerateInitialItem(i, selectedTurrets));
                 }
                 else
                 {
@@ -95,13 +95,13 @@ namespace UI.Shop
                     if (choice <= _levelData.moduleOptionWeight.Value.Evaluate(GameStats.Rounds))
                     {
                         // Grants an Module option
-                        GenerateModuleItem(i, ref selectedTypes, ref selectedNames);
+                        selectedModules.Add(GenerateModuleItem(i, selectedModules));
 
                     }
                     else if (_levelData.moduleOptionWeight.Value.Evaluate(GameStats.Rounds) < choice && choice <=
                              _levelData.moduleOptionWeight.Value.Evaluate(GameStats.Rounds) + _levelData.turretOptionWeight.Value.Evaluate(GameStats.Rounds))
                     {
-                        GenerateTurretItem(i, ref selectedTypes, ref selectedNames);
+                        selectedTurrets.Add(GenerateTurretItem(i, selectedTurrets));
                     }
                     else
                     {
@@ -112,141 +112,54 @@ namespace UI.Shop
             }
         }
 
-        private void GenerateInitialItem(int selectionIndex, ref Type[] selectedTypes, ref string[] selectedNames)
+        private TurretBlueprint GenerateInitialItem(int selectionIndex, ICollection<TurretBlueprint> selectedTurrets)
         {
             // Grants a turret option
             var turrets = new WeightedList<TurretBlueprint>(_levelData.initialTurretSelection);
-            TurretBlueprint selected = turrets.GetRandomItem();
-        
-            // Check the game didn't pick something it's already picked (depending on duplicate checking type)
-            switch (_levelData.initialDuplicateCheck)
-            {
-                case DuplicateTypes.None:
-                    break;
-            
-                case DuplicateTypes.ByName:
-                    while (selectedNames.Contains(selected.displayName.GetLocalizedString()))
-                    {
-                        turrets.RemoveItem(selected);
-                        selected = turrets.GetRandomItem();
-                    }
-                    break;
-            
-                case DuplicateTypes.ByType:
-                    while (selectedTypes.Contains(selected.GetType()))
-                    {
-                        turrets.RemoveItem(selected);
-                        selected = turrets.GetRandomItem();
-                    }
-                    break;
-            
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            TurretBlueprint selected = turrets.GetRandomItem(duplicateType: _levelData.initialDuplicateCheck,
+                previousPicks: selectedTurrets.Take(selectionIndex).ToArray());
             
             // Add the turret to the ui for the player to pick
             GenerateTurretUI(selected);
-        
-            // Add the turret to our history so the game don't pick it again
-            if (_levelData.turretDuplicateCheck != DuplicateTypes.None)
-                turrets.RemoveItem(selected);
-            selectedTypes[selectionIndex] = selected.GetType();
-            selectedNames[selectionIndex] = selected.displayName.GetLocalizedString();
+            
+            return selected;
         }
 
-        private void GenerateTurretItem(int selectionIndex, ref Type[] selectedTypes, ref string[] selectedNames)
+        private TurretBlueprint GenerateTurretItem(int selectionIndex, ICollection<TurretBlueprint> selectedTurrets)
         {
             // Grants a turret option
-            var turrets = new WeightedList<TurretBlueprint>(_levelData.turrets.ToWeightedList(GameStats.Rounds));
-            TurretBlueprint selected = turrets.GetRandomItem();
-        
-            // Check the game didn't pick something it's already picked (depending on duplicate checking type)
-            switch (_levelData.turretDuplicateCheck)
-            {
-                case DuplicateTypes.None:
-                    break;
-            
-                case DuplicateTypes.ByName:
-                    while (selectedNames.Contains(selected.displayName.GetLocalizedString()))
-                    {
-                        turrets.RemoveItem(selected);
-                        selected = turrets.GetRandomItem();
-                    }
-                    break;
-            
-                case DuplicateTypes.ByType:
-                    while (selectedTypes.Contains(selected.GetType()))
-                    {
-                        turrets.RemoveItem(selected);
-                        selected = turrets.GetRandomItem();
-                    }
-                    break;
-            
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            WeightedList<TurretBlueprint> turrets = _levelData.turrets.ToWeightedList(GameStats.Rounds);
+            TurretBlueprint selected = turrets.GetRandomItem(duplicateType: _levelData.turretDuplicateCheck,
+                previousPicks: selectedTurrets.Take(selectionIndex).ToArray());
             
             // Add the turret to the ui for the player to pick
             GenerateTurretUI(selected);
-        
-            // Add the turret to our history so the game don't pick it again
-            if (_levelData.turretDuplicateCheck != DuplicateTypes.None)
-                turrets.RemoveItem(selected);
-            selectedTypes[selectionIndex] = selected.GetType();
-            selectedNames[selectionIndex] = selected.displayName.GetLocalizedString();
+
+            return selected;
         }
         
-        private void GenerateModuleItem(int selectionIndex, ref Type[] selectedTypes, ref string[] selectedNames)
+        private ModuleChainHandler GenerateModuleItem(int selectionIndex, ICollection<ModuleChainHandler> selectedModules)
         { 
-            var modules = new WeightedList<ModuleChainHandler>(_levelData.moduleHandlers.ToWeightedList(GameStats.Rounds));
-            ModuleChainHandler selected = modules.GetRandomItem();
+            WeightedList<ModuleChainHandler> modules = _levelData.moduleHandlers.ToWeightedList(GameStats.Rounds);
+
+            // Only show modules that can be equipped on a turret the player has (or had)
+            for (var i = 0; i < modules.Count; i++)
+            {
+                Type[] validTypes = modules[i].item.GetModule().GetValidTypes();
+                if (validTypes == null || validTypes.Any(x => _turretTypes.Contains(x))) continue;
+                
+                Debug.Log("Removing " + modules[i].item.GetModule().name);
+                modules.RemoveAt(i);
+                i--;
+            }
             
-            // Check the player actually has a turret of the modules type
-            // But only if they have actually bought some turrets
-            if (_turretTypes.Any())
-            {
-                while (!(selected.GetModule().GetValidTypes() == null ||
-                         _turretTypes.Any(x => selected.GetModule().GetValidTypes().Any(y => y.IsAssignableFrom(x)))))
-                {
-                    modules.RemoveItem(selected);
-                    selected = modules.GetRandomItem();
-                }
-            }
-
-            // Gets a new Module if the random has picked a duplicate (depending on settings)
-            switch (_levelData.moduleDuplicateCheck)
-            {
-                case DuplicateTypes.None:
-                    break;
-
-                case DuplicateTypes.ByName:
-                    while (selectedNames.Contains(selected.GetChain().displayName.GetLocalizedString()))
-                    {
-                        modules.RemoveItem(selected);
-                        selected = modules.GetRandomItem();
-                    }
-
-                    break;
-
-                case DuplicateTypes.ByType:
-                    while (selectedTypes.Contains(selected.GetModule().GetType()))
-                    {
-                        modules.RemoveItem(selected);
-                        selected = modules.GetRandomItem();
-                    }
-
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            ModuleChainHandler selected = modules.GetRandomItem(duplicateType: _levelData.moduleDuplicateCheck,
+                previousPicks: selectedModules.Take(selectionIndex).ToArray());
 
             // Adds the Module as an option to the player
             GenerateModuleUI(selected);
 
-            // Add it to our "history" to avoid duplicates on our next selection
-            selectedTypes[selectionIndex] = selected.GetModule().GetType();
-            selectedNames[selectionIndex] = selected.GetChain().displayName.GetLocalizedString();
+            return selected;
         }
 
         private void GenerateLifeItem()

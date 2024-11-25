@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Abstract;
 using Abstract.Data;
 using UI.Glyphs;
 using UnityEngine;
@@ -11,7 +13,7 @@ namespace Turrets
     /// Allows us to save turret data in an so without creating a prefab per turret
     /// </summary>
     [CreateAssetMenu(fileName = "TurretBlueprint", menuName = "Turret Blueprint", order = 0)]
-    public class TurretBlueprint : ScriptableObject
+    public class TurretBlueprint : ScriptableObject, ISubtypeable
     {
         [Header("Shop Info")]
         [Tooltip("The icon that appears on the selection card")]
@@ -33,5 +35,10 @@ namespace Turrets
         public GameObject prefab;
         [Tooltip("Any modules that come pre-applied when the player places the turret")]
         public List<ModuleChainHandler> moduleHandlers = new();
+
+        public Type GetSubtype()
+        {
+            return prefab.GetComponent<Turret>().GetType();
+        }
     }
 }

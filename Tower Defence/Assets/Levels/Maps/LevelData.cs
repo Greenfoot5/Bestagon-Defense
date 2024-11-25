@@ -5,16 +5,6 @@ using UnityEngine;
 namespace Levels.Maps
 {
     /// <summary>
-    /// A way to disable duplicates in random selections
-    /// </summary>
-    public enum DuplicateTypes
-    {
-        None,
-        ByName,
-        ByType
-    }
-    
-    /// <summary>
     /// Allows us to save data to allow levels to be different
     /// </summary>
     [CreateAssetMenu(fileName = "LevelName", menuName = "Level Data", order = 1)]

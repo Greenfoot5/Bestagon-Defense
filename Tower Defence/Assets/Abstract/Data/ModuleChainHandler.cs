@@ -11,7 +11,7 @@ namespace Abstract.Data
     /// Also handles a few other useful things
     /// </summary>
     [Serializable]
-    public struct ModuleChainHandler : IEquatable<ModuleChainHandler>
+    public struct ModuleChainHandler : IEquatable<ModuleChainHandler>, ISubtypeable
     {
         // The display levels of the modules
         private static readonly string[] Levels =
@@ -130,6 +130,16 @@ namespace Abstract.Data
         public override int GetHashCode()
         {
             return HashCode.Combine(chain, tier);
+        }
+
+        public override string ToString()
+        {
+            return GetModule().name + " (" + GetTierDisplay() + ")";
+        }
+        
+        public Type GetSubtype()
+        {
+            return GetModule().GetType();
         }
     }
 }
