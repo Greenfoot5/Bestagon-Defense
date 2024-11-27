@@ -39,7 +39,7 @@ namespace UI.Shop
             effect.text = lifeCount.GetLocalizedString(count);
             
             // When the card is clicked, the game picks the module
-            bg.GetComponent<Button>().onClick.AddListener(delegate { MakeSelection(); });
+            bg.GetComponent<Button>().onClick.AddListener(MakeSelection);
         }
 
         /// <summary>
@@ -47,10 +47,8 @@ namespace UI.Shop
         /// </summary>
         private void MakeSelection ()
         {
-            transform.parent.parent.gameObject.SetActive(false);
-            Time.timeScale = 1f;
-        
             GameStats.Lives += _count;
+            GameStats.Powercells -= 1;
         }
     }
 }

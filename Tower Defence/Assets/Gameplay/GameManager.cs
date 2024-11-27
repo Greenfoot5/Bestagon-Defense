@@ -114,15 +114,16 @@ namespace Gameplay
 
         public void PopulateSaveData(SaveLevel saveData)
         {
-            saveData.Lives = GameStats.Lives;
             var droppedEnergy = 0;
             foreach (DeathEnergy particle in DeathBitManager.Particles)
             {
                 if (!particle.IsAnimating)
                     droppedEnergy += particle.Value;
             }
+            
             saveData.Energy = GameStats.Energy + droppedEnergy;
             saveData.Powercells = GameStats.Powercells;
+            saveData.Lives = GameStats.Lives;
             saveData.WaveIndex = GameStats.Rounds - 1;
             saveData.TotalCellsCollected = shop.GetComponent<Shop>().totalCellsCollected;
             saveData.Nodes = new List<SaveLevel.NodeData>();
@@ -131,8 +132,8 @@ namespace Gameplay
             
             // Random
             saveData.RandomState = Random.state;
-            saveData.RandomSeed = Shop.random.GetState().Item1;
-            saveData.ShopRandomN = Shop.random.GetState().Item2;
+            saveData.RandomSeed = Shop.OldState.Item1;
+            saveData.ShopRandomN = Shop.OldState.Item2;
 
             // Node Data
             foreach (Node node in nodeParent.GetComponentsInChildren<Node>())

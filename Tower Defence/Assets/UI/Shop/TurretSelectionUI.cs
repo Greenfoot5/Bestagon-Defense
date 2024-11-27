@@ -1,5 +1,6 @@
 using System.Collections;
 using Abstract.Data;
+using Gameplay;
 using MaterialLibrary.Hexagons;
 using TMPro;
 using Turrets;
@@ -119,8 +120,6 @@ namespace UI.Shop
             
             // Adds the click event to the card
             bg.GetComponent<Button>().onClick.AddListener(delegate { MakeSelection(shop); });
-
-            StartCoroutine(Size());
         }
 
         /// <summary>
@@ -130,11 +129,14 @@ namespace UI.Shop
         /// <param name="shop"></param>
         private void MakeSelection(Shop shop)
         {
-            transform.parent.parent.gameObject.SetActive(false);
-            Time.timeScale = 1f;
-        
             shop.SpawnNewTurret(_turretBlueprint);
             TurretInfo.instance.DisplayTurretInventory();
+            GameStats.Powercells -= 1;
+        }
+
+        private void OnEnable()
+        {
+            StartCoroutine(Size());
         }
 
         private IEnumerator Size()

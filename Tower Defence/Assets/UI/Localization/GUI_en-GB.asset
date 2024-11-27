@@ -368,7 +368,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 166355730590326784
-    m_Localized: Live Longer
+    m_Localized: Could be anything
     m_Metadata:
       m_Items: []
   - m_Id: 166355899490754560
@@ -381,6 +381,38 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 167080099352403968
     m_Localized: Are you sure you wish to leave the level?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 167886092147613696
+    m_Localized: ???
+    m_Metadata:
+      m_Items: []
+  - m_Id: 167888981750439936
+    m_Localized: Resume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 167889063451287552
+    m_Localized: Lock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 167889221253586944
+    m_Localized: Will reveal hidden choices
+    m_Metadata:
+      m_Items: []
+  - m_Id: 167889999762546688
+    m_Localized: Lock to reveal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 167890170441359360
+    m_Localized: Live Longer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 167899297821483008
+    m_Localized: Pick an option to unlock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 167899401261408256
+    m_Localized: Locked
     m_Metadata:
       m_Items: []
   references:

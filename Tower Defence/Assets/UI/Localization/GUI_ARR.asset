@@ -243,7 +243,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 166355730590326784
-    m_Localized: Sail Longer
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 167889221253586944
+    m_Localized: Will reveal hidden loot
     m_Metadata:
       m_Items: []
   references:

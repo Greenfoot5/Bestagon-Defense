@@ -21,42 +21,33 @@ namespace UI.Shop
         [SerializeField]
         private GameObject lifeSelectionUI;
         private LevelData _levelData;
-        [Tooltip("The Shop component in the scene")]
+        private Shop _shop;
+        [Tooltip("The parent to add the selection to")]
         [SerializeField]
-        private Shop shop;
+        private Transform selectionCardsParent;
         
         [Tooltip("The turrets already purchased")]
         private readonly List<Type> _turretTypes = new();
+
+        [Tooltip("The button to show when unlocked")]
+        [SerializeField]
+        private GameObject lockButton;
+        [Tooltip("The status to show when locked")]
+        [SerializeField]
+        private GameObject lockedButton;
+        private bool _isLocked;
+
+        private void Awake()
+        {
+            _shop = GetComponent<Shop>();
+        }
     
         /// <summary>
         /// Setups references, checks the player has enough gold and freezes the game when enabled
         /// </summary>
-        private void Init()
+        private void Start()
         {
-            // Setup Level Manager reference
             _levelData = BuildManager.instance.GetComponent<GameManager>().levelData;
-
-            // Check the player can afford to open the shop
-            if (GameStats.Powercells < 1)
-            {
-                transform.parent.gameObject.SetActive(false);
-                return;
-            }
-
-            Time.timeScale = 0f;
-            GameStats.Powercells--;
-        }
-    
-        /// <summary>
-        /// Creates the new selection based on the GameManager's LevelData
-        /// </summary>
-        /// <exception cref="OverflowException">Removed duplicates too many times. Likely to have too few options</exception>
-        /// <exception cref="ArgumentOutOfRangeException">The game cannot pick a new item from the LevelData lists</exception>
-        private void OnEnable()
-        {
-            Init();
-        
-            GenerateSelection();
         }
         
         /// <summary>
@@ -64,13 +55,17 @@ namespace UI.Shop
         /// </summary>
         public void GenerateSelection()
         {
+            if (_isLocked) return;
+
+            Shop.OldState = Shop.random.GetState();
+            
             // Destroy the previous selection
-            for (int i = transform.childCount - 1; i >= 0; i--)
+            for (int i = selectionCardsParent.childCount - 1; i >= 0; i--)
             {
-                Destroy(transform.GetChild(i).gameObject);
+                Destroy(selectionCardsParent.GetChild(i).gameObject);
             }
             
-            int selectionCount = shop.HasPlayerMadePurchase() ? _levelData.selectionChoices : _levelData.initialChoices;
+            int selectionCount = _shop.HasPlayerMadePurchase() ? _levelData.selectionChoices : _levelData.initialChoices;
             // Tracks what the game has given the player, so the game don't give duplicates
             var selectedTurrets = new List<TurretBlueprint>();
             var selectedModules = new List<ModuleChainHandler>();
@@ -79,7 +74,7 @@ namespace UI.Shop
             for (var i = 0; i < selectionCount; i++)
             {
                 // If it's the first time opening the shop this level, the game should display a different selection
-                if (!shop.HasPlayerMadePurchase())
+                if (!_shop.HasPlayerMadePurchase())
                 {
                     // Grants an Module option
                     selectedTurrets.Add(GenerateInitialItem(i, selectedTurrets));
@@ -163,9 +158,9 @@ namespace UI.Shop
         private void GenerateLifeItem()
         {
             // Create the ui as a child
-            GameObject lifeUI = Instantiate(lifeSelectionUI, transform);
+            GameObject lifeUI = Instantiate(lifeSelectionUI, selectionCardsParent);
             lifeUI.name = "_" + lifeUI.name;
-            lifeUI.GetComponent<LifeSelectionUI>().Init(_levelData.lifeCount, shop);
+            lifeUI.GetComponent<LifeSelectionUI>().Init(_levelData.lifeCount, _shop);
         }
     
         /// <summary>
@@ -175,9 +170,9 @@ namespace UI.Shop
         private void GenerateModuleUI(ModuleChainHandler handler)
         {
             // Create the ui as a child
-            GameObject moduleUI = Instantiate(moduleSelectionUI, transform);
+            GameObject moduleUI = Instantiate(moduleSelectionUI, selectionCardsParent);
             moduleUI.name = "_" + moduleUI.name;
-            moduleUI.GetComponent<ModuleSelectionUI>().Init(handler, shop);
+            moduleUI.GetComponent<ModuleSelectionUI>().Init(handler, _shop);
         }
     
         /// <summary>
@@ -186,10 +181,10 @@ namespace UI.Shop
         /// <param name="turret">The turret the player can pick</param>
         private void GenerateTurretUI(TurretBlueprint turret)
         {
-            turret.glyph = shop.glyphsLookup.GetForType(turret.prefab.GetComponent<Turret>().GetType());
-            GameObject turretUI = Instantiate(turretSelectionUI, transform);
+            turret.glyph = _shop.glyphsLookup.GetForType(turret.prefab.GetComponent<Turret>().GetType());
+            GameObject turretUI = Instantiate(turretSelectionUI, selectionCardsParent);
             turretUI.name = "_" + turretUI.name;
-            turretUI.GetComponent<TurretSelectionUI>().Init(turret, shop);
+            turretUI.GetComponent<TurretSelectionUI>().Init(turret, _shop);
         }
         
         /// <summary>
@@ -202,6 +197,33 @@ namespace UI.Shop
         {
             if (!_turretTypes.Contains(type))
                 _turretTypes.Add(type);
+        }
+        
+        public void Open()
+        {
+            Time.timeScale = 0f;
+            selectionCardsParent.parent.gameObject.SetActive(true);
+        }
+
+        public void Resume()
+        {
+            Time.timeScale = 1f;
+            selectionCardsParent.parent.gameObject.SetActive(false);
+        }
+
+        public void Lock()
+        {
+            // TODO - Reveal Hidden
+            _isLocked = true;
+            lockButton.SetActive(false);
+            lockedButton.SetActive(true);
+        }
+
+        public void Unlock()
+        {
+            _isLocked = false;
+            lockButton.SetActive(true);
+            lockedButton.SetActive(false);
         }
     }
 }
