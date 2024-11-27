@@ -581,6 +581,9 @@ MonoBehaviour:
   initialSelectionCount: 2
   initialChoices: 3
   selectionChoices: 4
+  hiddenMode: 2
+  hiddenChoices: 2
+  hiddenChance: 0.25
   selectionCostFormula: 0.17*x^2+19*x+41
   health:
     useConstant: 0

@@ -6,9 +6,17 @@ using Gameplay;
 using Levels.Maps;
 using Turrets;
 using UnityEngine;
+using Object = System.Object;
 
 namespace UI.Shop
 {
+    public enum HiddenMode
+    {
+        Disabled,
+        Count,
+        Chance
+    }
+    
     public class GenerateShopSelection : MonoBehaviour
     {
         [Tooltip("The game object for a turret selection card")]
@@ -20,6 +28,9 @@ namespace UI.Shop
         [Tooltip("The game object for a life selection card")]
         [SerializeField]
         private GameObject lifeSelectionUI;
+        [Tooltip("The game object for a hidden selection card")]
+        [SerializeField]
+        private GameObject hiddenSelectionUI;
         private LevelData _levelData;
         private Shop _shop;
         [Tooltip("The parent to add the selection to")]
@@ -36,6 +47,8 @@ namespace UI.Shop
         [SerializeField]
         private GameObject lockedButton;
         private bool _isLocked;
+
+        private List<Tuple<Object, int>> _hiddenChoices;
 
         private void Awake()
         {
@@ -57,8 +70,10 @@ namespace UI.Shop
         {
             if (_isLocked) return;
 
-            Shop.OldState = Shop.random.GetState();
-            
+            Shop.oldState = Shop.random.GetState();
+            if (_levelData.hiddenMode != HiddenMode.Disabled)
+                _hiddenChoices = new List<Tuple<Object, int>>();
+
             // Destroy the previous selection
             for (int i = selectionCardsParent.childCount - 1; i >= 0; i--)
             {
@@ -99,7 +114,11 @@ namespace UI.Shop
                     }
                     else
                     {
-                        GenerateLifeItem();
+                        if (ShouldHide(i))
+                            GenerateHiddenUI(_levelData.lifeCount, i);
+                        else
+                            GenerateLifeItem();
+                        
                         hasLife = true;
                     }
                 }
@@ -125,9 +144,11 @@ namespace UI.Shop
             WeightedList<TurretBlueprint> turrets = _levelData.turrets.ToWeightedList(GameStats.Rounds);
             TurretBlueprint selected = turrets.GetRandomItem(duplicateType: _levelData.turretDuplicateCheck,
                 previousPicks: selectedTurrets.Take(selectionIndex).ToArray(), rng: Shop.random);
-            
-            // Add the turret to the ui for the player to pick
-            GenerateTurretUI(selected);
+
+            if (ShouldHide(selectionIndex))
+                GenerateHiddenUI(selected, selectionIndex);
+            else
+                GenerateTurretUI(selected);
 
             return selected;
         }
@@ -149,42 +170,65 @@ namespace UI.Shop
             ModuleChainHandler selected = modules.GetRandomItem(duplicateType: _levelData.moduleDuplicateCheck,
                 previousPicks: selectedModules.Take(selectionIndex).ToArray(), rng: Shop.random);
 
-            // Adds the Module as an option to the player
-            GenerateModuleUI(selected);
+            if (ShouldHide(selectionIndex))
+                GenerateHiddenUI(selected, selectionIndex);
+            else
+                GenerateModuleUI(selected);
 
             return selected;
         }
 
-        private void GenerateLifeItem()
+        private GameObject GenerateLifeItem()
         {
             // Create the ui as a child
             GameObject lifeUI = Instantiate(lifeSelectionUI, selectionCardsParent);
             lifeUI.name = "_" + lifeUI.name;
             lifeUI.GetComponent<LifeSelectionUI>().Init(_levelData.lifeCount, _shop);
+            return lifeUI;
         }
     
         /// <summary>
         /// Adds a new Module UI option to the player's choice
         /// </summary>
         /// <param name="handler">The Module the player can pick</param>
-        private void GenerateModuleUI(ModuleChainHandler handler)
+        private GameObject GenerateModuleUI(ModuleChainHandler handler)
         {
             // Create the ui as a child
             GameObject moduleUI = Instantiate(moduleSelectionUI, selectionCardsParent);
             moduleUI.name = "_" + moduleUI.name;
             moduleUI.GetComponent<ModuleSelectionUI>().Init(handler, _shop);
+            return moduleUI;
         }
     
         /// <summary>
         /// Adds a new turret UI option to the player's choice
         /// </summary>
         /// <param name="turret">The turret the player can pick</param>
-        private void GenerateTurretUI(TurretBlueprint turret)
+        private GameObject GenerateTurretUI(TurretBlueprint turret)
         {
             turret.glyph = _shop.glyphsLookup.GetForType(turret.prefab.GetComponent<Turret>().GetType());
             GameObject turretUI = Instantiate(turretSelectionUI, selectionCardsParent);
             turretUI.name = "_" + turretUI.name;
             turretUI.GetComponent<TurretSelectionUI>().Init(turret, _shop);
+            return turretUI;
+        }
+
+        private void GenerateHiddenUI(Object choice, int selectionIndex)
+        {
+            _hiddenChoices.Add(new Tuple<Object, int>(choice, selectionIndex));
+            GameObject turretUI = Instantiate(hiddenSelectionUI, selectionCardsParent);
+            turretUI.name = "_" + turretUI.name;
+        }
+
+        private bool ShouldHide(int selectionIndex)
+        {
+            return _levelData.hiddenMode switch
+            {
+                HiddenMode.Disabled => false,
+                HiddenMode.Count => _levelData.selectionChoices - (selectionIndex + 1) < _levelData.hiddenChoices,
+                HiddenMode.Chance => Shop.random.Next() > _levelData.hiddenChance,
+                _ => throw new Exception("Invalid hidden mode")
+            };
         }
         
         /// <summary>
@@ -213,7 +257,25 @@ namespace UI.Shop
 
         public void Lock()
         {
-            // TODO - Reveal Hidden
+            for (var i = 0; i < _hiddenChoices.Count; i++)
+            {
+                Destroy(selectionCardsParent.GetChild(_hiddenChoices[i].Item2 + i).gameObject);
+                GameObject shownItem;
+                if (_hiddenChoices[i].Item1.GetType() == typeof(TurretBlueprint))
+                {
+                    shownItem = GenerateTurretUI((TurretBlueprint)_hiddenChoices[i].Item1);
+                }
+                else if (_hiddenChoices[i].Item1 is ModuleChainHandler)
+                {
+                    shownItem = GenerateModuleUI((ModuleChainHandler)_hiddenChoices[i].Item1);
+                }
+                else
+                {
+                    shownItem = GenerateLifeItem();
+                }
+                shownItem.transform.SetSiblingIndex(_hiddenChoices[i].Item2);
+            }
+            
             _isLocked = true;
             lockButton.SetActive(false);
             lockedButton.SetActive(true);

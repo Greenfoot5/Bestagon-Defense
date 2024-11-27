@@ -81,7 +81,7 @@ namespace UI.Shop
         public static Squirrel3 random;
         [Tooltip("The previous state of the random before the current selection")]
         [HideInInspector]
-        public static Tuple<int, int> OldState;
+        public static Tuple<int, int> oldState;
 
         /// <summary>
         /// Initialises values and set's starting prices
@@ -164,7 +164,7 @@ namespace UI.Shop
         /// <returns>If the player has made a purchase</returns>
         public bool HasPlayerMadePurchase()
         {
-            return totalCellsCollected - GameStats.Powercells > _levelData.initialSelectionCount;
+            return totalCellsCollected - GameStats.Powercells >= _levelData.initialSelectionCount;
         }
 
         public int GetSellPercentage()

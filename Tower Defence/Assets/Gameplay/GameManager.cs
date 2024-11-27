@@ -132,8 +132,8 @@ namespace Gameplay
             
             // Random
             saveData.RandomState = Random.state;
-            saveData.RandomSeed = Shop.OldState.Item1;
-            saveData.ShopRandomN = Shop.OldState.Item2;
+            saveData.RandomSeed = Shop.oldState.Item1;
+            saveData.ShopRandomN = Shop.oldState.Item2;
 
             // Node Data
             foreach (Node node in nodeParent.GetComponentsInChildren<Node>())

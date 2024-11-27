@@ -5150,6 +5150,7 @@ MonoBehaviour:
   turretSelectionUI: {fileID: 7349952435930394342, guid: 5453fbd1fffdc4a799b811ae56769adb, type: 3}
   moduleSelectionUI: {fileID: 7349952435930394342, guid: 1fd7562f294fb4ebfa9c3ec91a6f36e8, type: 3}
   lifeSelectionUI: {fileID: 7349952435930394342, guid: 2c152cea0b9334ff7b4ae9dfbbcfe040, type: 3}
+  hiddenSelectionUI: {fileID: 7349952435930394342, guid: 07d5e918566324535852006bf5b0ab0e, type: 3}
   selectionCardsParent: {fileID: 4077244561405541610}
   lockButton: {fileID: 402540864464573623}
   lockedButton: {fileID: 8682056778370520253}
