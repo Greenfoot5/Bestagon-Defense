@@ -86,6 +86,10 @@ namespace UI.Shop
             var selectedModules = new List<ModuleChainHandler>();
             var hasLife = false;
             
+            // We want to warn if there's a round where a selection couldn't be fully generated
+            if (_shop.HasPlayerMadePurchase())
+                CheckCategories(selectionCount);
+
             for (var i = 0; i < selectionCount; i++)
             {
                 // If it's the first time opening the shop this level, the game should display a different selection
@@ -98,9 +102,11 @@ namespace UI.Shop
                 {
                     // Select if the game should get a module, turret or life
                     // Can only have one life option
-                    float choice = Shop.random.Range(0f, _levelData.turretOptionWeight.Value.Evaluate(GameStats.Rounds)
-                                                    + _levelData.moduleOptionWeight.Value.Evaluate(GameStats.Rounds)
-                                                    + (!hasLife ? 1 : 0) * _levelData.lifeOptionWeight.Value.Evaluate(GameStats.Rounds));
+                    // We clamp to make sure they don't affect each other if < 0
+                    float choice = Shop.random.Range(0f,
+                        Mathf.Clamp(_levelData.turretOptionWeight.Value.Evaluate(GameStats.Rounds), 0f, float.MaxValue)
+                        + Mathf.Clamp(_levelData.moduleOptionWeight.Value.Evaluate(GameStats.Rounds), 0f, float.MaxValue)
+                        + (!hasLife ? 1 : 0) * Mathf.Clamp(_levelData.lifeOptionWeight.Value.Evaluate(GameStats.Rounds), 0f, float.MaxValue));
                     if (choice <= _levelData.moduleOptionWeight.Value.Evaluate(GameStats.Rounds))
                     {
                         // Grants an Module option
@@ -229,6 +235,30 @@ namespace UI.Shop
                 HiddenMode.Chance => Shop.random.Next() < _levelData.hiddenChance,
                 _ => throw new Exception("Invalid hidden mode")
             };
+        }
+
+        private void CheckCategories(int selectionCount)
+        {
+            try
+            {
+                if (_levelData.turretOptionWeight.Value.Evaluate(GameStats.Rounds) < 0)
+                    _levelData.turrets.ToWeightedList(GameStats.Rounds)
+                        .GetRandomItems(selectionCount, _levelData.turretDuplicateCheck);
+            }
+            catch (NullReferenceException)
+            {
+                Debug.LogWarning("Shop may not have enough turrets to pick from at wave " + GameStats.Rounds);
+            }
+            try
+            {
+                if (_levelData.moduleOptionWeight.Value.Evaluate(GameStats.Rounds) < 0)
+                    _levelData.moduleHandlers.ToWeightedList(GameStats.Rounds)
+                        .GetRandomItems(selectionCount, _levelData.moduleDuplicateCheck);
+            }
+            catch (NullReferenceException)
+            {
+                Debug.LogWarning("Shop may not have enough modules to pick from at wave " + GameStats.Rounds);
+            }
         }
         
         /// <summary>
