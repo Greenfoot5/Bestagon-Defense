@@ -80,7 +80,6 @@ namespace UI.Shop
 
         public static Squirrel3 random;
         [Tooltip("The previous state of the random before the current selection")]
-        [HideInInspector]
         public static Tuple<int, int> oldState;
 
         /// <summary>

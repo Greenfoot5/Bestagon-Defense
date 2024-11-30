@@ -226,7 +226,7 @@ namespace UI.Shop
             {
                 HiddenMode.Disabled => false,
                 HiddenMode.Count => _levelData.selectionChoices - (selectionIndex + 1) < _levelData.hiddenChoices,
-                HiddenMode.Chance => Shop.random.Next() > _levelData.hiddenChance,
+                HiddenMode.Chance => Shop.random.Next() < _levelData.hiddenChance,
                 _ => throw new Exception("Invalid hidden mode")
             };
         }
