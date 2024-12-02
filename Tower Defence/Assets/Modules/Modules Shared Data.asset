@@ -255,6 +255,18 @@ MonoBehaviour:
     m_Key: Title/Modules
     m_Metadata:
       m_Items: []
+  - m_Id: 258848283893424128
+    m_Key: Frostbite/Display Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 258848354047352832
+    m_Key: Frostbite/Tagline
+    m_Metadata:
+      m_Items: []
+  - m_Id: 258848436603838464
+    m_Key: New Entry
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

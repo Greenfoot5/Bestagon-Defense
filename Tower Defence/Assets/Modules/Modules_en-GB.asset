@@ -258,6 +258,18 @@ MonoBehaviour:
     m_Localized: Modules
     m_Metadata:
       m_Items: []
+  - m_Id: 258848283893424128
+    m_Localized: Frostbite
+    m_Metadata:
+      m_Items: []
+  - m_Id: 258848354047352832
+    m_Localized: Shattering
+    m_Metadata:
+      m_Items: []
+  - m_Id: 258848436603838464
+    m_Localized: 'Removes slow effect '
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

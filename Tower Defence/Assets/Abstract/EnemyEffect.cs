@@ -72,7 +72,6 @@ namespace Abstract
                     Target.ActiveEffects[effectType]._durationLeft = 0f;
                     return false;
                 }
-                if (Target.ActiveEffects[effectType].tier <= tier)
 
                 if (Target.ActiveEffects[effectType].tier < tier)
                 {

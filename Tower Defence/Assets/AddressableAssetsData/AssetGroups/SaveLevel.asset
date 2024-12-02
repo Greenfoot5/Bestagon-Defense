@@ -255,6 +255,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - ModuleChain
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fbd6ed1e70325442b93199df51454964
+    m_Address: FrostbiteModuleChain
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleChain
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 6e9e55f6df8a74e608f92b8e3a1f0b77, type: 2}
   m_SchemaSet:
