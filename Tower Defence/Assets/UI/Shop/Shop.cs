@@ -1,4 +1,5 @@
-﻿using Abstract;
+﻿using System;
+using Abstract;
 using Abstract.Data;
 using Gameplay;
 using Levels.Maps;
@@ -15,62 +16,71 @@ namespace UI.Shop
     /// <summary>
     /// Handles the shop and inventory of the player
     /// </summary>
+    [RequireComponent(typeof(GenerateShopSelection))]
     public class Shop : MonoBehaviour
     {
         private BuildManager _buildManager;
         private LevelData _levelData;
         private ModuleChainHandler _selectedHandler;
-        
-        [SerializeField]
-        [Tooltip("The inventory to place turret buttons")]
+
+        [SerializeField] [Tooltip("The inventory to place turret buttons")]
         private GameObject turretInventory;
-        [SerializeField]
-        [Tooltip("The inventory to place module buttons under")]
+
+        [SerializeField] [Tooltip("The inventory to place module buttons under")]
         private GameObject moduleInventory;
-        [SerializeField]
-        [Tooltip("The generic turret button prefab")]
+
+        [SerializeField] [Tooltip("The generic turret button prefab")]
         private GameObject defaultTurretButton;
+
         [Tooltip("The generic module button prefab")]
         [SerializeField]
         private GameObject defaultModuleButton;
-        
+
         [Tooltip("The UI to display when the player opens the shop")]
         [SerializeField]
-        private GameObject selectionUI;
+        private GenerateShopSelection selectionGenerator;
+
         [FormerlySerializedAs("selectionCost")]
         [Range(0, Mathf.Infinity)]
         [HideInInspector]
         public int nextCost;
-        [HideInInspector]
-        public int totalCellsCollected;
-        
+
+        [HideInInspector] public int totalCellsCollected;
+
         [Tooltip("Current count of powercells")]
         [SerializeField]
         private TMP_Text powercellCount;
+
         [Tooltip("Current count of powercells")]
         [SerializeField]
         private Progress powercellProgress;
-        
-        [Header("Shop Button")]
+
+        [Header("Shop Button")] 
         [Tooltip("Shop Button Colours Top when can afford")]
         [SerializeField]
         private Image buyButton;
+
         private Button _buyButtonButton;
+
         [Tooltip("Shop button image when can afford")]
         [SerializeField]
         private Sprite affordButtonImage;
+
         [Tooltip("Shop button image when can't afford")]
         [SerializeField]
         private Sprite expensiveButtonImage;
+
         [Tooltip("Shop Button Colours Bottom when can afford")]
         [SerializeField]
         private GameObject expensiveButtonOverlay;
-        
+
         [Tooltip("The GlyphsLookup index in the scene")]
         [SerializeField]
         public TypeSpriteLookup glyphsLookup;
 
         public static Squirrel3 random;
+        [Tooltip("The previous state of the random before the current selection")]
+        public static Tuple<int, int> oldState;
 
         /// <summary>
         /// Initialises values and set's starting prices
@@ -80,12 +90,14 @@ namespace UI.Shop
             _buildManager = BuildManager.instance;
             _levelData = _buildManager.GetComponent<GameManager>().levelData;
             _buyButtonButton = buyButton.gameObject.GetComponent<Button>();
-            
+            selectionGenerator = GetComponent<GenerateShopSelection>();
+
             // It should only be greater than 0 if we've loaded a save
             nextCost = GetEnergyCost();
-            
+
             GameStats.OnGainEnergy += CalculateCells;
             GameStats.OnGainPowercell += UpdateBuyButton;
+            GameStats.OnRoundProgress += selectionGenerator.GenerateSelection;
             CalculateCells();
             UpdateBuyButton();
         }
@@ -94,6 +106,7 @@ namespace UI.Shop
         {
             GameStats.OnGainEnergy -= CalculateCells;
             GameStats.OnGainPowercell -= UpdateBuyButton;
+            GameStats.OnRoundProgress -= selectionGenerator.GenerateSelection;
         }
 
         /// <summary>
@@ -110,54 +123,57 @@ namespace UI.Shop
         /// <param name="turret">The blueprint of the turret to add</param>
         public void SpawnNewTurret(TurretBlueprint turret)
         {
+            selectionGenerator.GenerateSelection();
+            selectionGenerator.Resume();
+            selectionGenerator.Unlock();
+
             // Add and display the new item
             GameObject turretButton = Instantiate(defaultTurretButton, turretInventory.transform);
             turretButton.name = "_" + turretButton.name;
             turretButton.GetComponent<TurretInventoryItem>().Init(turret);
-            
-            selectionUI.GetComponentInChildren<GenerateShopSelection>().AddTurretType(turret.prefab.GetComponent<Turret>().GetType());
+
+            selectionGenerator.AddTurretType(turret.prefab.GetComponent<Turret>().GetType());
             GameManager.TurretInventory.Add(turret);
         }
-        
+
         /// <summary>
         /// Adds a new module button to the module inventory
         /// </summary>
         /// <param name="module">The module to add</param>
         public void SpawnNewModule(ModuleChainHandler module)
         {
+            selectionGenerator.GenerateSelection();
+            selectionGenerator.Resume();
+            selectionGenerator.Unlock();
+
             GameObject moduleButton = Instantiate(defaultModuleButton, moduleInventory.transform);
             moduleButton.name = "_" + moduleButton.name;
             moduleButton.GetComponentInChildren<ModuleInventoryItem>().Init(module, glyphsLookup);
-            moduleButton.GetComponentInChildren<Button>().onClick.AddListener(delegate { TurretInfo.instance.ApplyModule(module, moduleButton); });
-            
+            moduleButton.GetComponentInChildren<Button>().onClick.AddListener(delegate
+            {
+                TurretInfo.instance.ApplyModule(module, moduleButton);
+            });
+
             GameManager.ModuleInventory.Add(module);
         }
-        
-        /// <summary>
-        /// Opens the shop and displays the selection
-        /// </summary>
-        public void OpenSelectionUI()
-        {
-            selectionUI.SetActive(true);
-        }
-        
+
         /// <summary>
         /// Gets if the player has made a purchase yet
         /// </summary>
         /// <returns>If the player has made a purchase</returns>
         public bool HasPlayerMadePurchase()
         {
-            return totalCellsCollected - GameStats.Powercells > _levelData.initialSelectionCount;
+            return totalCellsCollected - GameStats.Powercells >= _levelData.initialSelectionCount;
         }
-        
+
         public int GetSellPercentage()
         {
-            return (int) (_levelData.sellPercentage * 100);
+            return (int)(_levelData.sellPercentage * 100);
         }
 
         public int GetSellAmount()
         {
-            return (int) (_levelData.sellPercentage * nextCost);
+            return (int)(_levelData.sellPercentage * nextCost);
         }
 
         private void CalculateCells()
@@ -170,6 +186,7 @@ namespace UI.Shop
                 energyToSubtract += nextCost;
                 GameStats.Powercells++;
             }
+
             if (energyToSubtract > 0)
                 GameStats.Energy -= energyToSubtract;
             UpdateBuyButton();
@@ -189,9 +206,10 @@ namespace UI.Shop
                 expensiveButtonOverlay.SetActive(true);
                 _buyButtonButton.enabled = false;
             }
+
             UpdateEnergyCount();
         }
-        
+
         private void UpdateEnergyCount()
         {
             powercellCount.text = GameStats.Powercells.ToString();
@@ -203,7 +221,8 @@ namespace UI.Shop
         /// </summary>
         public int GetEnergyCost()
         {
-            ExpressionEvaluator.Evaluate(_levelData.selectionCostFormula.Replace("x", $"({totalCellsCollected.ToString()})"), out int output);
+            ExpressionEvaluator.Evaluate(
+                _levelData.selectionCostFormula.Replace("x", $"({totalCellsCollected.ToString()})"), out int output);
             if (output == 0)
                 Debug.LogError("Energy Cost was 0, likely an issue with formula");
             return output;

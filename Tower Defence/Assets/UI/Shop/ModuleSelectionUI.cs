@@ -1,5 +1,6 @@
 using System;
 using Abstract.Data;
+using Gameplay;
 using MaterialLibrary;
 using MaterialLibrary.Hexagons;
 using Modules;
@@ -104,11 +105,9 @@ namespace UI.Shop
         /// <param name="shop"></param>
         private void MakeSelection (Shop shop)
         {
-            transform.parent.parent.gameObject.SetActive(false);
-            Time.timeScale = 1f;
-        
             shop.SpawnNewModule(handler);
             TurretInfo.instance.OpenModuleInventory();
+            GameStats.Powercells -= 1;
         }
     }
 }

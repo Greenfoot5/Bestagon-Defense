@@ -100,7 +100,7 @@ namespace UI.Shop
             
             // Regenerate and refresh
             selectionCardsParent.GenerateSelection();
-            shop.OpenSelectionUI();
+            //shop.GenerateSelection();
             CheckReroll();
         }
         

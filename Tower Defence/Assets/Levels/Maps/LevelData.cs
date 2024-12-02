@@ -1,6 +1,8 @@
 using Abstract.Data;
 using Turrets;
+using UI.Shop;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Levels.Maps
 {
@@ -41,6 +43,13 @@ namespace Levels.Maps
         public int initialChoices = 3;
         [Tooltip("How many options to display in selections after the initial")]
         public int selectionChoices = 3;
+        [Tooltip("If the hidden feature should use chance")]
+        public HiddenMode hiddenMode = HiddenMode.Disabled;
+        [Tooltip("How many options in a selection should be hidden")]
+        public int hiddenChoices = 0;
+        [Tooltip("Chance an option is hidden")]
+        [Range(0f, 1f)]
+        public float hiddenChance = 0;
         
         [Header("Costs")]
         [Tooltip("Shows how costs scale per wave.\nMust be valid formula for ExpressionEvaluator.Evaluate\n\"x\" is the input")]
