@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moduleTiers:
   - {fileID: 11400000, guid: ba6eb512d951746e3beed4c10e2c54fd, type: 2}
+  - {fileID: 11400000, guid: 9186534c56d9e47edb4bf93c9f328783, type: 2}
+  - {fileID: 11400000, guid: cc3589e55239a47fdad2a8c75346cd50, type: 2}
   unique: 1
   accentColor: {r: 1, g: 1, b: 1, a: 1}
   icon: {fileID: -3233660875540053938, guid: 968d79b317056467986e74bf36918e59, type: 3}

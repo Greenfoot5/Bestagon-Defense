@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bac19b33f995f4953b7c99adbaea721e, type: 3}
-  m_Name: FrostbiteT1
+  m_Name: FrostbiteT2
   m_EditorClassIdentifier: 
   moduleTier: 1
   isUpgradableTo: 1
-  damageMultiplier: 1.25
-  bulletExplosionRadius: 0.7
+  damageMultiplier: 1.75
+  bulletExplosionRadius: 0.3
   enemyEffect: {fileID: 11400000, guid: d303b955d85a74953a2aca0b1d311a52, type: 2}
