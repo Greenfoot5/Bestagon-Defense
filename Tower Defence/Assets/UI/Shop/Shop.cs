@@ -38,14 +38,15 @@ namespace UI.Shop
 
         [Tooltip("The UI to display when the player opens the shop")]
         [SerializeField]
-        private GenerateShopSelection selectionGenerator;
+        public GenerateShopSelection selectionGenerator;
 
         [FormerlySerializedAs("selectionCost")]
         [Range(0, Mathf.Infinity)]
         [HideInInspector]
         public int nextCost;
 
-        [HideInInspector] public int totalCellsCollected;
+        [HideInInspector]
+        public int totalCellsCollected;
 
         [Tooltip("Current count of powercells")]
         [SerializeField]
@@ -59,7 +60,6 @@ namespace UI.Shop
         [Tooltip("Shop Button Colours Top when can afford")]
         [SerializeField]
         private Image buyButton;
-
         private Button _buyButtonButton;
 
         [Tooltip("Shop button image when can afford")]

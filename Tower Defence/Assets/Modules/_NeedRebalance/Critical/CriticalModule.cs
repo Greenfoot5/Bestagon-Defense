@@ -12,7 +12,7 @@ namespace Modules.Critical
     [CreateAssetMenu(fileName = "CriticalT0", menuName = "Modules/Critical")]
     public class CriticalModule : Module
     {
-        protected override Type[] ValidTypes => null;
+        protected override Type[] ValidTypes => new[] {typeof(Turret)};
         
         [Tooltip("Percentage chance to deal double damage")]
         [SerializeField]

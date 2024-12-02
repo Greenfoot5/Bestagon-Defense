@@ -38,7 +38,7 @@ namespace UI.Shop
         private Transform selectionCardsParent;
         
         [Tooltip("The turrets already purchased")]
-        private readonly List<Type> _turretTypes = new();
+        private readonly List<Type> _turretTypes = new() {typeof(Turret)};
 
         [Tooltip("The button to show when unlocked")]
         [SerializeField]
@@ -168,7 +168,7 @@ namespace UI.Shop
             for (var i = 0; i < modules.Count; i++)
             {
                 Type[] validTypes = modules[i].item.GetModule().GetValidTypes();
-                if (validTypes == null || validTypes.Any(x => _turretTypes.Contains(x))) continue;
+                if (validTypes.Any(x => _turretTypes.Contains(x))) continue;
                 
                 modules.RemoveAt(i);
                 i--;

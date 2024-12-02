@@ -20,7 +20,6 @@ namespace Abstract
     {
         private static readonly List<Type> Types = new()
         {
-            null, // Represents no specific damager type
             typeof(Turret), // Represents no specific turret type
             typeof(Shooter),
             typeof(Laser),

@@ -69,28 +69,14 @@ namespace UI.Inventory
             accent = module.GetChain().accentColor;
             modulesBg.color = module.GetChain().accentColor * new Color(1, 1, 1, .16f);
             
-            // Adds the any glyph
-            if (_module.GetModule().GetValidTypes() == null)
+            foreach (Type turretType in module.GetModule().GetValidTypes())
             {
-                TurretGlyphSo glyphSo = lookup.GetForType(null);
-                Transform glyph = Instantiate(glyphPrefab, applicableGlyphs.transform).transform;
+                TurretGlyphSo glyphSo = lookup.GetForType(turretType);
+                Transform glyph = Instantiate(glyphPrefab, applicableGlyphs).transform;
                 glyph.name = "_" + glyph.name;
                 glyph.Find("Body").GetComponent<HexagonSprite>().color = glyphSo.body;
                 glyph.Find("Shade").GetComponent<HexagonSprite>().color = glyphSo.shade;
                 glyph.Find("Glyph").GetComponent<Image>().sprite = glyphSo.glyph;
-            }
-            // Adds the glyph for every turret the module supports
-            else
-            {
-                foreach (Type turretType in module.GetModule().GetValidTypes())
-                {
-                    TurretGlyphSo glyphSo = lookup.GetForType(turretType);
-                    Transform glyph = Instantiate(glyphPrefab, applicableGlyphs).transform;
-                    glyph.name = "_" + glyph.name;
-                    glyph.Find("Body").GetComponent<HexagonSprite>().color = glyphSo.body;
-                    glyph.Find("Shade").GetComponent<HexagonSprite>().color = glyphSo.shade;
-                    glyph.Find("Glyph").GetComponent<Image>().sprite = glyphSo.glyph;
-                }
             }
 
             TurretTypes = module.GetModule().GetValidTypes();

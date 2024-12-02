@@ -11,7 +11,7 @@ namespace Modules.Range
     [CreateAssetMenu(fileName = "RangeModule", menuName = "Modules/Range")]
     public class RangeModule : Module
     {
-        protected override Type[] ValidTypes => new [] {typeof(Turret)};  // any
+        protected override Type[] ValidTypes => new[] {typeof(Turret)};  // any
         
         [Tooltip("The percentage to modify the range of the turret by")]
         [SerializeField]

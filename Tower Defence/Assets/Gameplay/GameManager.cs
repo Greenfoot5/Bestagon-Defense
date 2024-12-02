@@ -217,6 +217,7 @@ namespace Gameplay
                     }
                     
                     var turret = node.turret.GetComponent<Turret>();
+                    shopComponent.selectionGenerator.AddTurretType(turret.GetType());
                     if (turret.GetType().IsSubclassOf(typeof(DynamicTurret)))
                     {
                         ((DynamicTurret)turret).partToRotate.rotation = nodeData.turretRotation;

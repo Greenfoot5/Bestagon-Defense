@@ -71,28 +71,14 @@ namespace UI.Shop
             effect.text = chain.description.GetLocalizedString();
             effect.color = chain.accentColor;
             
-            // Adds the any glyph
-            if (module.GetValidTypes() == null)
+            foreach (Type turretType in module.GetValidTypes())
             {
-                TurretGlyphSo glyphSo = shop.glyphsLookup.GetForType(null);
-                Transform glyph = Instantiate(glyphPrefab, applicableGlyphs.transform).transform;
+                TurretGlyphSo glyphSo = shop.glyphsLookup.GetForType(turretType);
+                Transform glyph = Instantiate(glyphPrefab, applicableGlyphs).transform;
                 glyph.name = "_" + glyph.name;
                 glyph.Find("Body").GetComponent<HexagonSprite>().color = glyphSo.body;
                 glyph.Find("Shade").GetComponent<HexagonSprite>().color = glyphSo.shade;
                 glyph.Find("Glyph").GetComponent<Image>().sprite = glyphSo.glyph;
-            }
-            // Adds the glyph for every turret the module supports
-            else
-            {
-                foreach (Type turretType in module.GetValidTypes())
-                {
-                    TurretGlyphSo glyphSo = shop.glyphsLookup.GetForType(turretType);
-                    Transform glyph = Instantiate(glyphPrefab, applicableGlyphs).transform;
-                    glyph.name = "_" + glyph.name;
-                    glyph.Find("Body").GetComponent<HexagonSprite>().color = glyphSo.body;
-                    glyph.Find("Shade").GetComponent<HexagonSprite>().color = glyphSo.shade;
-                    glyph.Find("Glyph").GetComponent<Image>().sprite = glyphSo.glyph;
-                }
             }
             
             // When the card is clicked, the game picks the module

@@ -12,7 +12,7 @@ namespace Modules.Giantslayer
     [CreateAssetMenu(fileName = "GiantslayerT0", menuName = "Modules/Giantslayer")]
     public class GiantslayerModule : Module
     {
-        protected override Type[] ValidTypes => null;
+        protected override Type[] ValidTypes => new[] {typeof(Turret)};
 
         [SerializeField]
         [Tooltip("The percentage damage change if attacking a boss")]

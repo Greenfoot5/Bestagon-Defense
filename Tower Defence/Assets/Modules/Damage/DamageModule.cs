@@ -10,7 +10,7 @@ namespace Modules.Damage
     [CreateAssetMenu(fileName = "DamageT0", menuName = "Modules/Damage")]
     public class DamageModule : Module
     {
-        protected override Type[] ValidTypes => null;  // any
+        protected override Type[] ValidTypes => new[] {typeof(Turret)};  // any
         
         [Tooltip("What percentage to modify the damage by")]
         [SerializeField]
