@@ -49,6 +49,7 @@ namespace UI.Shop
         private bool _isLocked;
 
         private List<Tuple<Object, int>> _hiddenChoices;
+        private float _openTimeScale;
 
         private void Awake()
         {
@@ -276,13 +277,14 @@ namespace UI.Shop
         
         public void Open()
         {
+            _openTimeScale = Time.timeScale;
             Time.timeScale = 0f;
             selectionCardsParent.parent.gameObject.SetActive(true);
         }
 
         public void Resume()
         {
-            Time.timeScale = 1f;
+            Time.timeScale = _openTimeScale;
             selectionCardsParent.parent.gameObject.SetActive(false);
         }
 
