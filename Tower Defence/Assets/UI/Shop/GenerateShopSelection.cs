@@ -115,6 +115,7 @@ namespace UI.Shop
         {
             // Grants a turret option
             var turrets = new WeightedList<TurretBlueprint>(_levelData.initialTurretSelection);
+            turrets.RemoveUnweighted();
             TurretBlueprint selected = turrets.GetRandomItem(duplicateType: _levelData.initialDuplicateCheck,
                 previousPicks: selectedTurrets.Take(selectionIndex).ToArray(), rng: Shop.random);
             

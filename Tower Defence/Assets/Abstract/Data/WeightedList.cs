@@ -33,13 +33,11 @@ namespace Abstract.Data
         public WeightedList(List<WeightedItem<T>> list)
         {
             this.list = new List<WeightedItem<T>>(list);
-            RemoveUnweighted();
         }
 
         public WeightedList(WeightedList<T> list)
         {
             this.list = new List<WeightedItem<T>>(list.list);
-            RemoveUnweighted();
         }
         
         /// <summary>

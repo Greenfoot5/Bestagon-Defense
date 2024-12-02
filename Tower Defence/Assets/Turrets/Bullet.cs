@@ -12,7 +12,8 @@ namespace Turrets
     /// </summary>
     public class Bullet : MonoBehaviour
     {
-        [FormerlySerializedAs("_source")] public Turret source;
+        [FormerlySerializedAs("_source")]
+        public Turret source;
         [HideInInspector]
         public Transform target;
         [HideInInspector]
@@ -33,6 +34,9 @@ namespace Turrets
         public UpgradableStat explosionRadius;
         [Tooltip("The knockback the bullet deals to a target (set by turret)")]
         public UpgradableStat knockbackAmount;
+        [Tooltip("The damage the bullet will deal (set by turret when spawned")]
+        [HideInInspector]
+        public UpgradableStat damage;
     
         [Tooltip("The effect spawned when the bullet hit's a target")]
         [SerializeField]
@@ -53,6 +57,7 @@ namespace Turrets
             target = newTarget;
             source = turret;
             useLocation = false;
+            damage = turret.damage;
         }
         
         /// <summary>
@@ -65,6 +70,7 @@ namespace Turrets
             targetLocation = location;
             source = turret;
             useLocation = true;
+            damage = turret.damage;
         }
 
         /// <summary>
@@ -158,7 +164,7 @@ namespace Turrets
                 em.GetComponent<EnemyMovement>().TakeKnockback(knockbackAmount.GetTrueStat(), source.transform.position);
             }
 
-            em.TakeDamage(source.damage.GetStat(), gameObject);
+            em.TakeDamage(damage.GetStat(), gameObject);
         }
     
         /// <summary>

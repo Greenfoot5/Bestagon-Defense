@@ -71,7 +71,7 @@ namespace Enemies
         [Tooltip("A list of effect names (internal names) that the enemy is immune to" +
                  "\n\nDuring runtime, also contains any unique effects applied to the enemy as they are immune while they have it")]
         public List<string> uniqueEffects;
-        public Dictionary<string, EnemyEffect> ActiveEffects = new();
+        public readonly Dictionary<string, EnemyEffect> ActiveEffects = new();
         
         // Abilities for each trigger
         private readonly List<EnemyAbility> _timerAbilities = new();
@@ -96,6 +96,15 @@ namespace Enemies
             foreach (EnemyAbility ability in startingAbilities)
             {
                 GrantAbility(ability);
+            }
+        }
+
+        private void Update()
+        {
+            var keys = new List<string>(ActiveEffects.Keys);
+            foreach (string effect in keys)
+            {
+                ActiveEffects[effect].Update();
             }
         }
         

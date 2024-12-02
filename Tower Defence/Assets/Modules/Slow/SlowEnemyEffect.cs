@@ -29,7 +29,7 @@ namespace Modules.Slow
             return true;
         }
 
-        public override void Remove()
+        protected override void Remove()
         {
             base.Remove();
             
@@ -38,6 +38,6 @@ namespace Modules.Slow
             Target.speed.DivideModifier(slowValue);
         }
 
-        public override void DoEffect() { }
+        protected override void DoEffect() { }
     }
 }

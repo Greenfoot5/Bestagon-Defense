@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b839f187b6334ec792b27518c77b230b, type: 3}
   m_Name: SlowEffectT3
   m_EditorClassIdentifier: 
-  tickCount: 7
-  tickDuration: 0.5
+  tickCount: 1
+  tickDuration: 3.5
   ticksLeft: 0
   effectType: Slow
   tier: 3

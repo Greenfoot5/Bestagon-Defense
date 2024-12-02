@@ -1,4 +1,3 @@
-using System.Collections;
 using Enemies;
 using UnityEngine;
 
@@ -13,6 +12,8 @@ namespace Abstract
         [Tooltip("The number of ticks the effect currently has left")]
         [HideInInspector]
         public int ticksLeft;
+
+        private float _durationLeft;
         
         [Tooltip("The effect type to use when checking duplicates and immunities")]
         public string effectType;
@@ -24,6 +25,31 @@ namespace Abstract
 
         [Tooltip("The enemy the effect has been applied to")]
         protected Enemy Target;
+
+        public void Update()
+        {
+            if (isCancelled)
+            {
+                Remove();
+                return;
+            }
+            
+            if (_durationLeft > 0)
+            {
+                _durationLeft -= Time.deltaTime;
+                return;
+            }
+            
+            ticksLeft--;
+            if (ticksLeft >= 0)
+            {
+                _durationLeft = tickDuration;
+                DoEffect();
+                return;
+            }
+
+            Remove();
+        }
 
         public virtual bool Apply(Enemy target)
         {
@@ -43,49 +69,35 @@ namespace Abstract
                 if (Target.ActiveEffects[effectType].tier == tier)
                 {
                     Target.ActiveEffects[effectType].ticksLeft = tickCount;
+                    Target.ActiveEffects[effectType]._durationLeft = 0f;
                     return false;
                 }
                 if (Target.ActiveEffects[effectType].tier <= tier)
+
+                if (Target.ActiveEffects[effectType].tier < tier)
+                {
                     Target.ActiveEffects[effectType].isCancelled = true;
+                    Target.ActiveEffects.Remove(effectType);
+                }
             }
             
             Target.ActiveEffects.Add(effectType, this);
             Target.OnDeath += CancelFromDeath;
-            
-            Runner.Run(Tick());
 
             return true;
         }
 
-        public virtual void Remove()
+        protected virtual void Remove()
         {
             Target.ActiveEffects.Remove(effectType);
             Target.OnDeath -= CancelFromDeath;
         }
-        public abstract void DoEffect();
+
+        protected abstract void DoEffect();
 
         private void CancelFromDeath()
         {
             isCancelled = true;
-        }
-
-        public IEnumerator Tick()
-        {
-            while (ticksLeft > 0)
-            {
-                if (isCancelled)
-                    break;
-                
-                ticksLeft--;
-                yield return new WaitForSeconds(tickDuration);
-
-                if (isCancelled)
-                    break;
-
-                DoEffect();
-            }
-            
-            Remove();
         }
     }
 }
