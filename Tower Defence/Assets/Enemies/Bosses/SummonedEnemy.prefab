@@ -227,6 +227,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -249,7 +252,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1179752323
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: f64aab135e0c1461aa1233e8c64c65c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -483,7 +486,6 @@ GameObject:
   - component: {fileID: 8831531170002143533}
   - component: {fileID: 303567108907991177}
   - component: {fileID: 8836932715464416527}
-  - component: {fileID: 3701368268791861763}
   - component: {fileID: 5341610321547253143}
   - component: {fileID: 5420441874543326451}
   m_Layer: 6
@@ -527,7 +529,8 @@ MonoBehaviour:
   knockbackModifier: 0.8
   speed:
     stat: 0
-    modifier: 0
+    additive: 0
+    multiplicative: 0
   health: 100
   deathMoney: 0
   deathLives: 1
@@ -557,37 +560,6 @@ MonoBehaviour:
   distanceToWaypoint: 0.05
   knockbackDuration: 0.2
   mapProgress: 0
---- !u!114 &3701368268791861763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9190933599829545110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7135088833f09435eb5f708ff7aa7fec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startSpeed: 2
-  maxHealth: 1000
-  knockbackModifier: 1
-  speed:
-    stat: 0
-    modifier: 0
-  health: 0
-  deathMoney: 0
-  deathLives: 2
-  endPathMoney: 0
-  leftBar: {fileID: 5532738286270056061}
-  rightBar: {fileID: 6346128270463089290}
-  rotationRoot: {fileID: 0}
-  doesRotation: 1
-  deathEffect: {fileID: 710779272522642178, guid: d286b443e8ade4d4cb1ec3e2a41a94f8, type: 3}
-  startingAbilities: []
-  iconLayout: {fileID: 8513653298309528610}
-  isBoss: 0
-  uniqueEffects: []
 --- !u!61 &5341610321547253143
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -596,6 +568,7 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9190933599829545110}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -619,7 +592,8 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -630,12 +604,11 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 0.5714286, y: 0.5714286}
   m_EdgeRadius: 0
 --- !u!50 &5420441874543326451
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -646,8 +619,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.0001
-  m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_LinearDamping: 0
+  m_AngularDamping: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:

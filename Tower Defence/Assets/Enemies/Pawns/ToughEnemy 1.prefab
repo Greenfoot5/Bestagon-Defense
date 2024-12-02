@@ -84,7 +84,6 @@ GameObject:
   - component: {fileID: 1766261579634831074}
   - component: {fileID: 1128971760552915232}
   - component: {fileID: 7336438465809873736}
-  - component: {fileID: 6401496769337086624}
   - component: {fileID: -215411037865577175}
   - component: {fileID: -32090543215727474}
   m_Layer: 6
@@ -159,38 +158,6 @@ MonoBehaviour:
   distanceToWaypoint: 0.05
   knockbackDuration: 0.2
   mapProgress: 0
---- !u!114 &6401496769337086624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 895393602812883857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7135088833f09435eb5f708ff7aa7fec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startSpeed: 2
-  maxHealth: 20
-  knockbackModifier: 1
-  speed:
-    stat: 0
-    additive: 0
-    multiplicative: 0
-  health: 0
-  deathMoney: 10
-  deathLives: 1
-  endPathMoney: 10
-  leftBar: {fileID: 0}
-  rightBar: {fileID: 0}
-  rotationRoot: {fileID: 0}
-  doesRotation: 1
-  deathEffect: {fileID: 0}
-  startingAbilities: []
-  iconLayout: {fileID: 0}
-  isBoss: 0
-  uniqueEffects: []
 --- !u!61 &-215411037865577175
 BoxCollider2D:
   m_ObjectHideFlags: 0
