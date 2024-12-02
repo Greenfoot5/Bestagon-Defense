@@ -74,7 +74,8 @@ namespace Enemies
             }
             else
             {
-                mapProgress = waypointIndex + 1 - (distanceToWaypoint / _maxDistance);
+                float sqrDistance = Vector3.SqrMagnitude(transform.position - _target.position);
+                mapProgress = waypointIndex + 1 - (sqrDistance / (_maxDistance * _maxDistance));
             }
             
             if (_enemy.doesRotation)
