@@ -407,12 +407,12 @@ MonoBehaviour:
     m_Localized: Live Longer
     m_Metadata:
       m_Items: []
-  - m_Id: 167899297821483008
-    m_Localized: Pick an option to unlock
+  - m_Id: 167899401261408256
+    m_Localized: Unlock
     m_Metadata:
       m_Items: []
-  - m_Id: 167899401261408256
-    m_Localized: Locked
+  - m_Id: 167899297821483008
+    m_Localized: Pick an option to unlock
     m_Metadata:
       m_Items: []
   references:
